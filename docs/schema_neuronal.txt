@@ -1,0 +1,91 @@
+==============================================================================
+  SCHÉMA NEURONAL CONCENTRIQUE — methode_spectral.thy
+  Architecture : Ensemble = 1  (Règle Savard)
+==============================================================================
+
+  ┌─────────────────────────────────────────────────────────────────┐
+  │  ENSEMBLE = 1  →  synthese_pont_savard : RsP = Re = 1/2 VRAI  │
+  │  ┌───────────────┐  ┌──────────┐  ┌──────────────────────┐    │
+  │  │  1/x (Zeta)   │  │ 1/t(psi) │  │ 1/ms (MS)            │    │
+  │  │ 1/y1 C1──────────────────── │  │ 1/ms1 Reconstruction │    │
+  │  │ 1/y2 C3────────────────────────│ 1/ms2 Exclusion       │    │
+  │  │ 1/y3 C2────────────────────────│ 1/ms3 RsP=1/2         │    │
+  │  └───────────────┘  └──────────┘  └──────────────────────┘    │
+  └─────────────────────────────────────────────────────────────────┘
+
+  C1: 1/y1↔1/t   C2: 1/y3↔1/ms1   C3: 1/y2↔1/ms3
+
+──────────────────────────────────────────────────────────────────────────────
+  DÉTAIL PAR NŒUD (points HOL clés)
+──────────────────────────────────────────────────────────────────────────────
+
+  ◉ ENSEMBLE
+         [lemma         ] foundations_marker_satisfaisable
+         [theorem       ] ensemble_savard_satisfaisable
+         [definition    ] Re_droite_critique
+         [theorem       ] pont_spectral_direct_final
+         [lemma         ] RsP_universel_entier_naturel
+         [theorem       ] synthese_pont_savard
+         [lemma         ] RsP_universel_entier_naturel
+
+  ○ 1/x
+
+  ○ 1/t
+         [definition    ] log10_savard
+         [definition    ] rapport_zeta_savard
+         [definition    ] psi_savard
+         [lemma         ] rapport_zeta_savard_at_10
+         [lemma         ] rapport_zeta_savard_at_25
+         [lemma         ] rapport_zeta_savard_at_49
+         [lemma         ] psi_savard_expanded
+         [lemma         ] psi_savard_at_10_30_expanded
+         ... +2 autres objets formels
+
+  ○ 1/ms
+
+    ▷ 1/y1
+         [lemma         ] methode_spectrale_exclusivite_P
+
+    ▷ 1/y2
+         [theorem       ] alignement_central
+         [theorem       ] alignement_inverse
+         [theorem       ] conclusion_ensemble
+
+    ▷ 1/y3
+
+    ▷ 1/ms1
+         [definition    ] SA
+         [definition    ] SB
+         [lemma         ] SA_forme_generale
+         [lemma         ] SB_forme_generale
+         [lemma         ] prime_equation_for_primes_pos
+         [definition    ] n29
+         [definition    ] n31
+         [definition    ] n37
+         ... +233 autres objets formels
+
+    ▷ 1/ms2
+         [theorem       ] composite_not_prime_i
+         [theorem       ] spectral_method_exclusively_for_primes
+         [lemma         ] composite_4_not_prime
+         [lemma         ] composite_9_not_prime
+         [lemma         ] composite_15_not_prime
+         [lemma         ] composite_51_not_prime
+         [lemma         ] composite_91_not_prime
+         [lemma         ] composite_121_not_prime
+         ... +15 autres objets formels
+
+    ▷ 1/ms3
+         [definition    ] RsP
+         [lemma         ] RsP_un_demi_general
+         [lemma         ] algebriquement_incoherent_local
+         [lemma         ] coherence_numerique_reelle_P
+         [definition    ] RsP_nn
+         [definition    ] rapport_spectral_un_demi_nn
+         [definition    ] A3
+         [definition    ] B3
+         ... +41 autres objets formels
+
+==============================================================================
+  Base : methode_spectral_hol.db | Total : 553 points HOL
+==============================================================================

@@ -1,0 +1,60 @@
+==============================================================================
+  RAPPORT D'ARCHITECTURE HOL — methode_spectral.thy
+  Auteur : Philippe Thomas Savard
+==============================================================================
+
+──────────────────────────────────────────────────────────────────────────────
+  STATISTIQUES PAR SECTION
+──────────────────────────────────────────────────────────────────────────────
+  ENSEMBLE   :   24 pts  (def:  1  lem:  3  thm:  3  axm: 0)
+  1/x        :    0 pts  (def:  0  lem:  0  thm:  0  axm: 0)
+  1/t        :   24 pts  (def:  3  lem:  7  thm:  0  axm: 0)
+  1/ms       :    0 pts  (def:  0  lem:  0  thm:  0  axm: 0)
+  1/y1       :    6 pts  (def:  0  lem:  1  thm:  0  axm: 0)
+  1/y2       :   13 pts  (def:  0  lem:  0  thm:  3  axm: 0)
+  1/y3       :    0 pts  (def:  0  lem:  0  thm:  0  axm: 0)
+  1/ms1      :  368 pts  (def:128  lem:108  thm:  5  axm:13)
+  1/ms2      :   40 pts  (def:  0  lem:  6  thm: 17  axm: 0)
+  1/ms3      :   78 pts  (def: 18  lem: 28  thm:  3  axm: 1)
+
+──────────────────────────────────────────────────────────────────────────────
+  CONCORDANCES
+──────────────────────────────────────────────────────────────────────────────
+  C1 : 1/y1 --[PONT_VERS]--> 1/t
+       C1 : Tchebychev = psi_savard. Les deux traitent du meme sujet via x^p/p 
+       Lemmes : psi_savard_expanded, psi_savard_at_10_30_expanded, rapport_zeta_savard_a
+  C2 : 1/y3 --[VALIDE]--> 1/ms1
+       C2 : zeros non-triviaux = valeurs de n = positions des P. La methode spe
+       Lemmes : prime_equation_prime_i, RsP_generic_constant, RsP_universel_entier_natur
+  C3 : 1/y2 --[VALIDE]--> 1/ms3
+       C3 : Re(rho) = 1/2 = RsP = 1/2. La droite critique de Riemann s'aligne s
+       Lemmes : synthese_pont_savard, alignement_central, pont_spectral_direct_final, Re
+
+──────────────────────────────────────────────────────────────────────────────
+  RELATIONS CLÉS (CONDUIT_A / VALIDE / PONT_VERS / GENERALISE)
+──────────────────────────────────────────────────────────────────────────────
+  reconstruction_premier_pos                    --[VALIDE      ]--> D41
+  RsP_un_tiers_constant                         --[VALIDE      ]--> RsP_1_3
+  RsP_un_quart_constant                         --[VALIDE      ]--> RsP_1_4
+  extraction_constante_A                        --[VALIDE      ]--> echelle_stable
+  extraction_constante_B                        --[VALIDE      ]--> echelle_stable
+  ecart_minimal_universel_A                     --[VALIDE      ]--> echelle_stable
+  ecart_minimal_universel_B                     --[VALIDE      ]--> echelle_stable
+  RsP_generic_constant                          --[VALIDE      ]--> RsP_generic
+  pont_spectral_direct_final                    --[VALIDE      ]--> Re_droite_critique
+  synthese_pont_savard                          --[VALIDE      ]--> Re_droite_critique
+  RsP_un_demi_general                           --[CONDUIT_A   ]--> synthese_pont_savard
+  RsP_universel_entier_naturel                  --[CONDUIT_A   ]--> synthese_pont_savard
+  prime_equation_prime_i                        --[CONDUIT_A   ]--> synthese_pont_savard
+  composite_not_prime_i                         --[CONDUIT_A   ]--> synthese_pont_savard
+  psi_savard                                    --[PONT_VERS   ]--> methode_spectrale_exclusivite_P
+  alignement_central                            --[VALIDE      ]--> RsP_un_demi_general
+  conclusion_ensemble                           --[CONDUIT_A   ]--> synthese_pont_savard
+  RsP_generic_constant                          --[GENERALISE  ]--> RsP_un_demi_general
+  RsP_generic_constant                          --[GENERALISE  ]--> RsP_un_tiers_constant
+  RsP_generic_constant                          --[GENERALISE  ]--> RsP_un_quart_constant
+  ensemble_savard_satisfaisable                 --[VALIDE      ]--> synthese_pont_savard
+
+==============================================================================
+  TOTAL : 553 points | 182 relations | 3 concordances
+==============================================================================

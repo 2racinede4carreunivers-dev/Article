@@ -1,0 +1,6365 @@
+{
+  "sections": [
+    {
+      "code": "ENSEMBLE",
+      "label": "Ensemble = 1  (Theoreme d'unification Pont Savard)",
+      "description": "Cercle le plus grand. Aboutit au theoreme synthese_pont_savard : RsP = Re = 1/2 VRAI.",
+      "parent": null,
+      "hol_anchor": "synthese_pont_savard",
+      "ligne_anchor": 4154
+    },
+    {
+      "code": "1/x",
+      "label": "1/x - Fonction zeta de Riemann",
+      "description": "Decomposee en 1/y1 + 1/y2 + 1/y3.",
+      "parent": "ENSEMBLE",
+      "hol_anchor": "ensemble_savard",
+      "ligne_anchor": 3987
+    },
+    {
+      "code": "1/t",
+      "label": "1/t - Equation psi_savard (pont Tchebychev <-> Methode Spectrale)",
+      "description": "psi_savard est le pont fonctionnel entre Tchebychev et la Methode Spectrale. Lie via x^p/p et 2^n/SB_n. Section XIII.1-XIII.2.",
+      "parent": "ENSEMBLE",
+      "hol_anchor": "psi_savard",
+      "ligne_anchor": 3671
+    },
+    {
+      "code": "1/ms",
+      "label": "1/ms - Methode Spectrale (decomposee en 1/ms1 + 1/ms2 + 1/ms3)",
+      "description": "La Methode Spectrale de Savard dans son integralite operationnelle.",
+      "parent": "ENSEMBLE",
+      "hol_anchor": "RsP_universel_entier_naturel",
+      "ligne_anchor": 4105
+    },
+    {
+      "code": "1/y1",
+      "label": "1/y1 - Composante Tchebychev (zeros non-triviaux -> positions P)",
+      "description": "Zeros non-triviaux de zeta determinent la position de tous les premiers P. Section XIII.3.",
+      "parent": "1/x",
+      "hol_anchor": "methode_spectrale_exclusivite_P",
+      "ligne_anchor": 3880
+    },
+    {
+      "code": "1/y2",
+      "label": "1/y2 - Droite critique Re(rho) = 1/2",
+      "description": "Hypothese de Riemann : tous les zeros non-triviaux ont Re = 1/2. Section XIII.5 : locale ensemble_savard, hypothese_critique.",
+      "parent": "1/x",
+      "hol_anchor": "alignement_central",
+      "ligne_anchor": 4004
+    },
+    {
+      "code": "1/y3",
+      "label": "1/y3 - Equation de Tchebychev (psi classique)",
+      "description": "Equation de Tchebychev classique. Validee numeriquement pour x=30,98,228.",
+      "parent": "1/x",
+      "hol_anchor": "psi_savard_expanded",
+      "ligne_anchor": 3709
+    },
+    {
+      "code": "1/ms1",
+      "label": "1/ms1 - Reconstruction du i-ieme premier (Operation 1)",
+      "description": "Suites SA/SB, digamma_calc, prime_equation_prime_i, RsP_generic_constant. Sections I a XI.bis.",
+      "parent": "1/ms",
+      "hol_anchor": "prime_equation_prime_i",
+      "ligne_anchor": 754
+    },
+    {
+      "code": "1/ms2",
+      "label": "1/ms2 - Exclusion stricte des composes C (Preuve par l'absurde)",
+      "description": "Trois piliers : composite_not_prime_i, composite_no_reconstruction_position, composite_pair_no_rsp_positions.",
+      "parent": "1/ms",
+      "hol_anchor": "composite_not_prime_i",
+      "ligne_anchor": 1821
+    },
+    {
+      "code": "1/ms3",
+      "label": "1/ms3 - Rapport spectral RsP = 1/2 pour l'ensemble P (Operation 3)",
+      "description": "Regime central k=2 : RsP(n1,n2) = 1/2 pour tout n1!=n2, n1>=1, n2>=1.",
+      "parent": "1/ms",
+      "hol_anchor": "RsP_un_demi_general",
+      "ligne_anchor": 386
+    }
+  ],
+  "points": [
+    {
+      "id": 1,
+      "type": "section",
+      "nom": "0. Foundations / Meta-theory (v3.35)",
+      "ligne": 119,
+      "section_thy": "0. Foundations / Meta-theory (v3.35)",
+      "subsection_thy": "",
+      "section_logique": "ENSEMBLE"
+    },
+    {
+      "id": 2,
+      "type": "text",
+      "nom": "text_block_1",
+      "ligne": 121,
+      "section_thy": "0. Foundations / Meta-theory (v3.35)",
+      "subsection_thy": "",
+      "section_logique": "ENSEMBLE"
+    },
+    {
+      "id": 3,
+      "type": "subsection",
+      "nom": "Foundations.1 - Ontologie et vocabulaire",
+      "ligne": 134,
+      "section_thy": "0. Foundations / Meta-theory (v3.35)",
+      "subsection_thy": "Foundations.1 - Ontologie et vocabulaire",
+      "section_logique": "ENSEMBLE"
+    },
+    {
+      "id": 4,
+      "type": "text",
+      "nom": "text_block_2",
+      "ligne": 136,
+      "section_thy": "0. Foundations / Meta-theory (v3.35)",
+      "subsection_thy": "Foundations.1 - Ontologie et vocabulaire",
+      "section_logique": "ENSEMBLE"
+    },
+    {
+      "id": 5,
+      "type": "subsection",
+      "nom": "Foundations.2 - Postulats fondamentaux (P1..P6)",
+      "ligne": 163,
+      "section_thy": "0. Foundations / Meta-theory (v3.35)",
+      "subsection_thy": "Foundations.2 - Postulats fondamentaux (P1..P6)",
+      "section_logique": "ENSEMBLE"
+    },
+    {
+      "id": 6,
+      "type": "text",
+      "nom": "text_block_3",
+      "ligne": 165,
+      "section_thy": "0. Foundations / Meta-theory (v3.35)",
+      "subsection_thy": "Foundations.2 - Postulats fondamentaux (P1..P6)",
+      "section_logique": "ENSEMBLE"
+    },
+    {
+      "id": 7,
+      "type": "subsection",
+      "nom": "Foundations.3 - Les trois operations fondamentales",
+      "ligne": 200,
+      "section_thy": "0. Foundations / Meta-theory (v3.35)",
+      "subsection_thy": "Foundations.3 - Les trois operations fondamentales",
+      "section_logique": "ENSEMBLE"
+    },
+    {
+      "id": 8,
+      "type": "text",
+      "nom": "text_block_4",
+      "ligne": 202,
+      "section_thy": "0. Foundations / Meta-theory (v3.35)",
+      "subsection_thy": "Foundations.3 - Les trois operations fondamentales",
+      "section_logique": "ENSEMBLE"
+    },
+    {
+      "id": 9,
+      "type": "subsection",
+      "nom": "Foundations.4 - La regle Savard (Ensemble = 1)",
+      "ligne": 227,
+      "section_thy": "0. Foundations / Meta-theory (v3.35)",
+      "subsection_thy": "Foundations.4 - La regle Savard (Ensemble = 1)",
+      "section_logique": "ENSEMBLE"
+    },
+    {
+      "id": 10,
+      "type": "text",
+      "nom": "text_block_5",
+      "ligne": 229,
+      "section_thy": "0. Foundations / Meta-theory (v3.35)",
+      "subsection_thy": "Foundations.4 - La regle Savard (Ensemble = 1)",
+      "section_logique": "ENSEMBLE"
+    },
+    {
+      "id": 11,
+      "type": "subsection",
+      "nom": "Foundations.5 - Statut epistemologique et lecture",
+      "ligne": 279,
+      "section_thy": "0. Foundations / Meta-theory (v3.35)",
+      "subsection_thy": "Foundations.5 - Statut epistemologique et lecture",
+      "section_logique": "ENSEMBLE"
+    },
+    {
+      "id": 12,
+      "type": "text",
+      "nom": "text_block_6",
+      "ligne": 281,
+      "section_thy": "0. Foundations / Meta-theory (v3.35)",
+      "subsection_thy": "Foundations.5 - Statut epistemologique et lecture",
+      "section_logique": "ENSEMBLE"
+    },
+    {
+      "id": 13,
+      "type": "text",
+      "nom": "text_block_7",
+      "ligne": 326,
+      "section_thy": "0. Foundations / Meta-theory (v3.35)",
+      "subsection_thy": "Foundations.5 - Statut epistemologique et lecture",
+      "section_logique": "ENSEMBLE"
+    },
+    {
+      "id": 14,
+      "type": "locale",
+      "nom": "foundations_marker",
+      "ligne": 335,
+      "section_thy": "0. Foundations / Meta-theory (v3.35)",
+      "subsection_thy": "Foundations.5 - Statut epistemologique et lecture",
+      "section_logique": "ENSEMBLE"
+    },
+    {
+      "id": 15,
+      "type": "lemma",
+      "nom": "foundations_marker_satisfaisable",
+      "ligne": 340,
+      "section_thy": "0. Foundations / Meta-theory (v3.35)",
+      "subsection_thy": "Foundations.5 - Statut epistemologique et lecture",
+      "section_logique": "ENSEMBLE"
+    },
+    {
+      "id": 16,
+      "type": "section",
+      "nom": "Forme generale des suites A et B",
+      "ligne": 353,
+      "section_thy": "Forme generale des suites A et B",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 17,
+      "type": "definition",
+      "nom": "SA",
+      "ligne": 355,
+      "section_thy": "Forme generale des suites A et B",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 18,
+      "type": "definition",
+      "nom": "SB",
+      "ligne": 358,
+      "section_thy": "Forme generale des suites A et B",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 19,
+      "type": "lemma",
+      "nom": "SA_forme_generale",
+      "ligne": 366,
+      "section_thy": "Forme generale des suites A et B",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 20,
+      "type": "lemma",
+      "nom": "SB_forme_generale",
+      "ligne": 371,
+      "section_thy": "Forme generale des suites A et B",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 21,
+      "type": "section",
+      "nom": "Rapport spectral 1/2",
+      "ligne": 381,
+      "section_thy": "Rapport spectral 1/2",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 22,
+      "type": "definition",
+      "nom": "RsP",
+      "ligne": 383,
+      "section_thy": "Rapport spectral 1/2",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 23,
+      "type": "lemma",
+      "nom": "RsP_un_demi_general",
+      "ligne": 386,
+      "section_thy": "Rapport spectral 1/2",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 24,
+      "type": "text",
+      "nom": "text_block_8",
+      "ligne": 429,
+      "section_thy": "Rapport spectral 1/2",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 25,
+      "type": "subsection",
+      "nom": "Instance 1 : Incohérence algébrique locale (Espace Imaginaire)",
+      "ligne": 443,
+      "section_thy": "Rapport spectral 1/2",
+      "subsection_thy": "Instance 1 : Incohérence algébrique locale (Espace Imaginaire)",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 26,
+      "type": "lemma",
+      "nom": "algebriquement_incoherent_local",
+      "ligne": 445,
+      "section_thy": "Rapport spectral 1/2",
+      "subsection_thy": "Instance 1 : Incohérence algébrique locale (Espace Imaginaire)",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 27,
+      "type": "subsection",
+      "nom": "Instance 2 : Cohérence numérique réelle globale (Re = 1/2)",
+      "ligne": 451,
+      "section_thy": "Rapport spectral 1/2",
+      "subsection_thy": "Instance 2 : Cohérence numérique réelle globale (Re = 1/2)",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 28,
+      "type": "lemma",
+      "nom": "coherence_numerique_reelle_P",
+      "ligne": 453,
+      "section_thy": "Rapport spectral 1/2",
+      "subsection_thy": "Instance 2 : Cohérence numérique réelle globale (Re = 1/2)",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 29,
+      "type": "section",
+      "nom": "Rapport spectral n x n (generalisation symetrique)",
+      "ligne": 462,
+      "section_thy": "Rapport spectral n x n (generalisation symetrique)",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 30,
+      "type": "definition",
+      "nom": "RsP_nn",
+      "ligne": 464,
+      "section_thy": "Rapport spectral n x n (generalisation symetrique)",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 31,
+      "type": "definition",
+      "nom": "rapport_spectral_un_demi_nn",
+      "ligne": 469,
+      "section_thy": "Rapport spectral n x n (generalisation symetrique)",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 32,
+      "type": "definition",
+      "nom": "A3",
+      "ligne": 473,
+      "section_thy": "Rapport spectral n x n (generalisation symetrique)",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 33,
+      "type": "definition",
+      "nom": "B3",
+      "ligne": 476,
+      "section_thy": "Rapport spectral n x n (generalisation symetrique)",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 34,
+      "type": "lemma",
+      "nom": "exemple_3x3_spectral",
+      "ligne": 480,
+      "section_thy": "Rapport spectral n x n (generalisation symetrique)",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 35,
+      "type": "section",
+      "nom": "Section du Digamma calcule.",
+      "ligne": 493,
+      "section_thy": "Section du Digamma calcule.",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 36,
+      "type": "definition",
+      "nom": "digamma_calc",
+      "ligne": 495,
+      "section_thy": "Section du Digamma calcule.",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 37,
+      "type": "definition",
+      "nom": "prime_equation",
+      "ligne": 498,
+      "section_thy": "Section du Digamma calcule.",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 38,
+      "type": "lemma",
+      "nom": "digamma_calc_equation_alt",
+      "ligne": 501,
+      "section_thy": "Section du Digamma calcule.",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 39,
+      "type": "lemma",
+      "nom": "prime_equation_identity",
+      "ligne": 505,
+      "section_thy": "Section du Digamma calcule.",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 40,
+      "type": "lemma",
+      "nom": "SB_affine_en_SA",
+      "ligne": 510,
+      "section_thy": "Section du Digamma calcule.",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 41,
+      "type": "lemma",
+      "nom": "ecart_spectral_constant",
+      "ligne": 514,
+      "section_thy": "Section du Digamma calcule.",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 42,
+      "type": "lemma",
+      "nom": "digamma_affine_en_SA",
+      "ligne": 518,
+      "section_thy": "Section du Digamma calcule.",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 43,
+      "type": "lemma",
+      "nom": "difference_SA_succ",
+      "ligne": 522,
+      "section_thy": "Section du Digamma calcule.",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 44,
+      "type": "lemma",
+      "nom": "difference_SB_succ",
+      "ligne": 526,
+      "section_thy": "Section du Digamma calcule.",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 45,
+      "type": "lemma",
+      "nom": "ratio_incremental_un_demi",
+      "ligne": 530,
+      "section_thy": "Section du Digamma calcule.",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 46,
+      "type": "section",
+      "nom": "Axiomatisation positive",
+      "ligne": 547,
+      "section_thy": "Axiomatisation positive",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 47,
+      "type": "axiomatization",
+      "nom": "axiomatization_bloc_1",
+      "ligne": 549,
+      "section_thy": "Axiomatisation positive",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 48,
+      "type": "lemma",
+      "nom": "prime_equation_for_primes_pos",
+      "ligne": 553,
+      "section_thy": "Axiomatisation positive",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 49,
+      "type": "section",
+      "nom": "Exemple complet pour les nombres premiers 29 31 37 et 41.",
+      "ligne": 561,
+      "section_thy": "Exemple complet pour les nombres premiers 29 31 37 et 41.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 50,
+      "type": "definition",
+      "nom": "n29",
+      "ligne": 563,
+      "section_thy": "Exemple complet pour les nombres premiers 29 31 37 et 41.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 51,
+      "type": "definition",
+      "nom": "n31",
+      "ligne": 564,
+      "section_thy": "Exemple complet pour les nombres premiers 29 31 37 et 41.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 52,
+      "type": "definition",
+      "nom": "n37",
+      "ligne": 565,
+      "section_thy": "Exemple complet pour les nombres premiers 29 31 37 et 41.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 53,
+      "type": "definition",
+      "nom": "n41",
+      "ligne": 566,
+      "section_thy": "Exemple complet pour les nombres premiers 29 31 37 et 41.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 54,
+      "type": "definition",
+      "nom": "D29",
+      "ligne": 568,
+      "section_thy": "Exemple complet pour les nombres premiers 29 31 37 et 41.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 55,
+      "type": "definition",
+      "nom": "D31",
+      "ligne": 569,
+      "section_thy": "Exemple complet pour les nombres premiers 29 31 37 et 41.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 56,
+      "type": "definition",
+      "nom": "D37",
+      "ligne": 570,
+      "section_thy": "Exemple complet pour les nombres premiers 29 31 37 et 41.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 57,
+      "type": "definition",
+      "nom": "D41",
+      "ligne": 571,
+      "section_thy": "Exemple complet pour les nombres premiers 29 31 37 et 41.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 58,
+      "type": "section",
+      "nom": "Valeur des somme A et B pour n.",
+      "ligne": 573,
+      "section_thy": "Valeur des somme A et B pour n.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 59,
+      "type": "lemma",
+      "nom": "SA_10",
+      "ligne": 575,
+      "section_thy": "Valeur des somme A et B pour n.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 60,
+      "type": "lemma",
+      "nom": "SB_10",
+      "ligne": 578,
+      "section_thy": "Valeur des somme A et B pour n.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 61,
+      "type": "lemma",
+      "nom": "SA_11",
+      "ligne": 581,
+      "section_thy": "Valeur des somme A et B pour n.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 62,
+      "type": "lemma",
+      "nom": "SB_11",
+      "ligne": 584,
+      "section_thy": "Valeur des somme A et B pour n.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 63,
+      "type": "lemma",
+      "nom": "SA_12",
+      "ligne": 587,
+      "section_thy": "Valeur des somme A et B pour n.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 64,
+      "type": "lemma",
+      "nom": "SB_12",
+      "ligne": 590,
+      "section_thy": "Valeur des somme A et B pour n.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 65,
+      "type": "lemma",
+      "nom": "SA_13",
+      "ligne": 593,
+      "section_thy": "Valeur des somme A et B pour n.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 66,
+      "type": "lemma",
+      "nom": "SB_13",
+      "ligne": 596,
+      "section_thy": "Valeur des somme A et B pour n.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 67,
+      "type": "lemma",
+      "nom": "digamma_calc_29",
+      "ligne": 599,
+      "section_thy": "Valeur des somme A et B pour n.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 68,
+      "type": "lemma",
+      "nom": "digamma_calc_31",
+      "ligne": 603,
+      "section_thy": "Valeur des somme A et B pour n.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 69,
+      "type": "lemma",
+      "nom": "digamma_calc_37",
+      "ligne": 607,
+      "section_thy": "Valeur des somme A et B pour n.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 70,
+      "type": "lemma",
+      "nom": "digamma_calc_41",
+      "ligne": 611,
+      "section_thy": "Valeur des somme A et B pour n.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 71,
+      "type": "lemma",
+      "nom": "relation_29",
+      "ligne": 615,
+      "section_thy": "Valeur des somme A et B pour n.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 72,
+      "type": "lemma",
+      "nom": "relation_31",
+      "ligne": 619,
+      "section_thy": "Valeur des somme A et B pour n.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 73,
+      "type": "lemma",
+      "nom": "relation_37",
+      "ligne": 623,
+      "section_thy": "Valeur des somme A et B pour n.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 74,
+      "type": "lemma",
+      "nom": "relation_41",
+      "ligne": 627,
+      "section_thy": "Valeur des somme A et B pour n.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 75,
+      "type": "section",
+      "nom": "Equation generale reliant SB, digamma_calc et le nombre premier",
+      "ligne": 635,
+      "section_thy": "Equation generale reliant SB, digamma_calc et le nombre premier",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 76,
+      "type": "lemma",
+      "nom": "SB_minus_digamma_is_64p",
+      "ligne": 637,
+      "section_thy": "Equation generale reliant SB, digamma_calc et le nombre premier",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 77,
+      "type": "lemma",
+      "nom": "prime_equation_general",
+      "ligne": 641,
+      "section_thy": "Equation generale reliant SB, digamma_calc et le nombre premier",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 78,
+      "type": "lemma",
+      "nom": "SB_minus_digamma_div_64_general",
+      "ligne": 645,
+      "section_thy": "Equation generale reliant SB, digamma_calc et le nombre premier",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 79,
+      "type": "theorem",
+      "nom": "reconstruction_premier_pos",
+      "ligne": 649,
+      "section_thy": "Equation generale reliant SB, digamma_calc et le nombre premier",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 80,
+      "type": "consts",
+      "nom": "consts_bloc_1",
+      "ligne": 674,
+      "section_thy": "Equation generale reliant SB, digamma_calc et le nombre premier",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 81,
+      "type": "section",
+      "nom": "Generalisation spectrale pour le i-ieme nombre premier",
+      "ligne": 678,
+      "section_thy": "Generalisation spectrale pour le i-ieme nombre premier",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 82,
+      "type": "text",
+      "nom": "text_block_9",
+      "ligne": 680,
+      "section_thy": "Generalisation spectrale pour le i-ieme nombre premier",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 83,
+      "type": "subsection",
+      "nom": "Axiome d'existence pour la fonction position",
+      "ligne": 688,
+      "section_thy": "Generalisation spectrale pour le i-ieme nombre premier",
+      "subsection_thy": "Axiome d'existence pour la fonction position",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 84,
+      "type": "text",
+      "nom": "text_block_10",
+      "ligne": 690,
+      "section_thy": "Generalisation spectrale pour le i-ieme nombre premier",
+      "subsection_thy": "Axiome d'existence pour la fonction position",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 85,
+      "type": "axiomatization",
+      "nom": "axiomatization_bloc_2",
+      "ligne": 696,
+      "section_thy": "Generalisation spectrale pour le i-ieme nombre premier",
+      "subsection_thy": "Axiome d'existence pour la fonction position",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 86,
+      "type": "subsection",
+      "nom": "Definition du i-ieme nombre premier",
+      "ligne": 700,
+      "section_thy": "Generalisation spectrale pour le i-ieme nombre premier",
+      "subsection_thy": "Definition du i-ieme nombre premier",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 87,
+      "type": "definition",
+      "nom": "prime_i",
+      "ligne": 702,
+      "section_thy": "Generalisation spectrale pour le i-ieme nombre premier",
+      "subsection_thy": "Definition du i-ieme nombre premier",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 88,
+      "type": "lemma",
+      "nom": "prime_i_spec",
+      "ligne": 705,
+      "section_thy": "Generalisation spectrale pour le i-ieme nombre premier",
+      "subsection_thy": "Definition du i-ieme nombre premier",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 89,
+      "type": "lemma",
+      "nom": "prime_i_is_prime",
+      "ligne": 717,
+      "section_thy": "Generalisation spectrale pour le i-ieme nombre premier",
+      "subsection_thy": "Definition du i-ieme nombre premier",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 90,
+      "type": "lemma",
+      "nom": "prime_i_position",
+      "ligne": 721,
+      "section_thy": "Generalisation spectrale pour le i-ieme nombre premier",
+      "subsection_thy": "Definition du i-ieme nombre premier",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 91,
+      "type": "subsection",
+      "nom": "Lemmes generaux SA, SB et digamma",
+      "ligne": 726,
+      "section_thy": "Generalisation spectrale pour le i-ieme nombre premier",
+      "subsection_thy": "Lemmes generaux SA, SB et digamma",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 92,
+      "type": "lemma",
+      "nom": "SA_general_i",
+      "ligne": 728,
+      "section_thy": "Generalisation spectrale pour le i-ieme nombre premier",
+      "subsection_thy": "Lemmes generaux SA, SB et digamma",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 93,
+      "type": "lemma",
+      "nom": "SB_general_i",
+      "ligne": 732,
+      "section_thy": "Generalisation spectrale pour le i-ieme nombre premier",
+      "subsection_thy": "Lemmes generaux SA, SB et digamma",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 94,
+      "type": "lemma",
+      "nom": "digamma_general_i",
+      "ligne": 736,
+      "section_thy": "Generalisation spectrale pour le i-ieme nombre premier",
+      "subsection_thy": "Lemmes generaux SA, SB et digamma",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 95,
+      "type": "subsection",
+      "nom": "Equation spectrale generale pour tout i",
+      "ligne": 740,
+      "section_thy": "Generalisation spectrale pour le i-ieme nombre premier",
+      "subsection_thy": "Equation spectrale generale pour tout i",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 96,
+      "type": "text",
+      "nom": "text_block_11",
+      "ligne": 742,
+      "section_thy": "Generalisation spectrale pour le i-ieme nombre premier",
+      "subsection_thy": "Equation spectrale generale pour tout i",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 97,
+      "type": "lemma",
+      "nom": "prime_equation_general_i",
+      "ligne": 747,
+      "section_thy": "Generalisation spectrale pour le i-ieme nombre premier",
+      "subsection_thy": "Equation spectrale generale pour tout i",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 98,
+      "type": "subsection",
+      "nom": "Corollaire : reconstruction du i-ieme nombre premier",
+      "ligne": 752,
+      "section_thy": "Generalisation spectrale pour le i-ieme nombre premier",
+      "subsection_thy": "Corollaire : reconstruction du i-ieme nombre premier",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 99,
+      "type": "lemma",
+      "nom": "prime_equation_prime_i",
+      "ligne": 754,
+      "section_thy": "Generalisation spectrale pour le i-ieme nombre premier",
+      "subsection_thy": "Corollaire : reconstruction du i-ieme nombre premier",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 100,
+      "type": "section",
+      "nom": "Modele spectral 1/4 : Forme generale des suites A et B.",
+      "ligne": 763,
+      "section_thy": "Modele spectral 1/4 : Forme generale des suites A et B.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 101,
+      "type": "text",
+      "nom": "text_block_12",
+      "ligne": 765,
+      "section_thy": "Modele spectral 1/4 : Forme generale des suites A et B.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 102,
+      "type": "definition",
+      "nom": "A_1_4",
+      "ligne": 773,
+      "section_thy": "Modele spectral 1/4 : Forme generale des suites A et B.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 103,
+      "type": "definition",
+      "nom": "B_1_4",
+      "ligne": 776,
+      "section_thy": "Modele spectral 1/4 : Forme generale des suites A et B.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 104,
+      "type": "definition",
+      "nom": "prime_equation_1_4",
+      "ligne": 784,
+      "section_thy": "Modele spectral 1/4 : Forme generale des suites A et B.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 105,
+      "type": "lemma",
+      "nom": "prime_equation_1_4_identity",
+      "ligne": 787,
+      "section_thy": "Modele spectral 1/4 : Forme generale des suites A et B.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 106,
+      "type": "section",
+      "nom": "Axiomatisation spectral 1/4",
+      "ligne": 796,
+      "section_thy": "Axiomatisation spectral 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 107,
+      "type": "axiomatization",
+      "nom": "axiomatization_bloc_3",
+      "ligne": 798,
+      "section_thy": "Axiomatisation spectral 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 108,
+      "type": "lemma",
+      "nom": "prime_equation_1_4_for_primes",
+      "ligne": 807,
+      "section_thy": "Axiomatisation spectral 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 109,
+      "type": "section",
+      "nom": "Modele spectral 1/4: Sommes de suite A et B, Digamma, Digamma calcule et determination du premier 947.",
+      "ligne": 817,
+      "section_thy": "Modele spectral 1/4: Sommes de suite A et B, Digamma, Digamma calcule et determination du premier 947.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 110,
+      "type": "text",
+      "nom": "text_block_13",
+      "ligne": 819,
+      "section_thy": "Modele spectral 1/4: Sommes de suite A et B, Digamma, Digamma calcule et determination du premier 947.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 111,
+      "type": "definition",
+      "nom": "suite_A_1_4_somme",
+      "ligne": 827,
+      "section_thy": "Modele spectral 1/4: Sommes de suite A et B, Digamma, Digamma calcule et determination du premier 947.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 112,
+      "type": "definition",
+      "nom": "suite_B_1_4_somme",
+      "ligne": 830,
+      "section_thy": "Modele spectral 1/4: Sommes de suite A et B, Digamma, Digamma calcule et determination du premier 947.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 113,
+      "type": "definition",
+      "nom": "digamma_1_4",
+      "ligne": 833,
+      "section_thy": "Modele spectral 1/4: Sommes de suite A et B, Digamma, Digamma calcule et determination du premier 947.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 114,
+      "type": "definition",
+      "nom": "digamma_calcule_1_4",
+      "ligne": 836,
+      "section_thy": "Modele spectral 1/4: Sommes de suite A et B, Digamma, Digamma calcule et determination du premier 947.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 115,
+      "type": "lemma",
+      "nom": "preuve_premier_947",
+      "ligne": 839,
+      "section_thy": "Modele spectral 1/4: Sommes de suite A et B, Digamma, Digamma calcule et determination du premier 947.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 116,
+      "type": "section",
+      "nom": "Rapport 1/3 forme generaliser pour les suites A et B.",
+      "ligne": 849,
+      "section_thy": "Rapport 1/3 forme generaliser pour les suites A et B.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 117,
+      "type": "text",
+      "nom": "text_block_14",
+      "ligne": 851,
+      "section_thy": "Rapport 1/3 forme generaliser pour les suites A et B.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 118,
+      "type": "definition",
+      "nom": "A_1_3",
+      "ligne": 857,
+      "section_thy": "Rapport 1/3 forme generaliser pour les suites A et B.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 119,
+      "type": "definition",
+      "nom": "B_1_3",
+      "ligne": 860,
+      "section_thy": "Rapport 1/3 forme generaliser pour les suites A et B.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 120,
+      "type": "definition",
+      "nom": "prime_equation_1_3",
+      "ligne": 868,
+      "section_thy": "Rapport 1/3 forme generaliser pour les suites A et B.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 121,
+      "type": "lemma",
+      "nom": "prime_equation_1_3_identity",
+      "ligne": 871,
+      "section_thy": "Rapport 1/3 forme generaliser pour les suites A et B.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 122,
+      "type": "section",
+      "nom": "Axiomatisation rapport 1/3.",
+      "ligne": 880,
+      "section_thy": "Axiomatisation rapport 1/3.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 123,
+      "type": "axiomatization",
+      "nom": "axiomatization_bloc_4",
+      "ligne": 882,
+      "section_thy": "Axiomatisation rapport 1/3.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 124,
+      "type": "lemma",
+      "nom": "prime_equation_1_3_for_primes",
+      "ligne": 891,
+      "section_thy": "Axiomatisation rapport 1/3.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 125,
+      "type": "section",
+      "nom": "Rapport spectal 1/3 : validation numerique pour les suites A et B, Digamma, Digamma calcule et la determination du premier 227.",
+      "ligne": 901,
+      "section_thy": "Rapport spectal 1/3 : validation numerique pour les suites A et B, Digamma, Digamma calcule et la determination du premier 227.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 126,
+      "type": "definition",
+      "nom": "suite_A_1_3_somme",
+      "ligne": 903,
+      "section_thy": "Rapport spectal 1/3 : validation numerique pour les suites A et B, Digamma, Digamma calcule et la determination du premier 227.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 127,
+      "type": "definition",
+      "nom": "suite_B_1_3_somme",
+      "ligne": 906,
+      "section_thy": "Rapport spectal 1/3 : validation numerique pour les suites A et B, Digamma, Digamma calcule et la determination du premier 227.",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 128,
+      "type": "section",
+      "nom": "Rapport 1/3",
+      "ligne": 909,
+      "section_thy": "Rapport 1/3",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 129,
+      "type": "definition",
+      "nom": "digamma_1_3",
+      "ligne": 911,
+      "section_thy": "Rapport 1/3",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 130,
+      "type": "definition",
+      "nom": "digamma_calcule_1_3",
+      "ligne": 914,
+      "section_thy": "Rapport 1/3",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 131,
+      "type": "lemma",
+      "nom": "preuve_premier_227",
+      "ligne": 917,
+      "section_thy": "Rapport 1/3",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 132,
+      "type": "section",
+      "nom": "Rapport spectral constant 1/3 et 1/4.",
+      "ligne": 925,
+      "section_thy": "Rapport spectral constant 1/3 et 1/4.",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 133,
+      "type": "text",
+      "nom": "text_block_15",
+      "ligne": 927,
+      "section_thy": "Rapport spectral constant 1/3 et 1/4.",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 134,
+      "type": "section",
+      "nom": "Rapport spectral 1/3 - validation generalisee.",
+      "ligne": 930,
+      "section_thy": "Rapport spectral 1/3 - validation generalisee.",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 135,
+      "type": "definition",
+      "nom": "RsP_1_3",
+      "ligne": 934,
+      "section_thy": "Rapport spectral 1/3 - validation generalisee.",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 136,
+      "type": "theorem",
+      "nom": "RsP_un_tiers_constant",
+      "ligne": 939,
+      "section_thy": "Rapport spectral 1/3 - validation generalisee.",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 137,
+      "type": "section",
+      "nom": "Rapport spectral constant 1/4.",
+      "ligne": 985,
+      "section_thy": "Rapport spectral constant 1/4.",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 138,
+      "type": "definition",
+      "nom": "RsP_1_4",
+      "ligne": 987,
+      "section_thy": "Rapport spectral constant 1/4.",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 139,
+      "type": "section",
+      "nom": "Rapport spectral 1/4 - validation generalisee.",
+      "ligne": 992,
+      "section_thy": "Rapport spectral 1/4 - validation generalisee.",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 140,
+      "type": "theorem",
+      "nom": "RsP_un_quart_constant",
+      "ligne": 994,
+      "section_thy": "Rapport spectral 1/4 - validation generalisee.",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 141,
+      "type": "section",
+      "nom": "Suites mixtes A et B",
+      "ligne": 1041,
+      "section_thy": "Suites mixtes A et B",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 142,
+      "type": "definition",
+      "nom": "SA_mix",
+      "ligne": 1043,
+      "section_thy": "Suites mixtes A et B",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 143,
+      "type": "definition",
+      "nom": "SB_mix",
+      "ligne": 1046,
+      "section_thy": "Suites mixtes A et B",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 144,
+      "type": "lemma",
+      "nom": "SA_mix_closed_form",
+      "ligne": 1049,
+      "section_thy": "Suites mixtes A et B",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 145,
+      "type": "lemma",
+      "nom": "SB_mix_closed_form",
+      "ligne": 1053,
+      "section_thy": "Suites mixtes A et B",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 146,
+      "type": "lemma",
+      "nom": "SA_mix_step",
+      "ligne": 1057,
+      "section_thy": "Suites mixtes A et B",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 147,
+      "type": "lemma",
+      "nom": "SB_mix_step",
+      "ligne": 1062,
+      "section_thy": "Suites mixtes A et B",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 148,
+      "type": "lemma",
+      "nom": "SA_mix_limit_shape",
+      "ligne": 1067,
+      "section_thy": "Suites mixtes A et B",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 149,
+      "type": "lemma",
+      "nom": "SB_mix_limit_shape",
+      "ligne": 1071,
+      "section_thy": "Suites mixtes A et B",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 150,
+      "type": "section",
+      "nom": "Reconstruction generale du nombre premier",
+      "ligne": 1076,
+      "section_thy": "Reconstruction generale du nombre premier",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 151,
+      "type": "definition",
+      "nom": "digamma_mix",
+      "ligne": 1078,
+      "section_thy": "Reconstruction generale du nombre premier",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 152,
+      "type": "definition",
+      "nom": "premier_mix",
+      "ligne": 1081,
+      "section_thy": "Reconstruction generale du nombre premier",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 153,
+      "type": "lemma",
+      "nom": "premier_mix_rewrite",
+      "ligne": 1084,
+      "section_thy": "Reconstruction generale du nombre premier",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 154,
+      "type": "section",
+      "nom": "Exemple instancie : six termes negatif",
+      "ligne": 1090,
+      "section_thy": "Exemple instancie : six termes negatif",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 155,
+      "type": "definition",
+      "nom": "K6",
+      "ligne": 1092,
+      "section_thy": "Exemple instancie : six termes negatif",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 156,
+      "type": "definition",
+      "nom": "digamma_mix_6",
+      "ligne": 1095,
+      "section_thy": "Exemple instancie : six termes negatif",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 157,
+      "type": "definition",
+      "nom": "premier_mix_6",
+      "ligne": 1098,
+      "section_thy": "Exemple instancie : six termes negatif",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 158,
+      "type": "lemma",
+      "nom": "digamma_mix_6_value",
+      "ligne": 1101,
+      "section_thy": "Exemple instancie : six termes negatif",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 159,
+      "type": "lemma",
+      "nom": "premier_mix_6_value",
+      "ligne": 1106,
+      "section_thy": "Exemple instancie : six termes negatif",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 160,
+      "type": "section",
+      "nom": "Suites negatives : equations spectrales",
+      "ligne": 1115,
+      "section_thy": "Suites negatives : equations spectrales",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 161,
+      "type": "definition",
+      "nom": "SA_neg_eq",
+      "ligne": 1117,
+      "section_thy": "Suites negatives : equations spectrales",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 162,
+      "type": "definition",
+      "nom": "SB_neg_eq",
+      "ligne": 1120,
+      "section_thy": "Suites negatives : equations spectrales",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 163,
+      "type": "definition",
+      "nom": "digamma_neg_calc",
+      "ligne": 1123,
+      "section_thy": "Suites negatives : equations spectrales",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 164,
+      "type": "lemma",
+      "nom": "digamma_neg_calc_equation_alt",
+      "ligne": 1126,
+      "section_thy": "Suites negatives : equations spectrales",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 165,
+      "type": "section",
+      "nom": "Rapport spectral 1/2 negatif",
+      "ligne": 1136,
+      "section_thy": "Rapport spectral 1/2 negatif",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 166,
+      "type": "definition",
+      "nom": "RsP_neg",
+      "ligne": 1138,
+      "section_thy": "Rapport spectral 1/2 negatif",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 167,
+      "type": "axiomatization",
+      "nom": "axiomatization_bloc_5",
+      "ligne": 1143,
+      "section_thy": "Rapport spectral 1/2 negatif",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 168,
+      "type": "lemma",
+      "nom": "RsP_neg_un_demi_general",
+      "ligne": 1147,
+      "section_thy": "Rapport spectral 1/2 negatif",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 169,
+      "type": "section",
+      "nom": "Geometrie spectrale : asymetries",
+      "ligne": 1157,
+      "section_thy": "Geometrie spectrale : asymetries",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 170,
+      "type": "definition",
+      "nom": "indice_valide",
+      "ligne": 1159,
+      "section_thy": "Geometrie spectrale : asymetries",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 171,
+      "type": "definition",
+      "nom": "liste_strictement_croissante",
+      "ligne": 1162,
+      "section_thy": "Geometrie spectrale : asymetries",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 172,
+      "type": "definition",
+      "nom": "asymetrique_ordonnee",
+      "ligne": 1166,
+      "section_thy": "Geometrie spectrale : asymetries",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 173,
+      "type": "definition",
+      "nom": "asymetrique_chaotique",
+      "ligne": 1177,
+      "section_thy": "Geometrie spectrale : asymetries",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 174,
+      "type": "lemma",
+      "nom": "asymetrie_implique_indices_valides",
+      "ligne": 1184,
+      "section_thy": "Geometrie spectrale : asymetries",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 175,
+      "type": "section",
+      "nom": "Methode de comparaison asymetrique pour 1/2 et 1/4",
+      "ligne": 1206,
+      "section_thy": "Methode de comparaison asymetrique pour 1/2 et 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 176,
+      "type": "text",
+      "nom": "text_block_16",
+      "ligne": 1208,
+      "section_thy": "Methode de comparaison asymetrique pour 1/2 et 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 177,
+      "type": "text",
+      "nom": "text_block_17",
+      "ligne": 1225,
+      "section_thy": "Methode de comparaison asymetrique pour 1/2 et 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 178,
+      "type": "definition",
+      "nom": "indice_valide_nat",
+      "ligne": 1231,
+      "section_thy": "Methode de comparaison asymetrique pour 1/2 et 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 179,
+      "type": "definition",
+      "nom": "liste_strictement_croissante_nat",
+      "ligne": 1234,
+      "section_thy": "Methode de comparaison asymetrique pour 1/2 et 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 180,
+      "type": "definition",
+      "nom": "asymetrique_ordonnee_nat",
+      "ligne": 1238,
+      "section_thy": "Methode de comparaison asymetrique pour 1/2 et 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 181,
+      "type": "definition",
+      "nom": "asymetrique_chaotique_nat",
+      "ligne": 1249,
+      "section_thy": "Methode de comparaison asymetrique pour 1/2 et 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 182,
+      "type": "lemma",
+      "nom": "asymetrie_nat_implique_indices_valides",
+      "ligne": 1256,
+      "section_thy": "Methode de comparaison asymetrique pour 1/2 et 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 183,
+      "type": "text",
+      "nom": "text_block_18",
+      "ligne": 1279,
+      "section_thy": "Methode de comparaison asymetrique pour 1/2 et 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 184,
+      "type": "definition",
+      "nom": "somme_SA_bloc",
+      "ligne": 1290,
+      "section_thy": "Methode de comparaison asymetrique pour 1/2 et 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 185,
+      "type": "definition",
+      "nom": "somme_SB_bloc",
+      "ligne": 1293,
+      "section_thy": "Methode de comparaison asymetrique pour 1/2 et 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 186,
+      "type": "text",
+      "nom": "text_block_19",
+      "ligne": 1296,
+      "section_thy": "Methode de comparaison asymetrique pour 1/2 et 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 187,
+      "type": "definition",
+      "nom": "RsP_bloc_1_2",
+      "ligne": 1301,
+      "section_thy": "Methode de comparaison asymetrique pour 1/2 et 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 188,
+      "type": "text",
+      "nom": "text_block_20",
+      "ligne": 1306,
+      "section_thy": "Methode de comparaison asymetrique pour 1/2 et 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 189,
+      "type": "definition",
+      "nom": "comparaison_asym_ordonnee_1_2",
+      "ligne": 1314,
+      "section_thy": "Methode de comparaison asymetrique pour 1/2 et 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 190,
+      "type": "text",
+      "nom": "text_block_21",
+      "ligne": 1318,
+      "section_thy": "Methode de comparaison asymetrique pour 1/2 et 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 191,
+      "type": "definition",
+      "nom": "comparaison_asym_chaotique_1_2",
+      "ligne": 1325,
+      "section_thy": "Methode de comparaison asymetrique pour 1/2 et 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 192,
+      "type": "text",
+      "nom": "text_block_22",
+      "ligne": 1329,
+      "section_thy": "Methode de comparaison asymetrique pour 1/2 et 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 193,
+      "type": "text",
+      "nom": "text_block_23",
+      "ligne": 1347,
+      "section_thy": "Methode de comparaison asymetrique pour 1/2 et 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 194,
+      "type": "definition",
+      "nom": "somme_A_1_4_bloc",
+      "ligne": 1356,
+      "section_thy": "Methode de comparaison asymetrique pour 1/2 et 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 195,
+      "type": "definition",
+      "nom": "somme_B_1_4_bloc",
+      "ligne": 1359,
+      "section_thy": "Methode de comparaison asymetrique pour 1/2 et 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 196,
+      "type": "definition",
+      "nom": "RsP_bloc_1_4",
+      "ligne": 1362,
+      "section_thy": "Methode de comparaison asymetrique pour 1/2 et 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 197,
+      "type": "definition",
+      "nom": "comparaison_asym_ordonnee_1_4",
+      "ligne": 1367,
+      "section_thy": "Methode de comparaison asymetrique pour 1/2 et 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 198,
+      "type": "definition",
+      "nom": "comparaison_asym_chaotique_1_4",
+      "ligne": 1371,
+      "section_thy": "Methode de comparaison asymetrique pour 1/2 et 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 199,
+      "type": "text",
+      "nom": "text_block_24",
+      "ligne": 1375,
+      "section_thy": "Methode de comparaison asymetrique pour 1/2 et 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 200,
+      "type": "section",
+      "nom": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "ligne": 1392,
+      "section_thy": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 201,
+      "type": "text",
+      "nom": "text_block_25",
+      "ligne": 1394,
+      "section_thy": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 202,
+      "type": "definition",
+      "nom": "bloc_A_k",
+      "ligne": 1471,
+      "section_thy": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 203,
+      "type": "definition",
+      "nom": "bloc_B_k",
+      "ligne": 1475,
+      "section_thy": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 204,
+      "type": "definition",
+      "nom": "somme_bloc",
+      "ligne": 1479,
+      "section_thy": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 205,
+      "type": "definition",
+      "nom": "RsP_bloc",
+      "ligne": 1483,
+      "section_thy": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 206,
+      "type": "definition",
+      "nom": "RsP_bloc_extreme",
+      "ligne": 1489,
+      "section_thy": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 207,
+      "type": "lemma",
+      "nom": "card_bloc_A_k",
+      "ligne": 1494,
+      "section_thy": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 208,
+      "type": "lemma",
+      "nom": "card_bloc_B_k",
+      "ligne": 1497,
+      "section_thy": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 209,
+      "type": "lemma",
+      "nom": "asymetrie_structurelle_blocs",
+      "ligne": 1500,
+      "section_thy": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 210,
+      "type": "lemma",
+      "nom": "bloc_A_1_singleton",
+      "ligne": 1505,
+      "section_thy": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 211,
+      "type": "lemma",
+      "nom": "bloc_B_1_paire",
+      "ligne": 1508,
+      "section_thy": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 212,
+      "type": "lemma",
+      "nom": "somme_bloc_B_1",
+      "ligne": 1514,
+      "section_thy": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 213,
+      "type": "lemma",
+      "nom": "RsP_bloc_extreme_at_1",
+      "ligne": 1518,
+      "section_thy": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 214,
+      "type": "text",
+      "nom": "text_block_26",
+      "ligne": 1528,
+      "section_thy": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 215,
+      "type": "definition",
+      "nom": "ponderation_bloc",
+      "ligne": 1535,
+      "section_thy": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 216,
+      "type": "definition",
+      "nom": "S_pondere",
+      "ligne": 1539,
+      "section_thy": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 217,
+      "type": "lemma",
+      "nom": "ponderation_bloc_uniforme",
+      "ligne": 1545,
+      "section_thy": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 218,
+      "type": "lemma",
+      "nom": "S_pondere_uniforme",
+      "ligne": 1554,
+      "section_thy": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 219,
+      "type": "text",
+      "nom": "text_block_27",
+      "ligne": 1566,
+      "section_thy": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 220,
+      "type": "definition",
+      "nom": "ponderation_bloc_complexe",
+      "ligne": 1580,
+      "section_thy": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 221,
+      "type": "definition",
+      "nom": "S_pondere_complexe",
+      "ligne": 1584,
+      "section_thy": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 222,
+      "type": "lemma",
+      "nom": "ponderation_bloc_complexe_uniforme",
+      "ligne": 1591,
+      "section_thy": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 223,
+      "type": "lemma",
+      "nom": "ponderation_bloc_complexe_of_real",
+      "ligne": 1600,
+      "section_thy": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 224,
+      "type": "text",
+      "nom": "text_block_28",
+      "ligne": 1617,
+      "section_thy": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 225,
+      "type": "lemma",
+      "nom": "bloc_A_k_pour_SA",
+      "ligne": 1647,
+      "section_thy": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 226,
+      "type": "lemma",
+      "nom": "bloc_B_k_pour_SB",
+      "ligne": 1651,
+      "section_thy": "Blocs A_k / B_k et rapport spectral de blocs (v3.43)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 227,
+      "type": "section",
+      "nom": "Rapport spectral 1/3 negatif",
+      "ligne": 1660,
+      "section_thy": "Rapport spectral 1/3 negatif",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 228,
+      "type": "definition",
+      "nom": "SA_neg_eq_un_tiers",
+      "ligne": 1668,
+      "section_thy": "Rapport spectral 1/3 negatif",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 229,
+      "type": "definition",
+      "nom": "SB_neg_eq_un_tiers",
+      "ligne": 1671,
+      "section_thy": "Rapport spectral 1/3 negatif",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 230,
+      "type": "definition",
+      "nom": "RsP_neg_un_tiers",
+      "ligne": 1674,
+      "section_thy": "Rapport spectral 1/3 negatif",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 231,
+      "type": "axiomatization",
+      "nom": "axiomatization_bloc_6",
+      "ligne": 1688,
+      "section_thy": "Rapport spectral 1/3 negatif",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 232,
+      "type": "lemma",
+      "nom": "RsP_neg_un_tiers_general",
+      "ligne": 1692,
+      "section_thy": "Rapport spectral 1/3 negatif",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 233,
+      "type": "section",
+      "nom": "Rapport spectral 1/4 negatif",
+      "ligne": 1700,
+      "section_thy": "Rapport spectral 1/4 negatif",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 234,
+      "type": "definition",
+      "nom": "SA_neg_eq_un_quart",
+      "ligne": 1708,
+      "section_thy": "Rapport spectral 1/4 negatif",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 235,
+      "type": "definition",
+      "nom": "SB_neg_eq_un_quart",
+      "ligne": 1711,
+      "section_thy": "Rapport spectral 1/4 negatif",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 236,
+      "type": "definition",
+      "nom": "RsP_neg_un_quart",
+      "ligne": 1714,
+      "section_thy": "Rapport spectral 1/4 negatif",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 237,
+      "type": "axiomatization",
+      "nom": "axiomatization_bloc_7",
+      "ligne": 1725,
+      "section_thy": "Rapport spectral 1/4 negatif",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 238,
+      "type": "lemma",
+      "nom": "RsP_neg_un_quart_general",
+      "ligne": 1730,
+      "section_thy": "Rapport spectral 1/4 negatif",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 239,
+      "type": "section",
+      "nom": "Forme generale de l'ecart negatif",
+      "ligne": 1739,
+      "section_thy": "Forme generale de l'ecart negatif",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 240,
+      "type": "definition",
+      "nom": "gap_neg_val",
+      "ligne": 1741,
+      "section_thy": "Forme generale de l'ecart negatif",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 241,
+      "type": "section",
+      "nom": "Exemple complet : ecart entre -19 et -5",
+      "ligne": 1751,
+      "section_thy": "Exemple complet : ecart entre -19 et -5",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 242,
+      "type": "definition",
+      "nom": "n_m7",
+      "ligne": 1753,
+      "section_thy": "Exemple complet : ecart entre -19 et -5",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 243,
+      "type": "definition",
+      "nom": "n_m3",
+      "ligne": 1754,
+      "section_thy": "Exemple complet : ecart entre -19 et -5",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 244,
+      "type": "definition",
+      "nom": "n_m19",
+      "ligne": 1755,
+      "section_thy": "Exemple complet : ecart entre -19 et -5",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 245,
+      "type": "section",
+      "nom": "Valeurs spectrales exactes pour -19 et -5",
+      "ligne": 1762,
+      "section_thy": "Valeurs spectrales exactes pour -19 et -5",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 246,
+      "type": "definition",
+      "nom": "SA_m7_val",
+      "ligne": 1764,
+      "section_thy": "Valeurs spectrales exactes pour -19 et -5",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 247,
+      "type": "definition",
+      "nom": "SB_m5_val",
+      "ligne": 1767,
+      "section_thy": "Valeurs spectrales exactes pour -19 et -5",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 248,
+      "type": "definition",
+      "nom": "D_m5_val",
+      "ligne": 1770,
+      "section_thy": "Valeurs spectrales exactes pour -19 et -5",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 249,
+      "type": "definition",
+      "nom": "SB_m19_val",
+      "ligne": 1773,
+      "section_thy": "Valeurs spectrales exactes pour -19 et -5",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 250,
+      "type": "definition",
+      "nom": "D_m19_val",
+      "ligne": 1776,
+      "section_thy": "Valeurs spectrales exactes pour -19 et -5",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 251,
+      "type": "section",
+      "nom": "Demonstration finale : ecart -19 / -5",
+      "ligne": 1784,
+      "section_thy": "Demonstration finale : ecart -19 / -5",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 252,
+      "type": "lemma",
+      "nom": "gap_m19_m5",
+      "ligne": 1786,
+      "section_thy": "Demonstration finale : ecart -19 / -5",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 253,
+      "type": "section",
+      "nom": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "ligne": 1810,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 254,
+      "type": "subsection",
+      "nom": "Theoreme principal - Aucun compose n'est un prime_i",
+      "ligne": 1812,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Theoreme principal - Aucun compose n'est un prime_i",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 255,
+      "type": "text",
+      "nom": "text_block_29",
+      "ligne": 1814,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Theoreme principal - Aucun compose n'est un prime_i",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 256,
+      "type": "theorem",
+      "nom": "composite_not_prime_i",
+      "ligne": 1821,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Theoreme principal - Aucun compose n'est un prime_i",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 257,
+      "type": "subsection",
+      "nom": "Corollaire - Exclusion via l'equation spectrale",
+      "ligne": 1835,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Corollaire - Exclusion via l'equation spectrale",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 258,
+      "type": "text",
+      "nom": "text_block_30",
+      "ligne": 1837,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Corollaire - Exclusion via l'equation spectrale",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 259,
+      "type": "theorem",
+      "nom": "spectral_method_exclusively_for_primes",
+      "ligne": 1844,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Corollaire - Exclusion via l'equation spectrale",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 260,
+      "type": "subsection",
+      "nom": "Illustrations numeriques : composes 4, 9, 15, 51, 91, 121",
+      "ligne": 1857,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Illustrations numeriques : composes 4, 9, 15, 51, 91, 121",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 261,
+      "type": "text",
+      "nom": "text_block_31",
+      "ligne": 1859,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Illustrations numeriques : composes 4, 9, 15, 51, 91, 121",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 262,
+      "type": "lemma",
+      "nom": "composite_4_not_prime",
+      "ligne": 1869,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Illustrations numeriques : composes 4, 9, 15, 51, 91, 121",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 263,
+      "type": "lemma",
+      "nom": "composite_9_not_prime",
+      "ligne": 1877,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Illustrations numeriques : composes 4, 9, 15, 51, 91, 121",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 264,
+      "type": "lemma",
+      "nom": "composite_15_not_prime",
+      "ligne": 1885,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Illustrations numeriques : composes 4, 9, 15, 51, 91, 121",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 265,
+      "type": "lemma",
+      "nom": "composite_51_not_prime",
+      "ligne": 1893,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Illustrations numeriques : composes 4, 9, 15, 51, 91, 121",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 266,
+      "type": "lemma",
+      "nom": "composite_91_not_prime",
+      "ligne": 1901,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Illustrations numeriques : composes 4, 9, 15, 51, 91, 121",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 267,
+      "type": "lemma",
+      "nom": "composite_121_not_prime",
+      "ligne": 1909,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Illustrations numeriques : composes 4, 9, 15, 51, 91, 121",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 268,
+      "type": "theorem",
+      "nom": "no_spectral_position_for_4",
+      "ligne": 1917,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Illustrations numeriques : composes 4, 9, 15, 51, 91, 121",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 269,
+      "type": "theorem",
+      "nom": "no_spectral_position_for_9",
+      "ligne": 1921,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Illustrations numeriques : composes 4, 9, 15, 51, 91, 121",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 270,
+      "type": "theorem",
+      "nom": "no_spectral_position_for_15",
+      "ligne": 1925,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Illustrations numeriques : composes 4, 9, 15, 51, 91, 121",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 271,
+      "type": "theorem",
+      "nom": "no_spectral_position_for_51",
+      "ligne": 1929,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Illustrations numeriques : composes 4, 9, 15, 51, 91, 121",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 272,
+      "type": "theorem",
+      "nom": "no_spectral_position_for_91",
+      "ligne": 1933,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Illustrations numeriques : composes 4, 9, 15, 51, 91, 121",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 273,
+      "type": "theorem",
+      "nom": "no_spectral_position_for_121",
+      "ligne": 1937,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Illustrations numeriques : composes 4, 9, 15, 51, 91, 121",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 274,
+      "type": "subsection",
+      "nom": "Interpretation - Le log Gabriel comme preuve par l'absurde",
+      "ligne": 1942,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Interpretation - Le log Gabriel comme preuve par l'absurde",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 275,
+      "type": "text",
+      "nom": "text_block_32",
+      "ligne": 1944,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Interpretation - Le log Gabriel comme preuve par l'absurde",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 276,
+      "type": "subsection",
+      "nom": "Extension - Preuve par l'absurde pour la reconstruction des premiers",
+      "ligne": 1968,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Extension - Preuve par l'absurde pour la reconstruction des premiers",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 277,
+      "type": "text",
+      "nom": "text_block_33",
+      "ligne": 1970,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Extension - Preuve par l'absurde pour la reconstruction des premiers",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 278,
+      "type": "theorem",
+      "nom": "composite_no_reconstruction_position",
+      "ligne": 1986,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Extension - Preuve par l'absurde pour la reconstruction des premiers",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 279,
+      "type": "text",
+      "nom": "text_block_34",
+      "ligne": 2007,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Extension - Preuve par l'absurde pour la reconstruction des premiers",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 280,
+      "type": "theorem",
+      "nom": "no_reconstruction_for_4",
+      "ligne": 2012,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Extension - Preuve par l'absurde pour la reconstruction des premiers",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 281,
+      "type": "theorem",
+      "nom": "no_reconstruction_for_9",
+      "ligne": 2018,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Extension - Preuve par l'absurde pour la reconstruction des premiers",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 282,
+      "type": "theorem",
+      "nom": "no_reconstruction_for_15",
+      "ligne": 2024,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Extension - Preuve par l'absurde pour la reconstruction des premiers",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 283,
+      "type": "theorem",
+      "nom": "no_reconstruction_for_51",
+      "ligne": 2030,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Extension - Preuve par l'absurde pour la reconstruction des premiers",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 284,
+      "type": "theorem",
+      "nom": "no_reconstruction_for_91",
+      "ligne": 2036,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Extension - Preuve par l'absurde pour la reconstruction des premiers",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 285,
+      "type": "theorem",
+      "nom": "no_reconstruction_for_121",
+      "ligne": 2042,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Extension - Preuve par l'absurde pour la reconstruction des premiers",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 286,
+      "type": "subsection",
+      "nom": "Extension - Preuve par l'absurde pour le rapport spectral RsP",
+      "ligne": 2049,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Extension - Preuve par l'absurde pour le rapport spectral RsP",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 287,
+      "type": "text",
+      "nom": "text_block_35",
+      "ligne": 2051,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Extension - Preuve par l'absurde pour le rapport spectral RsP",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 288,
+      "type": "theorem",
+      "nom": "composite_pair_no_rsp_positions",
+      "ligne": 2064,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Extension - Preuve par l'absurde pour le rapport spectral RsP",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 289,
+      "type": "text",
+      "nom": "text_block_36",
+      "ligne": 2080,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Extension - Preuve par l'absurde pour le rapport spectral RsP",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 290,
+      "type": "theorem",
+      "nom": "composite_single_no_rsp_position",
+      "ligne": 2085,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Extension - Preuve par l'absurde pour le rapport spectral RsP",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 291,
+      "type": "subsection",
+      "nom": "Synthese - Les 3 piliers de la Methode Spectrale bornes a P",
+      "ligne": 2100,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Synthese - Les 3 piliers de la Methode Spectrale bornes a P",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 292,
+      "type": "text",
+      "nom": "text_block_37",
+      "ligne": 2102,
+      "section_thy": "Preuve par l'absurde : la Methode Spectrale exclut strictement les composes",
+      "subsection_thy": "Synthese - Les 3 piliers de la Methode Spectrale bornes a P",
+      "section_logique": "1/ms2"
+    },
+    {
+      "id": 293,
+      "type": "section",
+      "nom": "Exemple complet : ecart entre -31 et 17",
+      "ligne": 2139,
+      "section_thy": "Exemple complet : ecart entre -31 et 17",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 294,
+      "type": "definition",
+      "nom": "n_m29",
+      "ligne": 2141,
+      "section_thy": "Exemple complet : ecart entre -31 et 17",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 295,
+      "type": "definition",
+      "nom": "n_p17",
+      "ligne": 2142,
+      "section_thy": "Exemple complet : ecart entre -31 et 17",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 296,
+      "type": "definition",
+      "nom": "n_m31",
+      "ligne": 2143,
+      "section_thy": "Exemple complet : ecart entre -31 et 17",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 297,
+      "type": "section",
+      "nom": "Valeurs spectrales exactes pour -31 et 17",
+      "ligne": 2150,
+      "section_thy": "Valeurs spectrales exactes pour -31 et 17",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 298,
+      "type": "definition",
+      "nom": "SA_m29_val",
+      "ligne": 2152,
+      "section_thy": "Valeurs spectrales exactes pour -31 et 17",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 299,
+      "type": "definition",
+      "nom": "SB_p17_val",
+      "ligne": 2155,
+      "section_thy": "Valeurs spectrales exactes pour -31 et 17",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 300,
+      "type": "definition",
+      "nom": "D_p17_val",
+      "ligne": 2158,
+      "section_thy": "Valeurs spectrales exactes pour -31 et 17",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 301,
+      "type": "definition",
+      "nom": "SB_m31_val",
+      "ligne": 2161,
+      "section_thy": "Valeurs spectrales exactes pour -31 et 17",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 302,
+      "type": "definition",
+      "nom": "D_m31_val",
+      "ligne": 2164,
+      "section_thy": "Valeurs spectrales exactes pour -31 et 17",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 303,
+      "type": "section",
+      "nom": "Forme generale de l'ecart mixte",
+      "ligne": 2172,
+      "section_thy": "Forme generale de l'ecart mixte",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 304,
+      "type": "definition",
+      "nom": "gap_mix_val",
+      "ligne": 2174,
+      "section_thy": "Forme generale de l'ecart mixte",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 305,
+      "type": "section",
+      "nom": "Demonstration finale : ecart -31 / 17",
+      "ligne": 2184,
+      "section_thy": "Demonstration finale : ecart -31 / 17",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 306,
+      "type": "lemma",
+      "nom": "gap_m31_17",
+      "ligne": 2186,
+      "section_thy": "Demonstration finale : ecart -31 / 17",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 307,
+      "type": "section",
+      "nom": "Valeurs spectrales exactes pour 23 et 7",
+      "ligne": 2196,
+      "section_thy": "Valeurs spectrales exactes pour 23 et 7",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 308,
+      "type": "definition",
+      "nom": "SA_11_val",
+      "ligne": 2198,
+      "section_thy": "Valeurs spectrales exactes pour 23 et 7",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 309,
+      "type": "definition",
+      "nom": "SB_23_val",
+      "ligne": 2199,
+      "section_thy": "Valeurs spectrales exactes pour 23 et 7",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 310,
+      "type": "definition",
+      "nom": "D_23_val",
+      "ligne": 2200,
+      "section_thy": "Valeurs spectrales exactes pour 23 et 7",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 311,
+      "type": "definition",
+      "nom": "SB_7_val",
+      "ligne": 2201,
+      "section_thy": "Valeurs spectrales exactes pour 23 et 7",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 312,
+      "type": "definition",
+      "nom": "D_7_val",
+      "ligne": 2202,
+      "section_thy": "Valeurs spectrales exactes pour 23 et 7",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 313,
+      "type": "section",
+      "nom": "Note sur l'inclusion du zero dans les ecarts spectraux",
+      "ligne": 2209,
+      "section_thy": "Note sur l'inclusion du zero dans les ecarts spectraux",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 314,
+      "type": "text",
+      "nom": "text_block_38",
+      "ligne": 2211,
+      "section_thy": "Note sur l'inclusion du zero dans les ecarts spectraux",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 315,
+      "type": "section",
+      "nom": "Exemple complet : ecart entre les premiers 227 et 173 (rapport 1/3)",
+      "ligne": 2220,
+      "section_thy": "Exemple complet : ecart entre les premiers 227 et 173 (rapport 1/3)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 316,
+      "type": "text",
+      "nom": "text_block_39",
+      "ligne": 2222,
+      "section_thy": "Exemple complet : ecart entre les premiers 227 et 173 (rapport 1/3)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 317,
+      "type": "section",
+      "nom": "Valeurs spectrales exactes pour 227 et 173 (1/3)",
+      "ligne": 2256,
+      "section_thy": "Valeurs spectrales exactes pour 227 et 173 (1/3)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 318,
+      "type": "definition",
+      "nom": "SA_227_val",
+      "ligne": 2258,
+      "section_thy": "Valeurs spectrales exactes pour 227 et 173 (1/3)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 319,
+      "type": "definition",
+      "nom": "SB_227_val",
+      "ligne": 2261,
+      "section_thy": "Valeurs spectrales exactes pour 227 et 173 (1/3)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 320,
+      "type": "definition",
+      "nom": "D_227_val",
+      "ligne": 2264,
+      "section_thy": "Valeurs spectrales exactes pour 227 et 173 (1/3)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 321,
+      "type": "definition",
+      "nom": "SA_179_val",
+      "ligne": 2267,
+      "section_thy": "Valeurs spectrales exactes pour 227 et 173 (1/3)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 322,
+      "type": "definition",
+      "nom": "SB_173_val",
+      "ligne": 2270,
+      "section_thy": "Valeurs spectrales exactes pour 227 et 173 (1/3)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 323,
+      "type": "definition",
+      "nom": "D_173_val",
+      "ligne": 2273,
+      "section_thy": "Valeurs spectrales exactes pour 227 et 173 (1/3)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 324,
+      "type": "section",
+      "nom": "Validation numerique de l'ecart entre 227 et 173 (1/3)",
+      "ligne": 2281,
+      "section_thy": "Validation numerique de l'ecart entre 227 et 173 (1/3)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 325,
+      "type": "lemma",
+      "nom": "ecart_227_173_1_3",
+      "ligne": 2283,
+      "section_thy": "Validation numerique de l'ecart entre 227 et 173 (1/3)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 326,
+      "type": "section",
+      "nom": "Equation generale d'ecart pour le rapport spectral 1/3",
+      "ligne": 2292,
+      "section_thy": "Equation generale d'ecart pour le rapport spectral 1/3",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 327,
+      "type": "text",
+      "nom": "text_block_40",
+      "ligne": 2294,
+      "section_thy": "Equation generale d'ecart pour le rapport spectral 1/3",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 328,
+      "type": "definition",
+      "nom": "gap_equation_1_3",
+      "ligne": 2312,
+      "section_thy": "Equation generale d'ecart pour le rapport spectral 1/3",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 329,
+      "type": "lemma",
+      "nom": "gap_equation_1_3_simplifiee",
+      "ligne": 2316,
+      "section_thy": "Equation generale d'ecart pour le rapport spectral 1/3",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 330,
+      "type": "text",
+      "nom": "text_block_41",
+      "ligne": 2326,
+      "section_thy": "Equation generale d'ecart pour le rapport spectral 1/3",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 331,
+      "type": "axiomatization",
+      "nom": "axiomatization_bloc_8",
+      "ligne": 2336,
+      "section_thy": "Equation generale d'ecart pour le rapport spectral 1/3",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 332,
+      "type": "lemma",
+      "nom": "gap_equation_1_3_for_primes",
+      "ligne": 2348,
+      "section_thy": "Equation generale d'ecart pour le rapport spectral 1/3",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 333,
+      "type": "section",
+      "nom": "Validation de l'exemple 227 / 173 via l'equation generale 1/3",
+      "ligne": 2359,
+      "section_thy": "Validation de l'exemple 227 / 173 via l'equation generale 1/3",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 334,
+      "type": "lemma",
+      "nom": "ecart_227_173_1_3_via_gap_equation",
+      "ligne": 2361,
+      "section_thy": "Validation de l'exemple 227 / 173 via l'equation generale 1/3",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 335,
+      "type": "section",
+      "nom": "Valeurs spectrales exactes pour 947 et 881 (1/4)",
+      "ligne": 2372,
+      "section_thy": "Valeurs spectrales exactes pour 947 et 881 (1/4)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 336,
+      "type": "definition",
+      "nom": "SA_883_val",
+      "ligne": 2374,
+      "section_thy": "Valeurs spectrales exactes pour 947 et 881 (1/4)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 337,
+      "type": "definition",
+      "nom": "SB_947_val",
+      "ligne": 2377,
+      "section_thy": "Valeurs spectrales exactes pour 947 et 881 (1/4)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 338,
+      "type": "definition",
+      "nom": "D_947_val",
+      "ligne": 2380,
+      "section_thy": "Valeurs spectrales exactes pour 947 et 881 (1/4)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 339,
+      "type": "definition",
+      "nom": "D_881_val",
+      "ligne": 2383,
+      "section_thy": "Valeurs spectrales exactes pour 947 et 881 (1/4)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 340,
+      "type": "section",
+      "nom": "Equation generale d'ecart pour le rapport spectral 1/4",
+      "ligne": 2391,
+      "section_thy": "Equation generale d'ecart pour le rapport spectral 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 341,
+      "type": "definition",
+      "nom": "gap_equation_1_4",
+      "ligne": 2393,
+      "section_thy": "Equation generale d'ecart pour le rapport spectral 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 342,
+      "type": "lemma",
+      "nom": "gap_equation_1_4_simplifiee",
+      "ligne": 2397,
+      "section_thy": "Equation generale d'ecart pour le rapport spectral 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 343,
+      "type": "text",
+      "nom": "text_block_42",
+      "ligne": 2407,
+      "section_thy": "Equation generale d'ecart pour le rapport spectral 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 344,
+      "type": "axiomatization",
+      "nom": "axiomatization_bloc_9",
+      "ligne": 2417,
+      "section_thy": "Equation generale d'ecart pour le rapport spectral 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 345,
+      "type": "lemma",
+      "nom": "gap_equation_1_4_for_primes",
+      "ligne": 2429,
+      "section_thy": "Equation generale d'ecart pour le rapport spectral 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 346,
+      "type": "section",
+      "nom": "Validation de l'exemple 947 / 881 via l'equation generale 1/4",
+      "ligne": 2440,
+      "section_thy": "Validation de l'exemple 947 / 881 via l'equation generale 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 347,
+      "type": "lemma",
+      "nom": "ecart_947_881_1_4_via_gap_equation",
+      "ligne": 2442,
+      "section_thy": "Validation de l'exemple 947 / 881 via l'equation generale 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 348,
+      "type": "text",
+      "nom": "text_block_43",
+      "ligne": 2453,
+      "section_thy": "Validation de l'exemple 947 / 881 via l'equation generale 1/4",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 349,
+      "type": "section",
+      "nom": "Axiomatisation analytique et geometrique de la position des nombres premiers",
+      "ligne": 2497,
+      "section_thy": "Axiomatisation analytique et geometrique de la position des nombres premiers",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 350,
+      "type": "text",
+      "nom": "text_block_44",
+      "ligne": 2499,
+      "section_thy": "Axiomatisation analytique et geometrique de la position des nombres premiers",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 351,
+      "type": "text",
+      "nom": "text_block_45",
+      "ligne": 2507,
+      "section_thy": "Axiomatisation analytique et geometrique de la position des nombres premiers",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 352,
+      "type": "typedecl",
+      "nom": "zero_zeta",
+      "ligne": 2516,
+      "section_thy": "Axiomatisation analytique et geometrique de la position des nombres premiers",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 353,
+      "type": "consts",
+      "nom": "consts_bloc_2",
+      "ligne": 2518,
+      "section_thy": "Axiomatisation analytique et geometrique de la position des nombres premiers",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 354,
+      "type": "text",
+      "nom": "text_block_46",
+      "ligne": 2522,
+      "section_thy": "Axiomatisation analytique et geometrique de la position des nombres premiers",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 355,
+      "type": "consts",
+      "nom": "consts_bloc_3",
+      "ligne": 2528,
+      "section_thy": "Axiomatisation analytique et geometrique de la position des nombres premiers",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 356,
+      "type": "axiomatization",
+      "nom": "axiomatization_bloc_10",
+      "ligne": 2531,
+      "section_thy": "Axiomatisation analytique et geometrique de la position des nombres premiers",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 357,
+      "type": "text",
+      "nom": "text_block_47",
+      "ligne": 2535,
+      "section_thy": "Axiomatisation analytique et geometrique de la position des nombres premiers",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 358,
+      "type": "text",
+      "nom": "text_block_48",
+      "ligne": 2542,
+      "section_thy": "Axiomatisation analytique et geometrique de la position des nombres premiers",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 359,
+      "type": "typedecl",
+      "nom": "indice_spectral",
+      "ligne": 2556,
+      "section_thy": "Axiomatisation analytique et geometrique de la position des nombres premiers",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 360,
+      "type": "typedecl",
+      "nom": "premier_spectral",
+      "ligne": 2557,
+      "section_thy": "Axiomatisation analytique et geometrique de la position des nombres premiers",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 361,
+      "type": "consts",
+      "nom": "consts_bloc_4",
+      "ligne": 2558,
+      "section_thy": "Axiomatisation analytique et geometrique de la position des nombres premiers",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 362,
+      "type": "text",
+      "nom": "text_block_49",
+      "ligne": 2564,
+      "section_thy": "Axiomatisation analytique et geometrique de la position des nombres premiers",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 363,
+      "type": "axiomatization",
+      "nom": "axiomatization_bloc_11",
+      "ligne": 2571,
+      "section_thy": "Axiomatisation analytique et geometrique de la position des nombres premiers",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 364,
+      "type": "text",
+      "nom": "text_block_50",
+      "ligne": 2578,
+      "section_thy": "Axiomatisation analytique et geometrique de la position des nombres premiers",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 365,
+      "type": "consts",
+      "nom": "consts_bloc_5",
+      "ligne": 2585,
+      "section_thy": "Axiomatisation analytique et geometrique de la position des nombres premiers",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 366,
+      "type": "axiomatization",
+      "nom": "axiomatization_bloc_12",
+      "ligne": 2588,
+      "section_thy": "Axiomatisation analytique et geometrique de la position des nombres premiers",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 367,
+      "type": "text",
+      "nom": "text_block_51",
+      "ligne": 2593,
+      "section_thy": "Axiomatisation analytique et geometrique de la position des nombres premiers",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 368,
+      "type": "text",
+      "nom": "text_block_52",
+      "ligne": 2601,
+      "section_thy": "Axiomatisation analytique et geometrique de la position des nombres premiers",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 369,
+      "type": "consts",
+      "nom": "consts_bloc_6",
+      "ligne": 2610,
+      "section_thy": "Axiomatisation analytique et geometrique de la position des nombres premiers",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 370,
+      "type": "axiomatization",
+      "nom": "axiomatization_bloc_13",
+      "ligne": 2613,
+      "section_thy": "Axiomatisation analytique et geometrique de la position des nombres premiers",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 371,
+      "type": "text",
+      "nom": "text_block_53",
+      "ligne": 2620,
+      "section_thy": "Axiomatisation analytique et geometrique de la position des nombres premiers",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 372,
+      "type": "section",
+      "nom": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "ligne": 2652,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 373,
+      "type": "text",
+      "nom": "text_block_54",
+      "ligne": 2654,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 374,
+      "type": "subsection",
+      "nom": "XI.1. Definition de la raison et des formes de base",
+      "ligne": 2662,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.1. Definition de la raison et des formes de base",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 375,
+      "type": "definition",
+      "nom": "raison_spectrale",
+      "ligne": 2664,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.1. Definition de la raison et des formes de base",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 376,
+      "type": "subsection",
+      "nom": "XI.2. Progression simple (Positions 1 a n-2)",
+      "ligne": 2667,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.2. Progression simple (Positions 1 a n-2)",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 377,
+      "type": "definition",
+      "nom": "progression_simple_terme",
+      "ligne": 2669,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.2. Progression simple (Positions 1 a n-2)",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 378,
+      "type": "subsection",
+      "nom": "XI.3. Condition Terminale : Avant-dernier terme (Position n-1)",
+      "ligne": 2672,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.3. Condition Terminale : Avant-dernier terme (Position n-1)",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 379,
+      "type": "text",
+      "nom": "text_block_55",
+      "ligne": 2674,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.3. Condition Terminale : Avant-dernier terme (Position n-1)",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 380,
+      "type": "definition",
+      "nom": "avant_dernier_terme_savard",
+      "ligne": 2679,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.3. Condition Terminale : Avant-dernier terme (Position n-1)",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 381,
+      "type": "subsection",
+      "nom": "XI.4. Condition Terminale : Dernier terme (Position n)",
+      "ligne": 2682,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.4. Condition Terminale : Dernier terme (Position n)",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 382,
+      "type": "text",
+      "nom": "text_block_56",
+      "ligne": 2684,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.4. Condition Terminale : Dernier terme (Position n)",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 383,
+      "type": "definition",
+      "nom": "dernier_terme_savard",
+      "ligne": 2688,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.4. Condition Terminale : Dernier terme (Position n)",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 384,
+      "type": "subsection",
+      "nom": "XI.5. Construction Complete de la Suite A",
+      "ligne": 2691,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.5. Construction Complete de la Suite A",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 385,
+      "type": "definition",
+      "nom": "suite_A_savard_construction",
+      "ligne": 2693,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.5. Construction Complete de la Suite A",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 386,
+      "type": "text",
+      "nom": "text_block_57",
+      "ligne": 2703,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.5. Construction Complete de la Suite A",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 387,
+      "type": "definition",
+      "nom": "suite_B_savard_construction",
+      "ligne": 2707,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.5. Construction Complete de la Suite A",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 388,
+      "type": "subsection",
+      "nom": "XI.7. Sommation et Formules Fermées Globales",
+      "ligne": 2718,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.7. Sommation et Formules Fermées Globales",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 389,
+      "type": "definition",
+      "nom": "somme_A_compacte_savard",
+      "ligne": 2720,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.7. Sommation et Formules Fermées Globales",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 390,
+      "type": "definition",
+      "nom": "somme_B_compacte_savard",
+      "ligne": 2723,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.7. Sommation et Formules Fermées Globales",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 391,
+      "type": "subsection",
+      "nom": "XI.8. Calcul du Rapport Spectral sans tactique 'Ring'",
+      "ligne": 2726,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.8. Calcul du Rapport Spectral sans tactique 'Ring'",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 392,
+      "type": "definition",
+      "nom": "rapport_spectral_total_savard",
+      "ligne": 2728,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.8. Calcul du Rapport Spectral sans tactique 'Ring'",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 393,
+      "type": "text",
+      "nom": "text_block_58",
+      "ligne": 2731,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.8. Calcul du Rapport Spectral sans tactique 'Ring'",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 394,
+      "type": "lemma",
+      "nom": "preuve_rapport_spectral_limite_savard",
+      "ligne": 2735,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.8. Calcul du Rapport Spectral sans tactique 'Ring'",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 395,
+      "type": "subsection",
+      "nom": "XI.9. Lemmes de validation numérique par différence fine",
+      "ligne": 2773,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.9. Lemmes de validation numérique par différence fine",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 396,
+      "type": "text",
+      "nom": "text_block_59",
+      "ligne": 2775,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.9. Lemmes de validation numérique par différence fine",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 397,
+      "type": "lemma",
+      "nom": "validation_constante_A_savard",
+      "ligne": 2779,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.9. Lemmes de validation numérique par différence fine",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 398,
+      "type": "text",
+      "nom": "text_block_60",
+      "ligne": 2783,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.9. Lemmes de validation numérique par différence fine",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 399,
+      "type": "lemma",
+      "nom": "validation_constante_B_savard",
+      "ligne": 2787,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.9. Lemmes de validation numérique par différence fine",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 400,
+      "type": "subsection",
+      "nom": "XI.10.b Détermination formelle des constantes par différence fine",
+      "ligne": 2794,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.10.b Détermination formelle des constantes par différence fine",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 401,
+      "type": "text",
+      "nom": "text_block_61",
+      "ligne": 2796,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.10.b Détermination formelle des constantes par différence fine",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 402,
+      "type": "definition",
+      "nom": "valeur_A_10",
+      "ligne": 2803,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.10.b Détermination formelle des constantes par différence fine",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 403,
+      "type": "definition",
+      "nom": "valeur_A_9",
+      "ligne": 2804,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.10.b Détermination formelle des constantes par différence fine",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 404,
+      "type": "definition",
+      "nom": "valeur_B_10",
+      "ligne": 2805,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.10.b Détermination formelle des constantes par différence fine",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 405,
+      "type": "definition",
+      "nom": "valeur_B_9",
+      "ligne": 2806,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.10.b Détermination formelle des constantes par différence fine",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 406,
+      "type": "definition",
+      "nom": "echelle_stable",
+      "ligne": 2809,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.10.b Détermination formelle des constantes par différence fine",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 407,
+      "type": "theorem",
+      "nom": "extraction_constante_A",
+      "ligne": 2812,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.10.b Détermination formelle des constantes par différence fine",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 408,
+      "type": "theorem",
+      "nom": "extraction_constante_B",
+      "ligne": 2818,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.10.b Détermination formelle des constantes par différence fine",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 409,
+      "type": "lemma",
+      "nom": "generalisation_ecart_minimal_A",
+      "ligne": 2824,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.10.b Détermination formelle des constantes par différence fine",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 410,
+      "type": "lemma",
+      "nom": "generalisation_ecart_minimal_B",
+      "ligne": 2842,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.10.b Détermination formelle des constantes par différence fine",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 411,
+      "type": "subsection",
+      "nom": "XI.11. Cas particuliers : suites 1 a 7 termes (voir Section XII)",
+      "ligne": 2860,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.11. Cas particuliers : suites 1 a 7 termes (voir Section XII)",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 412,
+      "type": "text",
+      "nom": "text_block_62",
+      "ligne": 2862,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.11. Cas particuliers : suites 1 a 7 termes (voir Section XII)",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 413,
+      "type": "subsection",
+      "nom": "XI.12. Preuve analytique générale de l'écart minimal stable",
+      "ligne": 2868,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.12. Preuve analytique générale de l'écart minimal stable",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 414,
+      "type": "text",
+      "nom": "text_block_63",
+      "ligne": 2869,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.12. Preuve analytique générale de l'écart minimal stable",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 415,
+      "type": "theorem",
+      "nom": "ecart_minimal_universel_A",
+      "ligne": 2876,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.12. Preuve analytique générale de l'écart minimal stable",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 416,
+      "type": "theorem",
+      "nom": "ecart_minimal_universel_B",
+      "ligne": 2900,
+      "section_thy": "Section XI : Regles de construction des suites A_i et B_i (Pas de Ring)",
+      "subsection_thy": "XI.12. Preuve analytique générale de l'écart minimal stable",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 417,
+      "type": "section",
+      "nom": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "ligne": 2947,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 418,
+      "type": "text",
+      "nom": "text_block_64",
+      "ligne": 2949,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 419,
+      "type": "locale",
+      "nom": "spectral_family",
+      "ligne": 2975,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 420,
+      "type": "definition",
+      "nom": "A_pos",
+      "ligne": 2987,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 421,
+      "type": "definition",
+      "nom": "B_pos",
+      "ligne": 2990,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 422,
+      "type": "definition",
+      "nom": "RsP_generic",
+      "ligne": 2993,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 423,
+      "type": "lemma",
+      "nom": "k_ge_1_real",
+      "ligne": 2996,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 424,
+      "type": "lemma",
+      "nom": "k_gt_1_real",
+      "ligne": 2999,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 425,
+      "type": "lemma",
+      "nom": "pow_k_ne",
+      "ligne": 3002,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 426,
+      "type": "lemma",
+      "nom": "coef_B_ne_zero",
+      "ligne": 3018,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 427,
+      "type": "lemma",
+      "nom": "B_pos_diff_ne_zero",
+      "ligne": 3021,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 428,
+      "type": "theorem",
+      "nom": "RsP_generic_constant",
+      "ligne": 3032,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 429,
+      "type": "subsection",
+      "nom": "XI.bis.1 - Interpretations concretes : regime_1_2, regime_1_3, regime_1_4",
+      "ligne": 3051,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.1 - Interpretations concretes : regime_1_2, regime_1_3, regime_1_4",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 430,
+      "type": "text",
+      "nom": "text_block_65",
+      "ligne": 3053,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.1 - Interpretations concretes : regime_1_2, regime_1_3, regime_1_4",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 431,
+      "type": "interpretation",
+      "nom": "regime_1_2",
+      "ligne": 3106,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.1 - Interpretations concretes : regime_1_2, regime_1_3, regime_1_4",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 432,
+      "type": "interpretation",
+      "nom": "regime_1_3",
+      "ligne": 3110,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.1 - Interpretations concretes : regime_1_2, regime_1_3, regime_1_4",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 433,
+      "type": "interpretation",
+      "nom": "regime_1_4",
+      "ligne": 3114,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.1 - Interpretations concretes : regime_1_2, regime_1_3, regime_1_4",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 434,
+      "type": "subsection",
+      "nom": "XI.bis.2 - Aliases de compatibilite (SA, SB, A_1_3, B_1_3, A_1_4, B_1_4)",
+      "ligne": 3118,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.2 - Aliases de compatibilite (SA, SB, A_1_3, B_1_3, A_1_4, B_1_4)",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 435,
+      "type": "text",
+      "nom": "text_block_66",
+      "ligne": 3120,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.2 - Aliases de compatibilite (SA, SB, A_1_3, B_1_3, A_1_4, B_1_4)",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 436,
+      "type": "lemma",
+      "nom": "SA_eq_regime_1_2_A_pos",
+      "ligne": 3127,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.2 - Aliases de compatibilite (SA, SB, A_1_3, B_1_3, A_1_4, B_1_4)",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 437,
+      "type": "lemma",
+      "nom": "SB_eq_regime_1_2_B_pos",
+      "ligne": 3130,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.2 - Aliases de compatibilite (SA, SB, A_1_3, B_1_3, A_1_4, B_1_4)",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 438,
+      "type": "lemma",
+      "nom": "A_1_3_eq_regime_1_3_A_pos",
+      "ligne": 3133,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.2 - Aliases de compatibilite (SA, SB, A_1_3, B_1_3, A_1_4, B_1_4)",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 439,
+      "type": "lemma",
+      "nom": "B_1_3_eq_regime_1_3_B_pos",
+      "ligne": 3136,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.2 - Aliases de compatibilite (SA, SB, A_1_3, B_1_3, A_1_4, B_1_4)",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 440,
+      "type": "lemma",
+      "nom": "A_1_4_eq_regime_1_4_A_pos",
+      "ligne": 3139,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.2 - Aliases de compatibilite (SA, SB, A_1_3, B_1_3, A_1_4, B_1_4)",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 441,
+      "type": "lemma",
+      "nom": "B_1_4_eq_regime_1_4_B_pos",
+      "ligne": 3142,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.2 - Aliases de compatibilite (SA, SB, A_1_3, B_1_3, A_1_4, B_1_4)",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 442,
+      "type": "subsection",
+      "nom": "XI.bis.3 - Corollaires : les RsP historiques deviennent des instances",
+      "ligne": 3145,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.3 - Corollaires : les RsP historiques deviennent des instances",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 443,
+      "type": "text",
+      "nom": "text_block_67",
+      "ligne": 3147,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.3 - Corollaires : les RsP historiques deviennent des instances",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 444,
+      "type": "lemma",
+      "nom": "RsP_eq_regime_1_2_RsP_generic",
+      "ligne": 3154,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.3 - Corollaires : les RsP historiques deviennent des instances",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 445,
+      "type": "lemma",
+      "nom": "RsP_1_3_eq_regime_1_3_RsP_generic",
+      "ligne": 3158,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.3 - Corollaires : les RsP historiques deviennent des instances",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 446,
+      "type": "lemma",
+      "nom": "RsP_generic_1_2_is_half",
+      "ligne": 3162,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.3 - Corollaires : les RsP historiques deviennent des instances",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 447,
+      "type": "lemma",
+      "nom": "RsP_generic_1_3_is_third",
+      "ligne": 3167,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.3 - Corollaires : les RsP historiques deviennent des instances",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 448,
+      "type": "lemma",
+      "nom": "RsP_generic_1_4_is_quarter",
+      "ligne": 3172,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.3 - Corollaires : les RsP historiques deviennent des instances",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 449,
+      "type": "text",
+      "nom": "text_block_68",
+      "ligne": 3182,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.3 - Corollaires : les RsP historiques deviennent des instances",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 450,
+      "type": "definition",
+      "nom": "A_suite_InDSpecT",
+      "ligne": 3188,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.3 - Corollaires : les RsP historiques deviennent des instances",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 451,
+      "type": "definition",
+      "nom": "B_suite_InDSpecT",
+      "ligne": 3192,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.3 - Corollaires : les RsP historiques deviennent des instances",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 452,
+      "type": "text",
+      "nom": "text_block_69",
+      "ligne": 3195,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.3 - Corollaires : les RsP historiques deviennent des instances",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 453,
+      "type": "text",
+      "nom": "text_block_70",
+      "ligne": 3204,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.3 - Corollaires : les RsP historiques deviennent des instances",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 454,
+      "type": "definition",
+      "nom": "somme_A",
+      "ligne": 3208,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.3 - Corollaires : les RsP historiques deviennent des instances",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 455,
+      "type": "definition",
+      "nom": "somme_B",
+      "ligne": 3211,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.3 - Corollaires : les RsP historiques deviennent des instances",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 456,
+      "type": "text",
+      "nom": "text_block_71",
+      "ligne": 3214,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.3 - Corollaires : les RsP historiques deviennent des instances",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 457,
+      "type": "axiomatization",
+      "nom": "axiomatization_bloc_14",
+      "ligne": 3239,
+      "section_thy": "XI.bis - Factorisation generique : locale spectral_family (v3.35)",
+      "subsection_thy": "XI.bis.3 - Corollaires : les RsP historiques deviennent des instances",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 458,
+      "type": "section",
+      "nom": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "ligne": 3246,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 459,
+      "type": "text",
+      "nom": "text_block_72",
+      "ligne": 3248,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 460,
+      "type": "definition",
+      "nom": "alpha_A_k",
+      "ligne": 3264,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 461,
+      "type": "definition",
+      "nom": "alpha_B_k",
+      "ligne": 3271,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 462,
+      "type": "definition",
+      "nom": "offset_A_k",
+      "ligne": 3278,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 463,
+      "type": "definition",
+      "nom": "offset_B_k",
+      "ligne": 3285,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 464,
+      "type": "definition",
+      "nom": "somme_A_pos_k",
+      "ligne": 3294,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 465,
+      "type": "definition",
+      "nom": "somme_B_pos_k",
+      "ligne": 3297,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 466,
+      "type": "definition",
+      "nom": "somme_A_neg_k",
+      "ligne": 3300,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 467,
+      "type": "definition",
+      "nom": "somme_B_neg_k",
+      "ligne": 3303,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 468,
+      "type": "lemma",
+      "nom": "somme_A_pos_k_eq_SA",
+      "ligne": 3308,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 469,
+      "type": "lemma",
+      "nom": "somme_B_pos_k_eq_SB",
+      "ligne": 3313,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 470,
+      "type": "definition",
+      "nom": "terme_A_pos",
+      "ligne": 3324,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 471,
+      "type": "definition",
+      "nom": "terme_B_pos",
+      "ligne": 3335,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 472,
+      "type": "lemma",
+      "nom": "suite_A_1_terme",
+      "ligne": 3349,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 473,
+      "type": "lemma",
+      "nom": "suite_A_2_termes_pos1",
+      "ligne": 3354,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 474,
+      "type": "lemma",
+      "nom": "suite_A_2_termes_pos2",
+      "ligne": 3358,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 475,
+      "type": "lemma",
+      "nom": "suite_A_3_termes_pos3",
+      "ligne": 3363,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 476,
+      "type": "lemma",
+      "nom": "suite_A_4_termes_pos3",
+      "ligne": 3368,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 477,
+      "type": "lemma",
+      "nom": "suite_A_4_termes_pos4",
+      "ligne": 3372,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 478,
+      "type": "lemma",
+      "nom": "suite_A_5_termes_pos4",
+      "ligne": 3377,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 479,
+      "type": "lemma",
+      "nom": "suite_A_5_termes_pos5",
+      "ligne": 3381,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 480,
+      "type": "lemma",
+      "nom": "suite_A_7_termes_pos6",
+      "ligne": 3386,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 481,
+      "type": "lemma",
+      "nom": "suite_A_7_termes_pos7",
+      "ligne": 3390,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 482,
+      "type": "lemma",
+      "nom": "suite_A_8_termes_pos6",
+      "ligne": 3395,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 483,
+      "type": "lemma",
+      "nom": "suite_A_8_termes_pos7",
+      "ligne": 3399,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 484,
+      "type": "lemma",
+      "nom": "suite_A_8_termes_pos8",
+      "ligne": 3403,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 485,
+      "type": "lemma",
+      "nom": "suite_B_8_termes_pos6",
+      "ligne": 3410,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 486,
+      "type": "lemma",
+      "nom": "suite_B_8_termes_pos7",
+      "ligne": 3414,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 487,
+      "type": "lemma",
+      "nom": "suite_B_8_termes_pos8",
+      "ligne": 3418,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 488,
+      "type": "lemma",
+      "nom": "suite_B_9_termes_pos6",
+      "ligne": 3423,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 489,
+      "type": "lemma",
+      "nom": "suite_B_9_termes_pos7",
+      "ligne": 3427,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 490,
+      "type": "lemma",
+      "nom": "suite_B_9_termes_pos9",
+      "ligne": 3431,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 491,
+      "type": "lemma",
+      "nom": "suite_B_10_termes_pos8",
+      "ligne": 3436,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 492,
+      "type": "lemma",
+      "nom": "suite_B_10_termes_pos10",
+      "ligne": 3440,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 493,
+      "type": "lemma",
+      "nom": "somme_A_pos_11",
+      "ligne": 3447,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 494,
+      "type": "lemma",
+      "nom": "somme_B_pos_11",
+      "ligne": 3451,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 495,
+      "type": "lemma",
+      "nom": "somme_A_neg_k_value",
+      "ligne": 3463,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 496,
+      "type": "lemma",
+      "nom": "somme_A_neg_m2",
+      "ligne": 3467,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 497,
+      "type": "lemma",
+      "nom": "somme_A_neg_m5",
+      "ligne": 3471,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 498,
+      "type": "lemma",
+      "nom": "somme_B_neg_m5",
+      "ligne": 3476,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 499,
+      "type": "lemma",
+      "nom": "somme_B_neg_m5_decimal",
+      "ligne": 3481,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms1"
+    },
+    {
+      "id": 500,
+      "type": "definition",
+      "nom": "RsP_k",
+      "ligne": 3487,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 501,
+      "type": "definition",
+      "nom": "RsP_neg_k",
+      "ligne": 3492,
+      "section_thy": "Section XII : Construction generalisee pour rapport spectral 1/k_i",
+      "subsection_thy": "",
+      "section_logique": "1/ms3"
+    },
+    {
+      "id": 502,
+      "type": "section",
+      "nom": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "ligne": 3514,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "",
+      "section_logique": "1/t"
+    },
+    {
+      "id": 503,
+      "type": "text",
+      "nom": "text_block_73",
+      "ligne": 3516,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "",
+      "section_logique": "1/t"
+    },
+    {
+      "id": 504,
+      "type": "locale",
+      "nom": "ensemble_savard",
+      "ligne": 3579,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "",
+      "section_logique": "1/t"
+    },
+    {
+      "id": 505,
+      "type": "subsection",
+      "nom": "XIII.1 Definitions fondamentales",
+      "ligne": 3642,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.1 Definitions fondamentales",
+      "section_logique": "1/t"
+    },
+    {
+      "id": 506,
+      "type": "text",
+      "nom": "text_block_74",
+      "ligne": 3644,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.1 Definitions fondamentales",
+      "section_logique": "1/t"
+    },
+    {
+      "id": 507,
+      "type": "consts",
+      "nom": "consts_bloc_7",
+      "ligne": 3653,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.1 Definitions fondamentales",
+      "section_logique": "1/t"
+    },
+    {
+      "id": 508,
+      "type": "consts",
+      "nom": "consts_bloc_8",
+      "ligne": 3656,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.1 Definitions fondamentales",
+      "section_logique": "1/t"
+    },
+    {
+      "id": 509,
+      "type": "text",
+      "nom": "text_block_75",
+      "ligne": 3659,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.1 Definitions fondamentales",
+      "section_logique": "1/t"
+    },
+    {
+      "id": 510,
+      "type": "definition",
+      "nom": "log10_savard",
+      "ligne": 3665,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.1 Definitions fondamentales",
+      "section_logique": "1/t"
+    },
+    {
+      "id": 511,
+      "type": "definition",
+      "nom": "rapport_zeta_savard",
+      "ligne": 3668,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.1 Definitions fondamentales",
+      "section_logique": "1/t"
+    },
+    {
+      "id": 512,
+      "type": "definition",
+      "nom": "psi_savard",
+      "ligne": 3671,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.1 Definitions fondamentales",
+      "section_logique": "1/t"
+    },
+    {
+      "id": 513,
+      "type": "subsection",
+      "nom": "XIII.2 Validations numeriques (x = 30, 98, 228)",
+      "ligne": 3677,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.2 Validations numeriques (x = 30, 98, 228)",
+      "section_logique": "1/t"
+    },
+    {
+      "id": 514,
+      "type": "text",
+      "nom": "text_block_76",
+      "ligne": 3679,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.2 Validations numeriques (x = 30, 98, 228)",
+      "section_logique": "1/t"
+    },
+    {
+      "id": 515,
+      "type": "lemma",
+      "nom": "rapport_zeta_savard_at_10",
+      "ligne": 3688,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.2 Validations numeriques (x = 30, 98, 228)",
+      "section_logique": "1/t"
+    },
+    {
+      "id": 516,
+      "type": "lemma",
+      "nom": "rapport_zeta_savard_at_25",
+      "ligne": 3692,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.2 Validations numeriques (x = 30, 98, 228)",
+      "section_logique": "1/t"
+    },
+    {
+      "id": 517,
+      "type": "lemma",
+      "nom": "rapport_zeta_savard_at_49",
+      "ligne": 3696,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.2 Validations numeriques (x = 30, 98, 228)",
+      "section_logique": "1/t"
+    },
+    {
+      "id": 518,
+      "type": "text",
+      "nom": "text_block_77",
+      "ligne": 3700,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.2 Validations numeriques (x = 30, 98, 228)",
+      "section_logique": "1/t"
+    },
+    {
+      "id": 519,
+      "type": "lemma",
+      "nom": "psi_savard_expanded",
+      "ligne": 3709,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.2 Validations numeriques (x = 30, 98, 228)",
+      "section_logique": "1/t"
+    },
+    {
+      "id": 520,
+      "type": "lemma",
+      "nom": "psi_savard_at_10_30_expanded",
+      "ligne": 3716,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.2 Validations numeriques (x = 30, 98, 228)",
+      "section_logique": "1/t"
+    },
+    {
+      "id": 521,
+      "type": "lemma",
+      "nom": "psi_savard_at_25_98_expanded",
+      "ligne": 3723,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.2 Validations numeriques (x = 30, 98, 228)",
+      "section_logique": "1/t"
+    },
+    {
+      "id": 522,
+      "type": "lemma",
+      "nom": "psi_savard_at_49_228_expanded",
+      "ligne": 3730,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.2 Validations numeriques (x = 30, 98, 228)",
+      "section_logique": "1/t"
+    },
+    {
+      "id": 523,
+      "type": "text",
+      "nom": "text_block_78",
+      "ligne": 3737,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.2 Validations numeriques (x = 30, 98, 228)",
+      "section_logique": "1/t"
+    },
+    {
+      "id": 524,
+      "type": "subsection",
+      "nom": "XIII.2.b Union fonctionnelle : psi_savard STRICTEMENT contient Tchebychev",
+      "ligne": 3802,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.2.b Union fonctionnelle : psi_savard STRICTEMENT contient Tchebychev",
+      "section_logique": "1/t"
+    },
+    {
+      "id": 525,
+      "type": "text",
+      "nom": "text_block_79",
+      "ligne": 3804,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.2.b Union fonctionnelle : psi_savard STRICTEMENT contient Tchebychev",
+      "section_logique": "1/t"
+    },
+    {
+      "id": 526,
+      "type": "text",
+      "nom": "text_block_80",
+      "ligne": 3856,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.2.b Union fonctionnelle : psi_savard STRICTEMENT contient Tchebychev",
+      "section_logique": "1/y1"
+    },
+    {
+      "id": 527,
+      "type": "subsection",
+      "nom": "XIII.4 Le Deuxieme Pont : l'exclusivite sur P par l'absurde",
+      "ligne": 3870,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.4 Le Deuxieme Pont : l'exclusivite sur P par l'absurde",
+      "section_logique": "1/y1"
+    },
+    {
+      "id": 528,
+      "type": "text",
+      "nom": "text_block_81",
+      "ligne": 3872,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.4 Le Deuxieme Pont : l'exclusivite sur P par l'absurde",
+      "section_logique": "1/y1"
+    },
+    {
+      "id": 529,
+      "type": "lemma",
+      "nom": "methode_spectrale_exclusivite_P",
+      "ligne": 3880,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.4 Le Deuxieme Pont : l'exclusivite sur P par l'absurde",
+      "section_logique": "1/y1"
+    },
+    {
+      "id": 530,
+      "type": "subsection",
+      "nom": "XIII.4.b Extension chaotique, asymetrique et complexe (regime etendu)",
+      "ligne": 3886,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.4.b Extension chaotique, asymetrique et complexe (regime etendu)",
+      "section_logique": "1/y1"
+    },
+    {
+      "id": 531,
+      "type": "text",
+      "nom": "text_block_82",
+      "ligne": 3888,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.4.b Extension chaotique, asymetrique et complexe (regime etendu)",
+      "section_logique": "1/y1"
+    },
+    {
+      "id": 532,
+      "type": "subsection",
+      "nom": "XIII.5 Le Theoreme de l'Ensemble : decomposition spectrale coherente",
+      "ligne": 3944,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.5 Le Theoreme de l'Ensemble : decomposition spectrale coherente",
+      "section_logique": "1/y2"
+    },
+    {
+      "id": 533,
+      "type": "text",
+      "nom": "text_block_83",
+      "ligne": 3946,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.5 Le Theoreme de l'Ensemble : decomposition spectrale coherente",
+      "section_logique": "1/y2"
+    },
+    {
+      "id": 534,
+      "type": "locale",
+      "nom": "ensemble_savard",
+      "ligne": 3987,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.5 Le Theoreme de l'Ensemble : decomposition spectrale coherente",
+      "section_logique": "1/y2"
+    },
+    {
+      "id": 535,
+      "type": "text",
+      "nom": "text_block_84",
+      "ligne": 3999,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.5 Le Theoreme de l'Ensemble : decomposition spectrale coherente",
+      "section_logique": "1/y2"
+    },
+    {
+      "id": 536,
+      "type": "theorem",
+      "nom": "alignement_central",
+      "ligne": 4004,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.5 Le Theoreme de l'Ensemble : decomposition spectrale coherente",
+      "section_logique": "1/y2"
+    },
+    {
+      "id": 537,
+      "type": "theorem",
+      "nom": "alignement_inverse",
+      "ligne": 4007,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.5 Le Theoreme de l'Ensemble : decomposition spectrale coherente",
+      "section_logique": "1/y2"
+    },
+    {
+      "id": 538,
+      "type": "theorem",
+      "nom": "conclusion_ensemble",
+      "ligne": 4011,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.5 Le Theoreme de l'Ensemble : decomposition spectrale coherente",
+      "section_logique": "1/y2"
+    },
+    {
+      "id": 539,
+      "type": "text",
+      "nom": "text_block_85",
+      "ligne": 4015,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.5 Le Theoreme de l'Ensemble : decomposition spectrale coherente",
+      "section_logique": "1/y2"
+    },
+    {
+      "id": 540,
+      "type": "theorem",
+      "nom": "ensemble_savard_satisfaisable",
+      "ligne": 4033,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.5 Le Theoreme de l'Ensemble : decomposition spectrale coherente",
+      "section_logique": "ENSEMBLE"
+    },
+    {
+      "id": 541,
+      "type": "subsection",
+      "nom": "XIII.6 Conclusion : l'alignement direct RsP = Re = 1/2",
+      "ligne": 4042,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.6 Conclusion : l'alignement direct RsP = Re = 1/2",
+      "section_logique": "1/y2"
+    },
+    {
+      "id": 542,
+      "type": "text",
+      "nom": "text_block_86",
+      "ligne": 4044,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.6 Conclusion : l'alignement direct RsP = Re = 1/2",
+      "section_logique": "1/y2"
+    },
+    {
+      "id": 543,
+      "type": "definition",
+      "nom": "Re_droite_critique",
+      "ligne": 4050,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.6 Conclusion : l'alignement direct RsP = Re = 1/2",
+      "section_logique": "ENSEMBLE"
+    },
+    {
+      "id": 544,
+      "type": "text",
+      "nom": "text_block_87",
+      "ligne": 4053,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.6 Conclusion : l'alignement direct RsP = Re = 1/2",
+      "section_logique": "1/y2"
+    },
+    {
+      "id": 545,
+      "type": "theorem",
+      "nom": "pont_spectral_direct_final",
+      "ligne": 4062,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.6 Conclusion : l'alignement direct RsP = Re = 1/2",
+      "section_logique": "ENSEMBLE"
+    },
+    {
+      "id": 546,
+      "type": "text",
+      "nom": "text_block_88",
+      "ligne": 4075,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.6 Conclusion : l'alignement direct RsP = Re = 1/2",
+      "section_logique": "1/y2"
+    },
+    {
+      "id": 547,
+      "type": "lemma",
+      "nom": "RsP_universel_entier_naturel",
+      "ligne": 4105,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.6 Conclusion : l'alignement direct RsP = Re = 1/2",
+      "section_logique": "ENSEMBLE"
+    },
+    {
+      "id": 548,
+      "type": "text",
+      "nom": "text_block_89",
+      "ligne": 4111,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.6 Conclusion : l'alignement direct RsP = Re = 1/2",
+      "section_logique": "1/y2"
+    },
+    {
+      "id": 549,
+      "type": "theorem",
+      "nom": "synthese_pont_savard",
+      "ligne": 4154,
+      "section_thy": "XIII. Le Pont Savard : psi de Tchebychev, fonction zeta et Re(rho) = 1/2",
+      "subsection_thy": "XIII.6 Conclusion : l'alignement direct RsP = Re = 1/2",
+      "section_logique": "ENSEMBLE"
+    },
+    {
+      "id": 550,
+      "type": "section",
+      "nom": "Foundations - Synthese-index (annexe finale, renvoi Meta-theory)",
+      "ligne": 4165,
+      "section_thy": "Foundations - Synthese-index (annexe finale, renvoi Meta-theory)",
+      "subsection_thy": "",
+      "section_logique": "ENSEMBLE"
+    },
+    {
+      "id": 551,
+      "type": "text",
+      "nom": "text_block_90",
+      "ligne": 4167,
+      "section_thy": "Foundations - Synthese-index (annexe finale, renvoi Meta-theory)",
+      "subsection_thy": "",
+      "section_logique": "ENSEMBLE"
+    },
+    {
+      "id": 552,
+      "type": "lemma",
+      "nom": "RsP_universel_entier_naturel",
+      "ligne": 4203,
+      "section_thy": "Foundations - Synthese-index (annexe finale, renvoi Meta-theory)",
+      "subsection_thy": "",
+      "section_logique": "ENSEMBLE"
+    },
+    {
+      "id": 553,
+      "type": "text",
+      "nom": "text_block_91",
+      "ligne": 4235,
+      "section_thy": "Foundations - Synthese-index (annexe finale, renvoi Meta-theory)",
+      "subsection_thy": "",
+      "section_logique": "ENSEMBLE"
+    }
+  ],
+  "relations": [
+    {
+      "id": 1,
+      "point_source_id": 19,
+      "point_cible_id": 18,
+      "type_relation": "DEPEND_DE",
+      "description": "SA_forme_generale depend de SB"
+    },
+    {
+      "id": 2,
+      "point_source_id": 20,
+      "point_cible_id": 18,
+      "type_relation": "DEPEND_DE",
+      "description": "SB_forme_generale depend de SB"
+    },
+    {
+      "id": 3,
+      "point_source_id": 23,
+      "point_cible_id": 22,
+      "type_relation": "DEPEND_DE",
+      "description": "RsP_un_demi_general depend de RsP"
+    },
+    {
+      "id": 4,
+      "point_source_id": 26,
+      "point_cible_id": 22,
+      "type_relation": "DEPEND_DE",
+      "description": "algebriquement_incoherent_local depend de RsP"
+    },
+    {
+      "id": 5,
+      "point_source_id": 28,
+      "point_cible_id": 22,
+      "type_relation": "DEPEND_DE",
+      "description": "coherence_numerique_reelle_P depend de RsP"
+    },
+    {
+      "id": 6,
+      "point_source_id": 34,
+      "point_cible_id": 33,
+      "type_relation": "DEPEND_DE",
+      "description": "exemple_3x3_spectral depend de B3"
+    },
+    {
+      "id": 7,
+      "point_source_id": 38,
+      "point_cible_id": 37,
+      "type_relation": "DEPEND_DE",
+      "description": "digamma_calc_equation_alt depend de prime_equation"
+    },
+    {
+      "id": 8,
+      "point_source_id": 39,
+      "point_cible_id": 37,
+      "type_relation": "DEPEND_DE",
+      "description": "prime_equation_identity depend de prime_equation"
+    },
+    {
+      "id": 9,
+      "point_source_id": 40,
+      "point_cible_id": 37,
+      "type_relation": "DEPEND_DE",
+      "description": "SB_affine_en_SA depend de prime_equation"
+    },
+    {
+      "id": 10,
+      "point_source_id": 41,
+      "point_cible_id": 37,
+      "type_relation": "DEPEND_DE",
+      "description": "ecart_spectral_constant depend de prime_equation"
+    },
+    {
+      "id": 11,
+      "point_source_id": 42,
+      "point_cible_id": 37,
+      "type_relation": "DEPEND_DE",
+      "description": "digamma_affine_en_SA depend de prime_equation"
+    },
+    {
+      "id": 12,
+      "point_source_id": 43,
+      "point_cible_id": 37,
+      "type_relation": "DEPEND_DE",
+      "description": "difference_SA_succ depend de prime_equation"
+    },
+    {
+      "id": 13,
+      "point_source_id": 44,
+      "point_cible_id": 37,
+      "type_relation": "DEPEND_DE",
+      "description": "difference_SB_succ depend de prime_equation"
+    },
+    {
+      "id": 14,
+      "point_source_id": 45,
+      "point_cible_id": 37,
+      "type_relation": "DEPEND_DE",
+      "description": "ratio_incremental_un_demi depend de prime_equation"
+    },
+    {
+      "id": 15,
+      "point_source_id": 48,
+      "point_cible_id": 18,
+      "type_relation": "DEPEND_DE",
+      "description": "prime_equation_for_primes_pos depend de SB"
+    },
+    {
+      "id": 16,
+      "point_source_id": 59,
+      "point_cible_id": 57,
+      "type_relation": "DEPEND_DE",
+      "description": "SA_10 depend de D41"
+    },
+    {
+      "id": 17,
+      "point_source_id": 60,
+      "point_cible_id": 57,
+      "type_relation": "DEPEND_DE",
+      "description": "SB_10 depend de D41"
+    },
+    {
+      "id": 18,
+      "point_source_id": 61,
+      "point_cible_id": 57,
+      "type_relation": "DEPEND_DE",
+      "description": "SA_11 depend de D41"
+    },
+    {
+      "id": 19,
+      "point_source_id": 62,
+      "point_cible_id": 57,
+      "type_relation": "DEPEND_DE",
+      "description": "SB_11 depend de D41"
+    },
+    {
+      "id": 20,
+      "point_source_id": 63,
+      "point_cible_id": 57,
+      "type_relation": "DEPEND_DE",
+      "description": "SA_12 depend de D41"
+    },
+    {
+      "id": 21,
+      "point_source_id": 64,
+      "point_cible_id": 57,
+      "type_relation": "DEPEND_DE",
+      "description": "SB_12 depend de D41"
+    },
+    {
+      "id": 22,
+      "point_source_id": 65,
+      "point_cible_id": 57,
+      "type_relation": "DEPEND_DE",
+      "description": "SA_13 depend de D41"
+    },
+    {
+      "id": 23,
+      "point_source_id": 66,
+      "point_cible_id": 57,
+      "type_relation": "DEPEND_DE",
+      "description": "SB_13 depend de D41"
+    },
+    {
+      "id": 24,
+      "point_source_id": 67,
+      "point_cible_id": 57,
+      "type_relation": "DEPEND_DE",
+      "description": "digamma_calc_29 depend de D41"
+    },
+    {
+      "id": 25,
+      "point_source_id": 68,
+      "point_cible_id": 57,
+      "type_relation": "DEPEND_DE",
+      "description": "digamma_calc_31 depend de D41"
+    },
+    {
+      "id": 26,
+      "point_source_id": 69,
+      "point_cible_id": 57,
+      "type_relation": "DEPEND_DE",
+      "description": "digamma_calc_37 depend de D41"
+    },
+    {
+      "id": 27,
+      "point_source_id": 70,
+      "point_cible_id": 57,
+      "type_relation": "DEPEND_DE",
+      "description": "digamma_calc_41 depend de D41"
+    },
+    {
+      "id": 28,
+      "point_source_id": 71,
+      "point_cible_id": 57,
+      "type_relation": "DEPEND_DE",
+      "description": "relation_29 depend de D41"
+    },
+    {
+      "id": 29,
+      "point_source_id": 72,
+      "point_cible_id": 57,
+      "type_relation": "DEPEND_DE",
+      "description": "relation_31 depend de D41"
+    },
+    {
+      "id": 30,
+      "point_source_id": 73,
+      "point_cible_id": 57,
+      "type_relation": "DEPEND_DE",
+      "description": "relation_37 depend de D41"
+    },
+    {
+      "id": 31,
+      "point_source_id": 74,
+      "point_cible_id": 57,
+      "type_relation": "DEPEND_DE",
+      "description": "relation_41 depend de D41"
+    },
+    {
+      "id": 32,
+      "point_source_id": 76,
+      "point_cible_id": 57,
+      "type_relation": "DEPEND_DE",
+      "description": "SB_minus_digamma_is_64p depend de D41"
+    },
+    {
+      "id": 33,
+      "point_source_id": 77,
+      "point_cible_id": 57,
+      "type_relation": "DEPEND_DE",
+      "description": "prime_equation_general depend de D41"
+    },
+    {
+      "id": 34,
+      "point_source_id": 78,
+      "point_cible_id": 57,
+      "type_relation": "DEPEND_DE",
+      "description": "SB_minus_digamma_div_64_general depend de D41"
+    },
+    {
+      "id": 35,
+      "point_source_id": 79,
+      "point_cible_id": 57,
+      "type_relation": "VALIDE",
+      "description": "reconstruction_premier_pos valide D41"
+    },
+    {
+      "id": 36,
+      "point_source_id": 88,
+      "point_cible_id": 87,
+      "type_relation": "DEPEND_DE",
+      "description": "prime_i_spec depend de prime_i"
+    },
+    {
+      "id": 37,
+      "point_source_id": 89,
+      "point_cible_id": 87,
+      "type_relation": "DEPEND_DE",
+      "description": "prime_i_is_prime depend de prime_i"
+    },
+    {
+      "id": 38,
+      "point_source_id": 90,
+      "point_cible_id": 87,
+      "type_relation": "DEPEND_DE",
+      "description": "prime_i_position depend de prime_i"
+    },
+    {
+      "id": 39,
+      "point_source_id": 92,
+      "point_cible_id": 87,
+      "type_relation": "DEPEND_DE",
+      "description": "SA_general_i depend de prime_i"
+    },
+    {
+      "id": 40,
+      "point_source_id": 93,
+      "point_cible_id": 87,
+      "type_relation": "DEPEND_DE",
+      "description": "SB_general_i depend de prime_i"
+    },
+    {
+      "id": 41,
+      "point_source_id": 94,
+      "point_cible_id": 87,
+      "type_relation": "DEPEND_DE",
+      "description": "digamma_general_i depend de prime_i"
+    },
+    {
+      "id": 42,
+      "point_source_id": 97,
+      "point_cible_id": 87,
+      "type_relation": "DEPEND_DE",
+      "description": "prime_equation_general_i depend de prime_i"
+    },
+    {
+      "id": 43,
+      "point_source_id": 99,
+      "point_cible_id": 87,
+      "type_relation": "DEPEND_DE",
+      "description": "prime_equation_prime_i depend de prime_i"
+    },
+    {
+      "id": 44,
+      "point_source_id": 105,
+      "point_cible_id": 104,
+      "type_relation": "DEPEND_DE",
+      "description": "prime_equation_1_4_identity depend de prime_equation_1_4"
+    },
+    {
+      "id": 45,
+      "point_source_id": 108,
+      "point_cible_id": 104,
+      "type_relation": "DEPEND_DE",
+      "description": "prime_equation_1_4_for_primes depend de prime_equation_1_4"
+    },
+    {
+      "id": 46,
+      "point_source_id": 115,
+      "point_cible_id": 114,
+      "type_relation": "DEPEND_DE",
+      "description": "preuve_premier_947 depend de digamma_calcule_1_4"
+    },
+    {
+      "id": 47,
+      "point_source_id": 121,
+      "point_cible_id": 120,
+      "type_relation": "DEPEND_DE",
+      "description": "prime_equation_1_3_identity depend de prime_equation_1_3"
+    },
+    {
+      "id": 48,
+      "point_source_id": 124,
+      "point_cible_id": 120,
+      "type_relation": "DEPEND_DE",
+      "description": "prime_equation_1_3_for_primes depend de prime_equation_1_3"
+    },
+    {
+      "id": 49,
+      "point_source_id": 131,
+      "point_cible_id": 130,
+      "type_relation": "DEPEND_DE",
+      "description": "preuve_premier_227 depend de digamma_calcule_1_3"
+    },
+    {
+      "id": 50,
+      "point_source_id": 136,
+      "point_cible_id": 135,
+      "type_relation": "VALIDE",
+      "description": "RsP_un_tiers_constant valide RsP_1_3"
+    },
+    {
+      "id": 51,
+      "point_source_id": 140,
+      "point_cible_id": 138,
+      "type_relation": "VALIDE",
+      "description": "RsP_un_quart_constant valide RsP_1_4"
+    },
+    {
+      "id": 52,
+      "point_source_id": 144,
+      "point_cible_id": 143,
+      "type_relation": "DEPEND_DE",
+      "description": "SA_mix_closed_form depend de SB_mix"
+    },
+    {
+      "id": 53,
+      "point_source_id": 145,
+      "point_cible_id": 143,
+      "type_relation": "DEPEND_DE",
+      "description": "SB_mix_closed_form depend de SB_mix"
+    },
+    {
+      "id": 54,
+      "point_source_id": 146,
+      "point_cible_id": 143,
+      "type_relation": "DEPEND_DE",
+      "description": "SA_mix_step depend de SB_mix"
+    },
+    {
+      "id": 55,
+      "point_source_id": 147,
+      "point_cible_id": 143,
+      "type_relation": "DEPEND_DE",
+      "description": "SB_mix_step depend de SB_mix"
+    },
+    {
+      "id": 56,
+      "point_source_id": 148,
+      "point_cible_id": 143,
+      "type_relation": "DEPEND_DE",
+      "description": "SA_mix_limit_shape depend de SB_mix"
+    },
+    {
+      "id": 57,
+      "point_source_id": 149,
+      "point_cible_id": 143,
+      "type_relation": "DEPEND_DE",
+      "description": "SB_mix_limit_shape depend de SB_mix"
+    },
+    {
+      "id": 58,
+      "point_source_id": 153,
+      "point_cible_id": 152,
+      "type_relation": "DEPEND_DE",
+      "description": "premier_mix_rewrite depend de premier_mix"
+    },
+    {
+      "id": 59,
+      "point_source_id": 158,
+      "point_cible_id": 157,
+      "type_relation": "DEPEND_DE",
+      "description": "digamma_mix_6_value depend de premier_mix_6"
+    },
+    {
+      "id": 60,
+      "point_source_id": 159,
+      "point_cible_id": 157,
+      "type_relation": "DEPEND_DE",
+      "description": "premier_mix_6_value depend de premier_mix_6"
+    },
+    {
+      "id": 61,
+      "point_source_id": 164,
+      "point_cible_id": 163,
+      "type_relation": "DEPEND_DE",
+      "description": "digamma_neg_calc_equation_alt depend de digamma_neg_calc"
+    },
+    {
+      "id": 62,
+      "point_source_id": 168,
+      "point_cible_id": 166,
+      "type_relation": "DEPEND_DE",
+      "description": "RsP_neg_un_demi_general depend de RsP_neg"
+    },
+    {
+      "id": 63,
+      "point_source_id": 174,
+      "point_cible_id": 173,
+      "type_relation": "DEPEND_DE",
+      "description": "asymetrie_implique_indices_valides depend de asymetrique_chaotique"
+    },
+    {
+      "id": 64,
+      "point_source_id": 182,
+      "point_cible_id": 181,
+      "type_relation": "DEPEND_DE",
+      "description": "asymetrie_nat_implique_indices_valides depend de asymetrique_chaotique_nat"
+    },
+    {
+      "id": 65,
+      "point_source_id": 207,
+      "point_cible_id": 206,
+      "type_relation": "DEPEND_DE",
+      "description": "card_bloc_A_k depend de RsP_bloc_extreme"
+    },
+    {
+      "id": 66,
+      "point_source_id": 208,
+      "point_cible_id": 206,
+      "type_relation": "DEPEND_DE",
+      "description": "card_bloc_B_k depend de RsP_bloc_extreme"
+    },
+    {
+      "id": 67,
+      "point_source_id": 209,
+      "point_cible_id": 206,
+      "type_relation": "DEPEND_DE",
+      "description": "asymetrie_structurelle_blocs depend de RsP_bloc_extreme"
+    },
+    {
+      "id": 68,
+      "point_source_id": 210,
+      "point_cible_id": 206,
+      "type_relation": "DEPEND_DE",
+      "description": "bloc_A_1_singleton depend de RsP_bloc_extreme"
+    },
+    {
+      "id": 69,
+      "point_source_id": 211,
+      "point_cible_id": 206,
+      "type_relation": "DEPEND_DE",
+      "description": "bloc_B_1_paire depend de RsP_bloc_extreme"
+    },
+    {
+      "id": 70,
+      "point_source_id": 212,
+      "point_cible_id": 206,
+      "type_relation": "DEPEND_DE",
+      "description": "somme_bloc_B_1 depend de RsP_bloc_extreme"
+    },
+    {
+      "id": 71,
+      "point_source_id": 213,
+      "point_cible_id": 206,
+      "type_relation": "DEPEND_DE",
+      "description": "RsP_bloc_extreme_at_1 depend de RsP_bloc_extreme"
+    },
+    {
+      "id": 72,
+      "point_source_id": 217,
+      "point_cible_id": 216,
+      "type_relation": "DEPEND_DE",
+      "description": "ponderation_bloc_uniforme depend de S_pondere"
+    },
+    {
+      "id": 73,
+      "point_source_id": 218,
+      "point_cible_id": 216,
+      "type_relation": "DEPEND_DE",
+      "description": "S_pondere_uniforme depend de S_pondere"
+    },
+    {
+      "id": 74,
+      "point_source_id": 222,
+      "point_cible_id": 221,
+      "type_relation": "DEPEND_DE",
+      "description": "ponderation_bloc_complexe_uniforme depend de S_pondere_complexe"
+    },
+    {
+      "id": 75,
+      "point_source_id": 223,
+      "point_cible_id": 221,
+      "type_relation": "DEPEND_DE",
+      "description": "ponderation_bloc_complexe_of_real depend de S_pondere_complexe"
+    },
+    {
+      "id": 76,
+      "point_source_id": 225,
+      "point_cible_id": 221,
+      "type_relation": "DEPEND_DE",
+      "description": "bloc_A_k_pour_SA depend de S_pondere_complexe"
+    },
+    {
+      "id": 77,
+      "point_source_id": 226,
+      "point_cible_id": 221,
+      "type_relation": "DEPEND_DE",
+      "description": "bloc_B_k_pour_SB depend de S_pondere_complexe"
+    },
+    {
+      "id": 78,
+      "point_source_id": 232,
+      "point_cible_id": 230,
+      "type_relation": "DEPEND_DE",
+      "description": "RsP_neg_un_tiers_general depend de RsP_neg_un_tiers"
+    },
+    {
+      "id": 79,
+      "point_source_id": 238,
+      "point_cible_id": 236,
+      "type_relation": "DEPEND_DE",
+      "description": "RsP_neg_un_quart_general depend de RsP_neg_un_quart"
+    },
+    {
+      "id": 80,
+      "point_source_id": 252,
+      "point_cible_id": 250,
+      "type_relation": "DEPEND_DE",
+      "description": "gap_m19_m5 depend de D_m19_val"
+    },
+    {
+      "id": 81,
+      "point_source_id": 306,
+      "point_cible_id": 304,
+      "type_relation": "DEPEND_DE",
+      "description": "gap_m31_17 depend de gap_mix_val"
+    },
+    {
+      "id": 82,
+      "point_source_id": 325,
+      "point_cible_id": 323,
+      "type_relation": "DEPEND_DE",
+      "description": "ecart_227_173_1_3 depend de D_173_val"
+    },
+    {
+      "id": 83,
+      "point_source_id": 329,
+      "point_cible_id": 328,
+      "type_relation": "DEPEND_DE",
+      "description": "gap_equation_1_3_simplifiee depend de gap_equation_1_3"
+    },
+    {
+      "id": 84,
+      "point_source_id": 332,
+      "point_cible_id": 328,
+      "type_relation": "DEPEND_DE",
+      "description": "gap_equation_1_3_for_primes depend de gap_equation_1_3"
+    },
+    {
+      "id": 85,
+      "point_source_id": 334,
+      "point_cible_id": 328,
+      "type_relation": "DEPEND_DE",
+      "description": "ecart_227_173_1_3_via_gap_equation depend de gap_equation_1_3"
+    },
+    {
+      "id": 86,
+      "point_source_id": 342,
+      "point_cible_id": 341,
+      "type_relation": "DEPEND_DE",
+      "description": "gap_equation_1_4_simplifiee depend de gap_equation_1_4"
+    },
+    {
+      "id": 87,
+      "point_source_id": 345,
+      "point_cible_id": 341,
+      "type_relation": "DEPEND_DE",
+      "description": "gap_equation_1_4_for_primes depend de gap_equation_1_4"
+    },
+    {
+      "id": 88,
+      "point_source_id": 347,
+      "point_cible_id": 341,
+      "type_relation": "DEPEND_DE",
+      "description": "ecart_947_881_1_4_via_gap_equation depend de gap_equation_1_4"
+    },
+    {
+      "id": 89,
+      "point_source_id": 394,
+      "point_cible_id": 392,
+      "type_relation": "DEPEND_DE",
+      "description": "preuve_rapport_spectral_limite_savard depend de rapport_spectral_total_savard"
+    },
+    {
+      "id": 90,
+      "point_source_id": 397,
+      "point_cible_id": 392,
+      "type_relation": "DEPEND_DE",
+      "description": "validation_constante_A_savard depend de rapport_spectral_total_savard"
+    },
+    {
+      "id": 91,
+      "point_source_id": 399,
+      "point_cible_id": 392,
+      "type_relation": "DEPEND_DE",
+      "description": "validation_constante_B_savard depend de rapport_spectral_total_savard"
+    },
+    {
+      "id": 92,
+      "point_source_id": 407,
+      "point_cible_id": 406,
+      "type_relation": "VALIDE",
+      "description": "extraction_constante_A valide echelle_stable"
+    },
+    {
+      "id": 93,
+      "point_source_id": 408,
+      "point_cible_id": 406,
+      "type_relation": "VALIDE",
+      "description": "extraction_constante_B valide echelle_stable"
+    },
+    {
+      "id": 94,
+      "point_source_id": 409,
+      "point_cible_id": 406,
+      "type_relation": "DEPEND_DE",
+      "description": "generalisation_ecart_minimal_A depend de echelle_stable"
+    },
+    {
+      "id": 95,
+      "point_source_id": 410,
+      "point_cible_id": 406,
+      "type_relation": "DEPEND_DE",
+      "description": "generalisation_ecart_minimal_B depend de echelle_stable"
+    },
+    {
+      "id": 96,
+      "point_source_id": 415,
+      "point_cible_id": 406,
+      "type_relation": "VALIDE",
+      "description": "ecart_minimal_universel_A valide echelle_stable"
+    },
+    {
+      "id": 97,
+      "point_source_id": 416,
+      "point_cible_id": 406,
+      "type_relation": "VALIDE",
+      "description": "ecart_minimal_universel_B valide echelle_stable"
+    },
+    {
+      "id": 98,
+      "point_source_id": 423,
+      "point_cible_id": 422,
+      "type_relation": "DEPEND_DE",
+      "description": "k_ge_1_real depend de RsP_generic"
+    },
+    {
+      "id": 99,
+      "point_source_id": 424,
+      "point_cible_id": 422,
+      "type_relation": "DEPEND_DE",
+      "description": "k_gt_1_real depend de RsP_generic"
+    },
+    {
+      "id": 100,
+      "point_source_id": 425,
+      "point_cible_id": 422,
+      "type_relation": "DEPEND_DE",
+      "description": "pow_k_ne depend de RsP_generic"
+    },
+    {
+      "id": 101,
+      "point_source_id": 426,
+      "point_cible_id": 422,
+      "type_relation": "DEPEND_DE",
+      "description": "coef_B_ne_zero depend de RsP_generic"
+    },
+    {
+      "id": 102,
+      "point_source_id": 427,
+      "point_cible_id": 422,
+      "type_relation": "DEPEND_DE",
+      "description": "B_pos_diff_ne_zero depend de RsP_generic"
+    },
+    {
+      "id": 103,
+      "point_source_id": 428,
+      "point_cible_id": 422,
+      "type_relation": "VALIDE",
+      "description": "RsP_generic_constant valide RsP_generic"
+    },
+    {
+      "id": 104,
+      "point_source_id": 436,
+      "point_cible_id": 422,
+      "type_relation": "DEPEND_DE",
+      "description": "SA_eq_regime_1_2_A_pos depend de RsP_generic"
+    },
+    {
+      "id": 105,
+      "point_source_id": 437,
+      "point_cible_id": 422,
+      "type_relation": "DEPEND_DE",
+      "description": "SB_eq_regime_1_2_B_pos depend de RsP_generic"
+    },
+    {
+      "id": 106,
+      "point_source_id": 438,
+      "point_cible_id": 422,
+      "type_relation": "DEPEND_DE",
+      "description": "A_1_3_eq_regime_1_3_A_pos depend de RsP_generic"
+    },
+    {
+      "id": 107,
+      "point_source_id": 439,
+      "point_cible_id": 422,
+      "type_relation": "DEPEND_DE",
+      "description": "B_1_3_eq_regime_1_3_B_pos depend de RsP_generic"
+    },
+    {
+      "id": 108,
+      "point_source_id": 440,
+      "point_cible_id": 422,
+      "type_relation": "DEPEND_DE",
+      "description": "A_1_4_eq_regime_1_4_A_pos depend de RsP_generic"
+    },
+    {
+      "id": 109,
+      "point_source_id": 441,
+      "point_cible_id": 422,
+      "type_relation": "DEPEND_DE",
+      "description": "B_1_4_eq_regime_1_4_B_pos depend de RsP_generic"
+    },
+    {
+      "id": 110,
+      "point_source_id": 444,
+      "point_cible_id": 422,
+      "type_relation": "DEPEND_DE",
+      "description": "RsP_eq_regime_1_2_RsP_generic depend de RsP_generic"
+    },
+    {
+      "id": 111,
+      "point_source_id": 445,
+      "point_cible_id": 422,
+      "type_relation": "DEPEND_DE",
+      "description": "RsP_1_3_eq_regime_1_3_RsP_generic depend de RsP_generic"
+    },
+    {
+      "id": 112,
+      "point_source_id": 446,
+      "point_cible_id": 422,
+      "type_relation": "DEPEND_DE",
+      "description": "RsP_generic_1_2_is_half depend de RsP_generic"
+    },
+    {
+      "id": 113,
+      "point_source_id": 447,
+      "point_cible_id": 422,
+      "type_relation": "DEPEND_DE",
+      "description": "RsP_generic_1_3_is_third depend de RsP_generic"
+    },
+    {
+      "id": 114,
+      "point_source_id": 448,
+      "point_cible_id": 422,
+      "type_relation": "DEPEND_DE",
+      "description": "RsP_generic_1_4_is_quarter depend de RsP_generic"
+    },
+    {
+      "id": 115,
+      "point_source_id": 468,
+      "point_cible_id": 467,
+      "type_relation": "DEPEND_DE",
+      "description": "somme_A_pos_k_eq_SA depend de somme_B_neg_k"
+    },
+    {
+      "id": 116,
+      "point_source_id": 469,
+      "point_cible_id": 467,
+      "type_relation": "DEPEND_DE",
+      "description": "somme_B_pos_k_eq_SB depend de somme_B_neg_k"
+    },
+    {
+      "id": 117,
+      "point_source_id": 472,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "suite_A_1_terme depend de terme_B_pos"
+    },
+    {
+      "id": 118,
+      "point_source_id": 473,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "suite_A_2_termes_pos1 depend de terme_B_pos"
+    },
+    {
+      "id": 119,
+      "point_source_id": 474,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "suite_A_2_termes_pos2 depend de terme_B_pos"
+    },
+    {
+      "id": 120,
+      "point_source_id": 475,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "suite_A_3_termes_pos3 depend de terme_B_pos"
+    },
+    {
+      "id": 121,
+      "point_source_id": 476,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "suite_A_4_termes_pos3 depend de terme_B_pos"
+    },
+    {
+      "id": 122,
+      "point_source_id": 477,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "suite_A_4_termes_pos4 depend de terme_B_pos"
+    },
+    {
+      "id": 123,
+      "point_source_id": 478,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "suite_A_5_termes_pos4 depend de terme_B_pos"
+    },
+    {
+      "id": 124,
+      "point_source_id": 479,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "suite_A_5_termes_pos5 depend de terme_B_pos"
+    },
+    {
+      "id": 125,
+      "point_source_id": 480,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "suite_A_7_termes_pos6 depend de terme_B_pos"
+    },
+    {
+      "id": 126,
+      "point_source_id": 481,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "suite_A_7_termes_pos7 depend de terme_B_pos"
+    },
+    {
+      "id": 127,
+      "point_source_id": 482,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "suite_A_8_termes_pos6 depend de terme_B_pos"
+    },
+    {
+      "id": 128,
+      "point_source_id": 483,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "suite_A_8_termes_pos7 depend de terme_B_pos"
+    },
+    {
+      "id": 129,
+      "point_source_id": 484,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "suite_A_8_termes_pos8 depend de terme_B_pos"
+    },
+    {
+      "id": 130,
+      "point_source_id": 485,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "suite_B_8_termes_pos6 depend de terme_B_pos"
+    },
+    {
+      "id": 131,
+      "point_source_id": 486,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "suite_B_8_termes_pos7 depend de terme_B_pos"
+    },
+    {
+      "id": 132,
+      "point_source_id": 487,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "suite_B_8_termes_pos8 depend de terme_B_pos"
+    },
+    {
+      "id": 133,
+      "point_source_id": 488,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "suite_B_9_termes_pos6 depend de terme_B_pos"
+    },
+    {
+      "id": 134,
+      "point_source_id": 489,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "suite_B_9_termes_pos7 depend de terme_B_pos"
+    },
+    {
+      "id": 135,
+      "point_source_id": 490,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "suite_B_9_termes_pos9 depend de terme_B_pos"
+    },
+    {
+      "id": 136,
+      "point_source_id": 491,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "suite_B_10_termes_pos8 depend de terme_B_pos"
+    },
+    {
+      "id": 137,
+      "point_source_id": 492,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "suite_B_10_termes_pos10 depend de terme_B_pos"
+    },
+    {
+      "id": 138,
+      "point_source_id": 493,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "somme_A_pos_11 depend de terme_B_pos"
+    },
+    {
+      "id": 139,
+      "point_source_id": 494,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "somme_B_pos_11 depend de terme_B_pos"
+    },
+    {
+      "id": 140,
+      "point_source_id": 495,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "somme_A_neg_k_value depend de terme_B_pos"
+    },
+    {
+      "id": 141,
+      "point_source_id": 496,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "somme_A_neg_m2 depend de terme_B_pos"
+    },
+    {
+      "id": 142,
+      "point_source_id": 497,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "somme_A_neg_m5 depend de terme_B_pos"
+    },
+    {
+      "id": 143,
+      "point_source_id": 498,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "somme_B_neg_m5 depend de terme_B_pos"
+    },
+    {
+      "id": 144,
+      "point_source_id": 499,
+      "point_cible_id": 471,
+      "type_relation": "DEPEND_DE",
+      "description": "somme_B_neg_m5_decimal depend de terme_B_pos"
+    },
+    {
+      "id": 145,
+      "point_source_id": 515,
+      "point_cible_id": 512,
+      "type_relation": "DEPEND_DE",
+      "description": "rapport_zeta_savard_at_10 depend de psi_savard"
+    },
+    {
+      "id": 146,
+      "point_source_id": 516,
+      "point_cible_id": 512,
+      "type_relation": "DEPEND_DE",
+      "description": "rapport_zeta_savard_at_25 depend de psi_savard"
+    },
+    {
+      "id": 147,
+      "point_source_id": 517,
+      "point_cible_id": 512,
+      "type_relation": "DEPEND_DE",
+      "description": "rapport_zeta_savard_at_49 depend de psi_savard"
+    },
+    {
+      "id": 148,
+      "point_source_id": 519,
+      "point_cible_id": 512,
+      "type_relation": "DEPEND_DE",
+      "description": "psi_savard_expanded depend de psi_savard"
+    },
+    {
+      "id": 149,
+      "point_source_id": 520,
+      "point_cible_id": 512,
+      "type_relation": "DEPEND_DE",
+      "description": "psi_savard_at_10_30_expanded depend de psi_savard"
+    },
+    {
+      "id": 150,
+      "point_source_id": 521,
+      "point_cible_id": 512,
+      "type_relation": "DEPEND_DE",
+      "description": "psi_savard_at_25_98_expanded depend de psi_savard"
+    },
+    {
+      "id": 151,
+      "point_source_id": 522,
+      "point_cible_id": 512,
+      "type_relation": "DEPEND_DE",
+      "description": "psi_savard_at_49_228_expanded depend de psi_savard"
+    },
+    {
+      "id": 152,
+      "point_source_id": 545,
+      "point_cible_id": 543,
+      "type_relation": "VALIDE",
+      "description": "pont_spectral_direct_final valide Re_droite_critique"
+    },
+    {
+      "id": 153,
+      "point_source_id": 547,
+      "point_cible_id": 543,
+      "type_relation": "DEPEND_DE",
+      "description": "RsP_universel_entier_naturel depend de Re_droite_critique"
+    },
+    {
+      "id": 154,
+      "point_source_id": 549,
+      "point_cible_id": 543,
+      "type_relation": "VALIDE",
+      "description": "synthese_pont_savard valide Re_droite_critique"
+    },
+    {
+      "id": 155,
+      "point_source_id": 552,
+      "point_cible_id": 543,
+      "type_relation": "DEPEND_DE",
+      "description": "RsP_universel_entier_naturel depend de Re_droite_critique"
+    },
+    {
+      "id": 156,
+      "point_source_id": 23,
+      "point_cible_id": 549,
+      "type_relation": "CONDUIT_A",
+      "description": "RsP_un_demi_general --[CONDUIT_A]--> synthese_pont_savard"
+    },
+    {
+      "id": 157,
+      "point_source_id": 552,
+      "point_cible_id": 549,
+      "type_relation": "CONDUIT_A",
+      "description": "RsP_universel_entier_naturel --[CONDUIT_A]--> synthese_pont_savard"
+    },
+    {
+      "id": 158,
+      "point_source_id": 99,
+      "point_cible_id": 549,
+      "type_relation": "CONDUIT_A",
+      "description": "prime_equation_prime_i --[CONDUIT_A]--> synthese_pont_savard"
+    },
+    {
+      "id": 159,
+      "point_source_id": 79,
+      "point_cible_id": 99,
+      "type_relation": "DEPEND_DE",
+      "description": "reconstruction_premier_pos --[DEPEND_DE]--> prime_equation_prime_i"
+    },
+    {
+      "id": 160,
+      "point_source_id": 256,
+      "point_cible_id": 549,
+      "type_relation": "CONDUIT_A",
+      "description": "composite_not_prime_i --[CONDUIT_A]--> synthese_pont_savard"
+    },
+    {
+      "id": 161,
+      "point_source_id": 278,
+      "point_cible_id": 256,
+      "type_relation": "DEPEND_DE",
+      "description": "composite_no_reconstruction_position --[DEPEND_DE]--> composite_not_prime_i"
+    },
+    {
+      "id": 162,
+      "point_source_id": 288,
+      "point_cible_id": 256,
+      "type_relation": "DEPEND_DE",
+      "description": "composite_pair_no_rsp_positions --[DEPEND_DE]--> composite_not_prime_i"
+    },
+    {
+      "id": 163,
+      "point_source_id": 512,
+      "point_cible_id": 529,
+      "type_relation": "PONT_VERS",
+      "description": "psi_savard --[PONT_VERS]--> methode_spectrale_exclusivite_P"
+    },
+    {
+      "id": 164,
+      "point_source_id": 536,
+      "point_cible_id": 23,
+      "type_relation": "VALIDE",
+      "description": "alignement_central --[VALIDE]--> RsP_un_demi_general"
+    },
+    {
+      "id": 165,
+      "point_source_id": 538,
+      "point_cible_id": 549,
+      "type_relation": "CONDUIT_A",
+      "description": "conclusion_ensemble --[CONDUIT_A]--> synthese_pont_savard"
+    },
+    {
+      "id": 166,
+      "point_source_id": 428,
+      "point_cible_id": 23,
+      "type_relation": "GENERALISE",
+      "description": "RsP_generic_constant --[GENERALISE]--> RsP_un_demi_general"
+    },
+    {
+      "id": 167,
+      "point_source_id": 428,
+      "point_cible_id": 136,
+      "type_relation": "GENERALISE",
+      "description": "RsP_generic_constant --[GENERALISE]--> RsP_un_tiers_constant"
+    },
+    {
+      "id": 168,
+      "point_source_id": 428,
+      "point_cible_id": 140,
+      "type_relation": "GENERALISE",
+      "description": "RsP_generic_constant --[GENERALISE]--> RsP_un_quart_constant"
+    },
+    {
+      "id": 169,
+      "point_source_id": 545,
+      "point_cible_id": 549,
+      "type_relation": "DEPEND_DE",
+      "description": "pont_spectral_direct_final --[DEPEND_DE]--> synthese_pont_savard"
+    },
+    {
+      "id": 170,
+      "point_source_id": 543,
+      "point_cible_id": 549,
+      "type_relation": "DEPEND_DE",
+      "description": "Re_droite_critique --[DEPEND_DE]--> synthese_pont_savard"
+    },
+    {
+      "id": 171,
+      "point_source_id": 540,
+      "point_cible_id": 549,
+      "type_relation": "VALIDE",
+      "description": "ensemble_savard_satisfaisable --[VALIDE]--> synthese_pont_savard"
+    },
+    {
+      "id": 172,
+      "point_source_id": 520,
+      "point_cible_id": 519,
+      "type_relation": "DEPEND_DE",
+      "description": "psi_savard_at_10_30_expanded --[DEPEND_DE]--> psi_savard_expanded"
+    },
+    {
+      "id": 173,
+      "point_source_id": 521,
+      "point_cible_id": 519,
+      "type_relation": "DEPEND_DE",
+      "description": "psi_savard_at_25_98_expanded --[DEPEND_DE]--> psi_savard_expanded"
+    },
+    {
+      "id": 174,
+      "point_source_id": 522,
+      "point_cible_id": 519,
+      "type_relation": "DEPEND_DE",
+      "description": "psi_savard_at_49_228_expanded --[DEPEND_DE]--> psi_savard_expanded"
+    },
+    {
+      "id": 175,
+      "point_source_id": 67,
+      "point_cible_id": 99,
+      "type_relation": "DEPEND_DE",
+      "description": "digamma_calc_29 --[DEPEND_DE]--> prime_equation_prime_i"
+    },
+    {
+      "id": 176,
+      "point_source_id": 68,
+      "point_cible_id": 99,
+      "type_relation": "DEPEND_DE",
+      "description": "digamma_calc_31 --[DEPEND_DE]--> prime_equation_prime_i"
+    },
+    {
+      "id": 177,
+      "point_source_id": 69,
+      "point_cible_id": 99,
+      "type_relation": "DEPEND_DE",
+      "description": "digamma_calc_37 --[DEPEND_DE]--> prime_equation_prime_i"
+    },
+    {
+      "id": 178,
+      "point_source_id": 70,
+      "point_cible_id": 99,
+      "type_relation": "DEPEND_DE",
+      "description": "digamma_calc_41 --[DEPEND_DE]--> prime_equation_prime_i"
+    },
+    {
+      "id": 179,
+      "point_source_id": 115,
+      "point_cible_id": 99,
+      "type_relation": "DEPEND_DE",
+      "description": "preuve_premier_947 --[DEPEND_DE]--> prime_equation_prime_i"
+    },
+    {
+      "id": 180,
+      "point_source_id": 131,
+      "point_cible_id": 99,
+      "type_relation": "DEPEND_DE",
+      "description": "preuve_premier_227 --[DEPEND_DE]--> prime_equation_prime_i"
+    },
+    {
+      "id": 181,
+      "point_source_id": 436,
+      "point_cible_id": 428,
+      "type_relation": "DEPEND_DE",
+      "description": "SA_eq_regime_1_2_A_pos --[DEPEND_DE]--> RsP_generic_constant"
+    },
+    {
+      "id": 182,
+      "point_source_id": 437,
+      "point_cible_id": 428,
+      "type_relation": "DEPEND_DE",
+      "description": "SB_eq_regime_1_2_B_pos --[DEPEND_DE]--> RsP_generic_constant"
+    }
+  ],
+  "concordances": [
+    {
+      "code": "C1",
+      "section_source": "1/y1",
+      "section_cible": "1/t",
+      "type_relation": "PONT_VERS",
+      "description": "C1 : Tchebychev = psi_savard. Les deux traitent du meme sujet via x^p/p et 2^n/SB_n. Le reste des deux equations est identique : log(2Pi)-0.5*log(1-x^-2).",
+      "hol_lemmes": "psi_savard_expanded, psi_savard_at_10_30_expanded, rapport_zeta_savard_at_10"
+    },
+    {
+      "code": "C2",
+      "section_source": "1/y3",
+      "section_cible": "1/ms1",
+      "type_relation": "VALIDE",
+      "description": "C2 : zeros non-triviaux = valeurs de n = positions des P. La methode spectrale et la fonction zeta determinent les memes positions.",
+      "hol_lemmes": "prime_equation_prime_i, RsP_generic_constant, RsP_universel_entier_naturel"
+    },
+    {
+      "code": "C3",
+      "section_source": "1/y2",
+      "section_cible": "1/ms3",
+      "type_relation": "VALIDE",
+      "description": "C3 : Re(rho) = 1/2 = RsP = 1/2. La droite critique de Riemann s'aligne sur le rapport spectral central.",
+      "hol_lemmes": "synthese_pont_savard, alignement_central, pont_spectral_direct_final, Re_droite_critique"
+    }
+  ]
+}

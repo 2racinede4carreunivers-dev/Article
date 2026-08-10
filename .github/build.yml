@@ -1,0 +1,643 @@
+# ==============================================================================
+#  build.yml — GitHub Actions — Pipeline HOL Savard 2026
+#  Projet  : La Géométrie du Spectre des Nombres Premiers
+#  Auteur  : Philippe Thomas Savard — Lévis, Québec, Canada
+#  Fichier : .github/workflows/build.yml
+# ==============================================================================
+#
+#  Ce workflow réalise les 4 opérations suivantes à chaque push sur main :
+#
+#  JOB 1 — attestations
+#    Calcule les SHA-256 de TOUS les fichiers du dépôt (.thy, .py, .tex,
+#    .json, .db) et génère un rapport d'intégrité détaillé par type de fichier.
+#    Produit des attestations GitHub natives (SLSA) pour les deux fichiers .thy.
+#    Artefact : attestations-sha256/
+#
+#  JOB 2 — isabelle-build
+#    Télécharge Isabelle 2024, compile methode_spectral.thy et
+#    rapport_architecture.thy dans la session HOL Methode_Spectrale.
+#    Produit un rapport de compilation détaillé + attestation du résultat.
+#    Artefact : rapport-compilation-hol/
+#
+#  JOB 3 — latex-build
+#    Compile le fichier .tex de l'article en PDF avec latexmk + texlive-full.
+#    Produit le PDF compilé + rapport de compilation + SHA-256 du PDF.
+#    Artefact : rapport-compilation-latex/
+#
+#  JOB 4 — rapport-final
+#    Agrège tous les artefacts des 3 jobs précédents en un rapport global
+#    d'intégrité signé par une attestation GitHub native (SLSA).
+#    Artefact : rapport-integrite-global/
+#
+#  Structure du dépôt attendue :
+#    hol/     → methode_spectral.thy, rapport_architecture.thy, ROOT
+#    py/      → points_methode_spectral_thy.py, python2_sqlite_vers_hol.py
+#    tex/     → Geometrie_du_Spectre_des_Nombres_Premiers_2026.tex
+#    corpus/  → methode_spectral_hol.db
+#    json/    → rapport_spectral_points.json
+#    docs/    → README.md, Geometrie_du_Spectre_des_Nombres_Premiers.pdf
+# ==============================================================================
+
+name: Pipeline HOL — Validation Méthode Spectrale Savard
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+  attestations: write
+
+# ==============================================================================
+# JOB 1 — ATTESTATIONS SHA-256 POUR TOUS LES FICHIERS
+# ==============================================================================
+jobs:
+  attestations:
+    name: "Job 1 — Attestations SHA-256 (tous fichiers)"
+    runs-on: ubuntu-latest
+
+    steps:
+      # ------------------------------------------------------------------
+      - name: "1.1 — Checkout du dépôt"
+        uses: actions/checkout@v4
+
+      # ------------------------------------------------------------------
+      - name: "1.2 — Attestation SHA-256 détaillée — Fichiers HOL (.thy)"
+        run: |
+          mkdir -p attestations/hol
+          RAPPORT="attestations/hol/attestation_hol_detaillee.txt"
+          {
+            echo "========================================================"
+            echo "  ATTESTATION SHA-256 — FICHIERS HOL ISABELLE (.thy)"
+            echo "  Projet   : Méthode Spectrale — Philippe Thomas Savard"
+            echo "  Dépôt    : ${{ github.repository }}"
+            echo "  Commit   : ${{ github.sha }}"
+            echo "  Branche  : ${{ github.ref_name }}"
+            echo "  Date UTC : $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+            echo "  Run ID   : ${{ github.run_id }}"
+            echo "========================================================"
+            echo ""
+          } >> "$RAPPORT"
+
+          for f in hol/*.thy; do
+            if [ -f "$f" ]; then
+              NOM=$(basename "$f")
+              SHA=$(sha256sum "$f" | awk '{print $1}')
+              TAILLE=$(stat -c%s "$f")
+              LIGNES=$(wc -l < "$f")
+              {
+                echo "────────────────────────────────────────────────────"
+                echo "  Fichier   : $NOM"
+                echo "  Chemin    : $f"
+                echo "  SHA-256   : $SHA"
+                echo "  Taille    : $TAILLE octets"
+                echo "  Lignes    : $LIGNES"
+                echo "  Date      : $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+                echo "  Dépôt     : ${{ github.repository }}"
+                echo "  Commit    : ${{ github.sha }}"
+                echo "  Run ID    : ${{ github.run_id }}"
+                echo "  Run URL   : https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                echo "────────────────────────────────────────────────────"
+                echo ""
+              } >> "$RAPPORT"
+            fi
+          done
+          cat "$RAPPORT"
+
+      # ------------------------------------------------------------------
+      - name: "1.3 — Attestation SHA-256 détaillée — Fichiers Python (.py)"
+        run: |
+          mkdir -p attestations/py
+          RAPPORT="attestations/py/attestation_python_detaillee.txt"
+          {
+            echo "========================================================"
+            echo "  ATTESTATION SHA-256 — FICHIERS PYTHON (.py)"
+            echo "  Projet   : Pipeline HOL — Philippe Thomas Savard"
+            echo "  Dépôt    : ${{ github.repository }}"
+            echo "  Commit   : ${{ github.sha }}"
+            echo "  Date UTC : $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+            echo "  Run ID   : ${{ github.run_id }}"
+            echo "========================================================"
+            echo ""
+          } >> "$RAPPORT"
+
+          if ls py/*.py 1>/dev/null 2>&1; then
+            for f in py/*.py; do
+              NOM=$(basename "$f")
+              SHA=$(sha256sum "$f" | awk '{print $1}')
+              TAILLE=$(stat -c%s "$f")
+              LIGNES=$(wc -l < "$f")
+              {
+                echo "────────────────────────────────────────────────────"
+                echo "  Fichier   : $NOM"
+                echo "  Chemin    : $f"
+                echo "  SHA-256   : $SHA"
+                echo "  Taille    : $TAILLE octets"
+                echo "  Lignes    : $LIGNES"
+                echo "  Date      : $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+                echo "  Commit    : ${{ github.sha }}"
+                echo "────────────────────────────────────────────────────"
+                echo ""
+              } >> "$RAPPORT"
+            done
+          else
+            echo "  (aucun fichier .py dans py/)" >> "$RAPPORT"
+          fi
+          cat "$RAPPORT"
+
+      # ------------------------------------------------------------------
+      - name: "1.4 — Attestation SHA-256 détaillée — Fichiers LaTeX (.tex)"
+        run: |
+          mkdir -p attestations/tex
+          RAPPORT="attestations/tex/attestation_latex_detaillee.txt"
+          {
+            echo "========================================================"
+            echo "  ATTESTATION SHA-256 — FICHIERS LaTeX (.tex)"
+            echo "  Projet   : Article — Philippe Thomas Savard"
+            echo "  Dépôt    : ${{ github.repository }}"
+            echo "  Commit   : ${{ github.sha }}"
+            echo "  Date UTC : $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+            echo "  Run ID   : ${{ github.run_id }}"
+            echo "========================================================"
+            echo ""
+          } >> "$RAPPORT"
+
+          if ls tex/*.tex 1>/dev/null 2>&1; then
+            for f in tex/*.tex; do
+              NOM=$(basename "$f")
+              SHA=$(sha256sum "$f" | awk '{print $1}')
+              TAILLE=$(stat -c%s "$f")
+              LIGNES=$(wc -l < "$f")
+              {
+                echo "────────────────────────────────────────────────────"
+                echo "  Fichier   : $NOM"
+                echo "  Chemin    : $f"
+                echo "  SHA-256   : $SHA"
+                echo "  Taille    : $TAILLE octets"
+                echo "  Lignes    : $LIGNES"
+                echo "  Date      : $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+                echo "  Commit    : ${{ github.sha }}"
+                echo "────────────────────────────────────────────────────"
+                echo ""
+              } >> "$RAPPORT"
+            done
+          else
+            echo "  (aucun fichier .tex dans tex/)" >> "$RAPPORT"
+          fi
+          cat "$RAPPORT"
+
+      # ------------------------------------------------------------------
+      - name: "1.5 — Attestation SHA-256 détaillée — Fichiers JSON (.json)"
+        run: |
+          mkdir -p attestations/json
+          RAPPORT="attestations/json/attestation_json_detaillee.txt"
+          {
+            echo "========================================================"
+            echo "  ATTESTATION SHA-256 — FICHIERS JSON (.json)"
+            echo "  Projet   : Corpus HOL — Philippe Thomas Savard"
+            echo "  Dépôt    : ${{ github.repository }}"
+            echo "  Commit   : ${{ github.sha }}"
+            echo "  Date UTC : $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+            echo "  Run ID   : ${{ github.run_id }}"
+            echo "========================================================"
+            echo ""
+          } >> "$RAPPORT"
+
+          if ls json/*.json 1>/dev/null 2>&1; then
+            for f in json/*.json; do
+              NOM=$(basename "$f")
+              SHA=$(sha256sum "$f" | awk '{print $1}')
+              TAILLE=$(stat -c%s "$f")
+              {
+                echo "────────────────────────────────────────────────────"
+                echo "  Fichier   : $NOM"
+                echo "  Chemin    : $f"
+                echo "  SHA-256   : $SHA"
+                echo "  Taille    : $TAILLE octets"
+                echo "  Commit    : ${{ github.sha }}"
+                echo "────────────────────────────────────────────────────"
+                echo ""
+              } >> "$RAPPORT"
+            done
+          else
+            echo "  (aucun fichier .json dans json/)" >> "$RAPPORT"
+          fi
+          cat "$RAPPORT"
+
+      # ------------------------------------------------------------------
+      - name: "1.6 — Attestation SHA-256 détaillée — Base de données (.db)"
+        run: |
+          mkdir -p attestations/corpus
+          RAPPORT="attestations/corpus/attestation_db_detaillee.txt"
+          {
+            echo "========================================================"
+            echo "  ATTESTATION SHA-256 — BASE DE DONNÉES SQLite (.db)"
+            echo "  Projet   : Corpus HOL — Philippe Thomas Savard"
+            echo "  Dépôt    : ${{ github.repository }}"
+            echo "  Commit   : ${{ github.sha }}"
+            echo "  Date UTC : $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+            echo "  Run ID   : ${{ github.run_id }}"
+            echo "========================================================"
+            echo ""
+          } >> "$RAPPORT"
+
+          if ls corpus/*.db 1>/dev/null 2>&1; then
+            for f in corpus/*.db; do
+              NOM=$(basename "$f")
+              SHA=$(sha256sum "$f" | awk '{print $1}')
+              TAILLE=$(stat -c%s "$f")
+              {
+                echo "────────────────────────────────────────────────────"
+                echo "  Fichier   : $NOM"
+                echo "  Chemin    : $f"
+                echo "  SHA-256   : $SHA"
+                echo "  Taille    : $TAILLE octets"
+                echo "  Commit    : ${{ github.sha }}"
+                echo "────────────────────────────────────────────────────"
+                echo ""
+              } >> "$RAPPORT"
+            done
+          else
+            echo "  (aucun fichier .db dans corpus/)" >> "$RAPPORT"
+          fi
+          cat "$RAPPORT"
+
+      # ------------------------------------------------------------------
+      - name: "1.7 — Rapport SHA-256 global consolidé"
+        run: |
+          RAPPORT="attestations/rapport_sha256_global.txt"
+          {
+            echo "========================================================"
+            echo "  RAPPORT SHA-256 GLOBAL CONSOLIDÉ"
+            echo "  Projet    : La Géométrie du Spectre des Nombres Premiers"
+            echo "  Auteur    : Philippe Thomas Savard"
+            echo "  Dépôt     : ${{ github.repository }}"
+            echo "  Commit    : ${{ github.sha }}"
+            echo "  Branche   : ${{ github.ref_name }}"
+            echo "  Date UTC  : $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+            echo "  Run ID    : ${{ github.run_id }}"
+            echo "  Run URL   : https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo "========================================================"
+            echo ""
+            echo "--- HOL Isabelle (.thy) ---"
+            sha256sum hol/*.thy 2>/dev/null || echo "  (aucun)"
+            echo ""
+            echo "--- Python (.py) ---"
+            sha256sum py/*.py 2>/dev/null || echo "  (aucun)"
+            echo ""
+            echo "--- LaTeX (.tex) ---"
+            sha256sum tex/*.tex 2>/dev/null || echo "  (aucun)"
+            echo ""
+            echo "--- JSON (.json) ---"
+            sha256sum json/*.json 2>/dev/null || echo "  (aucun)"
+            echo ""
+            echo "--- Base de données SQLite (.db) ---"
+            sha256sum corpus/*.db 2>/dev/null || echo "  (aucun)"
+            echo ""
+            echo "========================================================"
+          } > "$RAPPORT"
+          cat "$RAPPORT"
+
+      # ------------------------------------------------------------------
+      - name: "1.8 — Attestation GitHub SLSA native — methode_spectral.thy"
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: hol/methode_spectral.thy
+
+      # ------------------------------------------------------------------
+      - name: "1.9 — Attestation GitHub SLSA native — rapport_architecture.thy"
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: hol/rapport_architecture.thy
+
+      # ------------------------------------------------------------------
+      - name: "1.10 — Upload artefact — Toutes les attestations SHA-256"
+        uses: actions/upload-artifact@v4
+        with:
+          name: attestations-sha256
+          path: attestations/
+          retention-days: 90
+
+# ==============================================================================
+# JOB 2 — COMPILATION ISABELLE/HOL
+# ==============================================================================
+  isabelle-build:
+    name: "Job 2 — Compilation Isabelle/HOL"
+    runs-on: ubuntu-latest
+    needs: attestations
+
+    steps:
+      # ------------------------------------------------------------------
+      - name: "2.1 — Checkout du dépôt"
+        uses: actions/checkout@v4
+
+      # ------------------------------------------------------------------
+      - name: "2.2 — Installation Java (requis par Isabelle)"
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y openjdk-17-jdk wget tar
+          java -version
+
+      # ------------------------------------------------------------------
+      - name: "2.3 — Téléchargement d'Isabelle 2024"
+        run: |
+          wget -q --show-progress \
+            https://isabelle.in.tum.de/dist/Isabelle2024_linux.tar.gz
+          tar xzf Isabelle2024_linux.tar.gz
+          echo "$PWD/Isabelle2024/bin" >> $GITHUB_PATH
+          Isabelle2024/bin/isabelle version
+
+      # ------------------------------------------------------------------
+      - name: "2.4 — Création du fichier ROOT (session Isabelle)"
+        run: |
+          cat > hol/ROOT << 'ROOTEOF'
+session Methode_Spectrale = HOL +
+  description "Methode Spectrale - Philippe Thomas Savard - Aout 2026
+  www.universestaucarre.com
+  Theoreme central : synthese_pont_savard : RsP = Re(rho) = 1/2 VRAI"
+  options [timeout = 7200, document = false]
+  sessions
+    "HOL-Computational_Algebra"
+    Complex_Main
+  theories
+    methode_spectral
+    rapport_architecture
+ROOTEOF
+          echo "Fichier ROOT créé :"
+          cat hol/ROOT
+
+      # ------------------------------------------------------------------
+      - name: "2.5 — Compilation de la session HOL Methode_Spectrale"
+        id: hol_build
+        run: |
+          mkdir -p build-reports
+          isabelle build \
+            -D hol \
+            -b Methode_Spectrale \
+            -v \
+            2>&1 | tee build-reports/isabelle_build_log.txt
+          CODE=${PIPESTATUS[0]}
+          if [ $CODE -eq 0 ]; then
+            echo "HOL_STATUS=SUCCESS" >> $GITHUB_ENV
+            echo "BUILD HOL : SUCCÈS — session Methode_Spectrale compilée" \
+              >> build-reports/isabelle_build_log.txt
+          else
+            echo "HOL_STATUS=FAILED (code $CODE)" >> $GITHUB_ENV
+            echo "BUILD HOL : ÉCHEC — code de sortie $CODE" \
+              >> build-reports/isabelle_build_log.txt
+          fi
+
+      # ------------------------------------------------------------------
+      - name: "2.6 — Rapport de compilation HOL détaillé"
+        run: |
+          {
+            echo "========================================================"
+            echo "  RAPPORT DE COMPILATION HOL ISABELLE"
+            echo "  Projet    : Méthode Spectrale — Philippe Thomas Savard"
+            echo "  Dépôt     : ${{ github.repository }}"
+            echo "  Commit    : ${{ github.sha }}"
+            echo "  Date UTC  : $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+            echo "  Run ID    : ${{ github.run_id }}"
+            echo "========================================================"
+            echo ""
+            echo "--- STATUT GLOBAL ---"
+            echo "  Compilation HOL : ${{ env.HOL_STATUS }}"
+            echo ""
+            echo "--- Fichiers HOL compilés ---"
+            ls -lh hol/*.thy
+            echo ""
+            echo "--- SHA-256 des fichiers HOL ---"
+            sha256sum hol/*.thy
+            echo ""
+            echo "--- Contenu de la session (hol/ROOT) ---"
+            cat hol/ROOT
+            echo ""
+            echo "--- LOG COMPLET DE COMPILATION ---"
+            cat build-reports/isabelle_build_log.txt
+            echo ""
+            echo "========================================================"
+          } > build-reports/rapport_compilation_hol.txt
+          cat build-reports/rapport_compilation_hol.txt
+
+      # ------------------------------------------------------------------
+      - name: "2.7 — Attestation GitHub SLSA — rapport de compilation HOL"
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: build-reports/rapport_compilation_hol.txt
+
+      # ------------------------------------------------------------------
+      - name: "2.8 — Upload artefact — Rapport compilation HOL"
+        uses: actions/upload-artifact@v4
+        with:
+          name: rapport-compilation-hol
+          path: build-reports/
+          retention-days: 90
+
+# ==============================================================================
+# JOB 3 — COMPILATION LaTeX
+# ==============================================================================
+  latex-build:
+    name: "Job 3 — Compilation LaTeX (article PDF)"
+    runs-on: ubuntu-latest
+    needs: attestations
+
+    steps:
+      # ------------------------------------------------------------------
+      - name: "3.1 — Checkout du dépôt"
+        uses: actions/checkout@v4
+
+      # ------------------------------------------------------------------
+      - name: "3.2 — Installation texlive-full + latexmk"
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y texlive-full latexmk
+          latexmk --version
+
+      # ------------------------------------------------------------------
+      - name: "3.3 — SHA-256 du fichier source .tex"
+        run: |
+          mkdir -p build-latex
+          sha256sum tex/*.tex | tee build-latex/sha256_tex_source.txt
+
+      # ------------------------------------------------------------------
+      - name: "3.4 — Compilation LaTeX — Geometrie_du_Spectre"
+        run: |
+          cd tex
+          latexmk -pdf \
+            -interaction=nonstopmode \
+            -halt-on-error \
+            Geometrie_du_Spectre_des_Nombres_Premiers_2026.tex \
+            2>&1 | tee ../build-latex/latex_build_log.txt || true
+          if ls *.pdf 1>/dev/null 2>&1; then
+            cp *.pdf ../build-latex/
+            echo "LATEX_STATUS=SUCCESS" >> $GITHUB_ENV
+          else
+            echo "LATEX_STATUS=FAILED" >> $GITHUB_ENV
+          fi
+
+      # ------------------------------------------------------------------
+      - name: "3.5 — Rapport de compilation LaTeX"
+        run: |
+          {
+            echo "========================================================"
+            echo "  RAPPORT DE COMPILATION LaTeX"
+            echo "  Projet    : Méthode Spectrale — Philippe Thomas Savard"
+            echo "  Dépôt     : ${{ github.repository }}"
+            echo "  Commit    : ${{ github.sha }}"
+            echo "  Date UTC  : $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+            echo "  Run ID    : ${{ github.run_id }}"
+            echo "========================================================"
+            echo ""
+            echo "--- STATUT ---"
+            echo "  Compilation LaTeX : ${{ env.LATEX_STATUS }}"
+            echo ""
+            echo "--- Fichier source .tex ---"
+            ls -lh tex/*.tex
+            echo ""
+            echo "--- SHA-256 source .tex ---"
+            sha256sum tex/*.tex
+            echo ""
+            echo "--- PDF généré ---"
+            ls -lh build-latex/*.pdf 2>/dev/null || echo "  (aucun PDF généré)"
+            echo ""
+            echo "--- SHA-256 PDF généré ---"
+            sha256sum build-latex/*.pdf 2>/dev/null || echo "  (aucun)"
+            echo ""
+            echo "--- LOG COMPLET LaTeX ---"
+            cat build-latex/latex_build_log.txt
+            echo ""
+            echo "========================================================"
+          } > build-latex/rapport_compilation_latex.txt
+          cat build-latex/rapport_compilation_latex.txt
+
+      # ------------------------------------------------------------------
+      - name: "3.6 — Attestation GitHub SLSA — rapport LaTeX"
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: build-latex/rapport_compilation_latex.txt
+
+      # ------------------------------------------------------------------
+      - name: "3.7 — Upload artefact — PDF compilé + rapport LaTeX"
+        uses: actions/upload-artifact@v4
+        with:
+          name: rapport-compilation-latex
+          path: build-latex/
+          retention-days: 90
+
+# ==============================================================================
+# JOB 4 — RAPPORT FINAL D'INTÉGRITÉ GLOBALE
+# ==============================================================================
+  rapport-final:
+    name: "Job 4 — Rapport final d'intégrité globale"
+    runs-on: ubuntu-latest
+    needs: [attestations, isabelle-build, latex-build]
+    if: always()
+
+    steps:
+      # ------------------------------------------------------------------
+      - name: "4.1 — Checkout du dépôt"
+        uses: actions/checkout@v4
+
+      # ------------------------------------------------------------------
+      - name: "4.2 — Téléchargement de tous les artefacts"
+        uses: actions/download-artifact@v4
+        with:
+          path: all-artifacts
+
+      # ------------------------------------------------------------------
+      - name: "4.3 — Génération du rapport final d'intégrité"
+        run: |
+          mkdir -p rapport-final
+          {
+            echo "========================================================"
+            echo "  RAPPORT FINAL D'INTÉGRITÉ — PIPELINE SAVARD 2026"
+            echo "========================================================"
+            echo ""
+            echo "  Projet    : La Géométrie du Spectre des Nombres Premiers"
+            echo "  Auteur    : Philippe Thomas Savard"
+            echo "  Site web  : www.universestaucarre.com"
+            echo "  Dépôt     : ${{ github.repository }}"
+            echo "  Commit    : ${{ github.sha }}"
+            echo "  Branche   : ${{ github.ref_name }}"
+            echo "  Date UTC  : $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+            echo "  Run ID    : ${{ github.run_id }}"
+            echo "  Run URL   : https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo ""
+            echo "========================================================"
+            echo "  SECTION 1 — STATUT DES JOBS"
+            echo "========================================================"
+            echo ""
+            echo "  Job 1 — Attestations SHA-256 : ${{ needs.attestations.result }}"
+            echo "  Job 2 — Compilation HOL      : ${{ needs.isabelle-build.result }}"
+            echo "  Job 3 — Compilation LaTeX    : ${{ needs.latex-build.result }}"
+            echo ""
+            echo "========================================================"
+            echo "  SECTION 2 — SHA-256 GLOBAL DE TOUS LES FICHIERS"
+            echo "========================================================"
+            echo ""
+            echo "--- HOL Isabelle (.thy) ---"
+            sha256sum hol/*.thy 2>/dev/null || echo "  (aucun)"
+            echo ""
+            echo "--- Python (.py) ---"
+            sha256sum py/*.py 2>/dev/null || echo "  (aucun)"
+            echo ""
+            echo "--- LaTeX (.tex) ---"
+            sha256sum tex/*.tex 2>/dev/null || echo "  (aucun)"
+            echo ""
+            echo "--- JSON (.json) ---"
+            sha256sum json/*.json 2>/dev/null || echo "  (aucun)"
+            echo ""
+            echo "--- Base SQLite (.db) ---"
+            sha256sum corpus/*.db 2>/dev/null || echo "  (aucun)"
+            echo ""
+            echo "========================================================"
+            echo "  SECTION 3 — ARTEFACTS PRODUITS PAR CE WORKFLOW"
+            echo "========================================================"
+            echo ""
+            ls -lhR all-artifacts/ 2>/dev/null || echo "  (aucun artefact)"
+            echo ""
+            echo "========================================================"
+            echo "  SECTION 4 — ARCHITECTURE LOGIQUE (Règle Savard)"
+            echo "========================================================"
+            echo ""
+            echo "  ENSEMBLE = 1"
+            echo "    = 1/x  (Zêta Riemann)  = 1/y1 + 1/y2 + 1/y3"
+            echo "    + 1/t  (psi_savard)"
+            echo "    + 1/ms (Méthode Spectrale) = 1/ms1 + 1/ms2 + 1/ms3"
+            echo ""
+            echo "  Concordances (ponts logiques) :"
+            echo "    C1 : 1/y1 <-> 1/t    Tchebychev = psi_savard"
+            echo "    C2 : 1/y3 <-> 1/ms1  Zeros non-triviaux = positions P"
+            echo "    C3 : 1/y2 <-> 1/ms3  Re(rho) = 1/2 = RsP = 1/2"
+            echo ""
+            echo "  Théorème central : synthese_pont_savard"
+            echo "    Pour tout n1>=1, n2>=1, n1!=n2 :"
+            echo "    Re_droite_critique(n1,n2) = RsP(n1,n2) = 1/2"
+            echo ""
+            echo "  Total objets formels HOL : 553"
+            echo "  Sections logiques        : 10"
+            echo "  Concordances             : 3 (C1, C2, C3)"
+            echo ""
+            echo "========================================================"
+            echo "  FIN DU RAPPORT FINAL D'INTÉGRITÉ"
+            echo "========================================================"
+          } > rapport-final/rapport_integrite_global.txt
+          cat rapport-final/rapport_integrite_global.txt
+
+      # ------------------------------------------------------------------
+      - name: "4.4 — Attestation GitHub SLSA native — rapport final"
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: rapport-final/rapport_integrite_global.txt
+
+      # ------------------------------------------------------------------
+      - name: "4.5 — Upload artefact — Rapport final d'intégrité"
+        uses: actions/upload-artifact@v4
+        with:
+          name: rapport-integrite-global
+          path: rapport-final/
+          retention-days: 90
