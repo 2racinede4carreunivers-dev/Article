@@ -268,10 +268,12 @@ jobs:
           retention-days: 90
 
 # ==============================================================================
-# JOB 2 - COMPILATION ISABELLE/HOL
+# JOB 2 - COMPILATION ISABELLE/HOL  (EXPRESS + DOUBLE CACHE)
+# 1er lancement : ~12-15 min  (telechargement + compilation)
+# Runs suivants  :  ~3-5 min  (cache Isabelle + cache heap HOL)
 # ==============================================================================
   isabelle-build:
-    name: "Job 2 - Compilation Isabelle/HOL"
+    name: "Job 2 - Compilation Isabelle/HOL (express + cache)"
     runs-on: ubuntu-latest
     needs: attestations
 
@@ -280,21 +282,40 @@ jobs:
       - name: "2.1 - Checkout du depot"
         uses: actions/checkout@v4
 
-      - name: "2.2 - Installation Java (requis par Isabelle)"
+      - name: "2.2 - Installation Java 17 (JRE leger uniquement)"
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y openjdk-17-jdk wget tar
+          sudo apt-get install -y --no-install-recommends \
+            openjdk-17-jre-headless \
+            wget \
+            tar
           java -version
 
-      - name: "2.3 - Telechargement Isabelle 2024"
+      - name: "2.3 - Cache Isabelle 2024 (archive telechargee une seule fois)"
+        id: cache-isabelle
+        uses: actions/cache@v4
+        with:
+          path: ~/isabelle-dist/Isabelle2024
+          key: isabelle-2024-linux-v1
+
+      - name: "2.4 - Telechargement Isabelle 2024 (si cache absent)"
+        if: steps.cache-isabelle.outputs.cache-hit != 'true'
         run: |
+          mkdir -p ~/isabelle-dist
+          cd ~/isabelle-dist
+          echo "Cache absent - telechargement en cours..."
           wget -q --show-progress \
             https://isabelle.in.tum.de/dist/Isabelle2024_linux.tar.gz
           tar xzf Isabelle2024_linux.tar.gz
-          echo "$PWD/Isabelle2024/bin" >> $GITHUB_PATH
-          Isabelle2024/bin/isabelle version
+          rm Isabelle2024_linux.tar.gz
+          echo "Telechargement et extraction termines."
 
-      - name: "2.4 - Creation du fichier ROOT (session Isabelle)"
+      - name: "2.5 - Ajout Isabelle au PATH"
+        run: |
+          echo "$HOME/isabelle-dist/Isabelle2024/bin" >> $GITHUB_PATH
+          ~/isabelle-dist/Isabelle2024/bin/isabelle version
+
+      - name: "2.6 - Creation du fichier ROOT (session Isabelle)"
         run: |
           {
             echo 'session Methode_Spectrale = HOL +'
@@ -312,7 +333,16 @@ jobs:
           echo "Fichier ROOT cree :"
           cat hol/ROOT
 
-      - name: "2.5 - Compilation de la session HOL Methode_Spectrale"
+      - name: "2.7 - Cache session HOL compilee (cle = hash des .thy)"
+        id: cache-hol-session
+        uses: actions/cache@v4
+        with:
+          path: ~/.isabelle/Isabelle2024/heaps
+          key: hol-methode-spectrale-${{ hashFiles('hol/*.thy') }}
+          restore-keys: |
+            hol-methode-spectrale-
+
+      - name: "2.8 - Compilation de la session HOL Methode_Spectrale"
         run: |
           mkdir -p build-reports
           set +e
@@ -326,7 +356,7 @@ jobs:
             echo "HOL_STATUS=FAILED_code_$CODE" >> $GITHUB_ENV
           fi
 
-      - name: "2.6 - Rapport de compilation HOL detaille"
+      - name: "2.9 - Rapport de compilation HOL detaille"
         run: |
           RAPPORT="build-reports/rapport_compilation_hol.txt"
           {
@@ -337,6 +367,8 @@ jobs:
             echo "  Commit    : ${{ github.sha }}"
             echo "  Date UTC  : $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
             echo "  Run ID    : ${{ github.run_id }}"
+            echo "  Cache Isabelle : ${{ steps.cache-isabelle.outputs.cache-hit == 'true' && 'HIT (express)' || 'MISS (telechargement)' }}"
+            echo "  Cache HOL heap : ${{ steps.cache-hol-session.outputs.cache-hit == 'true' && 'HIT (express)' || 'MISS (compilation)' }}"
             echo "========================================================"
             echo ""
             echo "--- STATUT GLOBAL ---"
@@ -354,14 +386,14 @@ jobs:
           echo "========================================================" >> "$RAPPORT"
           cat "$RAPPORT"
 
-      - name: "2.7 - Attestation GitHub SLSA - rapport compilation HOL"
+      - name: "2.10 - Attestation GitHub SLSA - rapport compilation HOL"
         if: hashFiles('build-reports/rapport_compilation_hol.txt') != ''
         continue-on-error: true
         uses: actions/attest-build-provenance@v2
         with:
           subject-path: build-reports/rapport_compilation_hol.txt
 
-      - name: "2.8 - Upload artefact - Rapport compilation HOL"
+      - name: "2.11 - Upload artefact - Rapport compilation HOL"
         uses: actions/upload-artifact@v4
         with:
           name: rapport-compilation-hol
@@ -369,10 +401,12 @@ jobs:
           retention-days: 90
 
 # ==============================================================================
-# JOB 3 - COMPILATION LaTeX
+# JOB 3 - COMPILATION LaTeX  (EXPRESS - packages minimaux)
+# texlive-full    : ~4 GB, 20-30 min
+# Express (ce job):  ~400 MB, 2-4 min
 # ==============================================================================
   latex-build:
-    name: "Job 3 - Compilation LaTeX (article PDF)"
+    name: "Job 3 - Compilation LaTeX (express - packages minimaux)"
     runs-on: ubuntu-latest
     needs: attestations
 
@@ -381,10 +415,21 @@ jobs:
       - name: "3.1 - Checkout du depot"
         uses: actions/checkout@v4
 
-      - name: "3.2 - Installation texlive-full et latexmk"
+      - name: "3.2 - Installation LaTeX EXPRESS (packages minimaux)"
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y texlive-full latexmk
+          sudo apt-get install -y --no-install-recommends \
+            texlive-latex-base \
+            texlive-latex-extra \
+            texlive-latex-recommended \
+            texlive-fonts-recommended \
+            texlive-fonts-extra \
+            texlive-lang-french \
+            texlive-science \
+            texlive-bibtex-extra \
+            latexmk \
+            cm-super
+          echo "Installation LaTeX express terminee."
           latexmk --version
 
       - name: "3.3 - SHA-256 du fichier source .tex"
@@ -424,151 +469,4 @@ jobs:
             echo "  RAPPORT DE COMPILATION LaTeX"
             echo "  Projet    : Methode Spectrale - Philippe Thomas Savard"
             echo "  Depot     : ${{ github.repository }}"
-            echo "  Commit    : ${{ github.sha }}"
-            echo "  Date UTC  : $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
-            echo "  Run ID    : ${{ github.run_id }}"
-            echo "========================================================"
-            echo ""
-            echo "--- STATUT ---"
-            echo "  Compilation LaTeX : $LATEX_STATUS"
-            echo ""
-            echo "--- Fichier source .tex ---"
-          } > "$RAPPORT"
-          { ls -lh tex/*.tex 2>/dev/null || echo "  (aucun)"; } >> "$RAPPORT"
-          { echo ""; echo "--- SHA-256 source .tex ---"; } >> "$RAPPORT"
-          { sha256sum tex/*.tex 2>/dev/null || echo "  (aucun)"; } >> "$RAPPORT"
-          { echo ""; echo "--- PDF genere ---"; } >> "$RAPPORT"
-          { ls -lh build-latex/*.pdf 2>/dev/null || echo "  (aucun)"; } >> "$RAPPORT"
-          { echo ""; echo "--- SHA-256 PDF genere ---"; } >> "$RAPPORT"
-          { sha256sum build-latex/*.pdf 2>/dev/null || echo "  (aucun)"; } >> "$RAPPORT"
-          { echo ""; echo "--- LOG COMPLET LaTeX ---"; } >> "$RAPPORT"
-          cat build-latex/latex_build_log.txt >> "$RAPPORT"
-          echo "========================================================" >> "$RAPPORT"
-          cat "$RAPPORT"
-
-      - name: "3.6 - Attestation GitHub SLSA - rapport LaTeX"
-        if: hashFiles('build-latex/rapport_compilation_latex.txt') != ''
-        continue-on-error: true
-        uses: actions/attest-build-provenance@v2
-        with:
-          subject-path: build-latex/rapport_compilation_latex.txt
-
-      - name: "3.7 - Upload artefact - PDF compile et rapport LaTeX"
-        uses: actions/upload-artifact@v4
-        with:
-          name: rapport-compilation-latex
-          path: build-latex/
-          retention-days: 90
-
-# ==============================================================================
-# JOB 4 - RAPPORT FINAL D'INTEGRITE GLOBALE
-# ==============================================================================
-  rapport-final:
-    name: "Job 4 - Rapport final integrite globale"
-    runs-on: ubuntu-latest
-    needs: [attestations, isabelle-build, latex-build]
-    if: always()
-
-    steps:
-
-      - name: "4.1 - Checkout du depot"
-        uses: actions/checkout@v4
-
-      - name: "4.2 - Telechargement de tous les artefacts"
-        uses: actions/download-artifact@v4
-        with:
-          path: all-artifacts
-
-      - name: "4.3 - Generation du rapport final integrite"
-        run: |
-          mkdir -p rapport-final
-          RAPPORT="rapport-final/rapport_integrite_global.txt"
-          {
-            echo "========================================================"
-            echo "  RAPPORT FINAL D'INTEGRITE - PIPELINE SAVARD 2026"
-            echo "========================================================"
-            echo ""
-            echo "  Projet    : La Geometrie du Spectre des Nombres Premiers"
-            echo "  Auteur    : Philippe Thomas Savard"
-            echo "  Site web  : www.universestaucarre.com"
-            echo "  Depot     : ${{ github.repository }}"
-            echo "  Commit    : ${{ github.sha }}"
-            echo "  Branche   : ${{ github.ref_name }}"
-            echo "  Date UTC  : $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
-            echo "  Run ID    : ${{ github.run_id }}"
-            echo "  Run URL   : https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-            echo ""
-            echo "========================================================"
-            echo "  SECTION 1 - STATUT DES JOBS"
-            echo "========================================================"
-            echo ""
-            echo "  Job 1 - Attestations SHA-256 : ${{ needs.attestations.result }}"
-            echo "  Job 2 - Compilation HOL      : ${{ needs.isabelle-build.result }}"
-            echo "  Job 3 - Compilation LaTeX    : ${{ needs.latex-build.result }}"
-            echo ""
-            echo "========================================================"
-            echo "  SECTION 2 - SHA-256 GLOBAL DE TOUS LES FICHIERS"
-            echo "========================================================"
-            echo ""
-            echo "--- HOL Isabelle (.thy) ---"
-          } > "$RAPPORT"
-          { sha256sum hol/*.thy 2>/dev/null || echo "  (aucun)"; } >> "$RAPPORT"
-          { echo ""; echo "--- Python (.py) ---"; } >> "$RAPPORT"
-          { sha256sum py/*.py 2>/dev/null || echo "  (aucun)"; } >> "$RAPPORT"
-          { echo ""; echo "--- LaTeX (.tex) ---"; } >> "$RAPPORT"
-          { sha256sum tex/*.tex 2>/dev/null || echo "  (aucun)"; } >> "$RAPPORT"
-          { echo ""; echo "--- JSON (.json) ---"; } >> "$RAPPORT"
-          { sha256sum json/*.json 2>/dev/null || echo "  (aucun)"; } >> "$RAPPORT"
-          { echo ""; echo "--- Base SQLite (.db) ---"; } >> "$RAPPORT"
-          { sha256sum corpus/*.db 2>/dev/null || echo "  (aucun)"; } >> "$RAPPORT"
-          {
-            echo ""
-            echo "========================================================"
-            echo "  SECTION 3 - ARTEFACTS PRODUITS PAR CE WORKFLOW"
-            echo "========================================================"
-            echo ""
-          } >> "$RAPPORT"
-          { ls -lhR all-artifacts/ 2>/dev/null || echo "  (aucun artefact)"; } >> "$RAPPORT"
-          {
-            echo ""
-            echo "========================================================"
-            echo "  SECTION 4 - ARCHITECTURE LOGIQUE (Regle Savard)"
-            echo "========================================================"
-            echo ""
-            echo "  ENSEMBLE = 1"
-            echo "    = 1/x  (Zeta Riemann)  = 1/y1 + 1/y2 + 1/y3"
-            echo "    + 1/t  (psi_savard)"
-            echo "    + 1/ms (Methode Spectrale) = 1/ms1 + 1/ms2 + 1/ms3"
-            echo ""
-            echo "  Concordances :"
-            echo "    C1 : 1/y1 <-> 1/t    Tchebychev = psi_savard"
-            echo "    C2 : 1/y3 <-> 1/ms1  Zeros non-triviaux = positions P"
-            echo "    C3 : 1/y2 <-> 1/ms3  Re(rho) = 1/2 = RsP = 1/2"
-            echo ""
-            echo "  Theoreme central : synthese_pont_savard"
-            echo "    Pour tout n1>=1, n2>=1, n1!=n2 :"
-            echo "    Re_droite_critique(n1,n2) = RsP(n1,n2) = 1/2"
-            echo ""
-            echo "  Total objets formels HOL : 553"
-            echo "  Sections logiques        : 10"
-            echo "  Concordances             : 3 (C1, C2, C3)"
-            echo ""
-            echo "========================================================"
-            echo "  FIN DU RAPPORT FINAL D'INTEGRITE"
-            echo "========================================================"
-          } >> "$RAPPORT"
-          cat "$RAPPORT"
-
-      - name: "4.4 - Attestation GitHub SLSA - rapport final"
-        if: hashFiles('rapport-final/rapport_integrite_global.txt') != ''
-        continue-on-error: true
-        uses: actions/attest-build-provenance@v2
-        with:
-          subject-path: rapport-final/rapport_integrite_global.txt
-
-      - name: "4.5 - Upload artefact - Rapport final integrite"
-        uses: actions/upload-artifact@v4
-        with:
-          name: rapport-integrite-global
-          path: rapport-final/
-          retention-days: 90
+            echo "  Commit    
