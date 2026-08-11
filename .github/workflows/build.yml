@@ -298,40 +298,29 @@ jobs:
           path: ~/isabelle-dist/Isabelle2024
           key: isabelle-2024-linux-v1
 
-      - name: "2.4 - Telechargement Isabelle 2024 (si cache absent)"
+            - name: "2.4 - Telechargement Isabelle 2024 (si cache absent)"
         if: steps.cache-isabelle.outputs.cache-hit != 'true'
         run: |
           mkdir -p ~/isabelle-dist
           cd ~/isabelle-dist
+          URL="https://isabelle.in.tum.de/dist/Isabelle2024_linux.tar.gz"
           echo "Cache absent - telechargement en cours..."
-          wget -q --show-progress \
-            https://isabelle.in.tum.de/dist/Isabelle2024_linux.tar.gz
+          wget --retry-connrefused \
+               --tries=5 \
+               --timeout=120 \
+               --waitretry=30 \
+               -q --show-progress \
+               "$URL" \
+          || curl -L \
+               --retry 5 \
+               --retry-delay 30 \
+               --connect-timeout 120 \
+               -o Isabelle2024_linux.tar.gz \
+               "$URL"
+          echo "Extraction..."
           tar xzf Isabelle2024_linux.tar.gz
           rm Isabelle2024_linux.tar.gz
           echo "Telechargement et extraction termines."
-
-      - name: "2.5 - Ajout Isabelle au PATH"
-        run: |
-          echo "$HOME/isabelle-dist/Isabelle2024/bin" >> $GITHUB_PATH
-          ~/isabelle-dist/Isabelle2024/bin/isabelle version
-
-      - name: "2.6 - Creation du fichier ROOT (session Isabelle)"
-        run: |
-          {
-            echo 'session Methode_Spectrale = HOL +'
-            echo '  description "Methode Spectrale - Philippe Thomas Savard"'
-            echo '  options [timeout = 7200, document = false]'
-            echo '  sessions'
-            echo '    "HOL-Computational_Algebra"'
-            echo '    Complex_Main'
-            echo '  theories'
-            echo '    methode_spectral'
-          } > hol/ROOT
-          if [ -f "hol/rapport_architecture.thy" ]; then
-            echo '    rapport_architecture' >> hol/ROOT
-          fi
-          echo "Fichier ROOT cree :"
-          cat hol/ROOT
 
       - name: "2.7 - Cache session HOL compilee (cle = hash des .thy)"
         id: cache-hol-session
