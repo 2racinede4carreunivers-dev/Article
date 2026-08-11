@@ -333,18 +333,14 @@ jobs:
       - name: "2.4 - Creation du fichier ROOT (session Isabelle)"
         run: |
           {
-            echo 'session Methode_Spectrale = HOL +'
-            echo '  description "Methode Spectrale - Philippe Thomas Savard"'
-            echo '  options [timeout = 7200, document = false]'
+            echo 'session Methode_Spectral = HOL +'
+            echo '  options [document = false]'
             echo '  sessions'
             echo '    "HOL-Computational_Algebra"'
-            echo '    Complex_Main'
             echo '  theories'
             echo '    methode_spectral'
+            echo '    validation_hol_unifiee'
           } > hol/ROOT
-          if [ -f "hol/rapport_architecture.thy" ]; then
-            echo '    rapport_architecture' >> hol/ROOT
-          fi
           echo "Fichier ROOT cree :"
           cat hol/ROOT
 
