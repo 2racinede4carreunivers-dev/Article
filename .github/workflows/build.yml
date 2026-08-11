@@ -298,7 +298,7 @@ jobs:
           path: ~/isabelle-dist/Isabelle2024
           key: isabelle-2024-linux-v1
 
-            - name: "2.4 - Telechargement Isabelle 2024 (si cache absent)"
+      - name: "2.4 - Telechargement Isabelle 2024 (si cache absent)"
         if: steps.cache-isabelle.outputs.cache-hit != 'true'
         run: |
           mkdir -p ~/isabelle-dist
