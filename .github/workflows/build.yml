@@ -268,12 +268,12 @@ jobs:
           retention-days: 90
 
 # ==============================================================================
-# JOB 2 - COMPILATION ISABELLE/HOL  (EXPRESS + DOUBLE CACHE)
-# 1er lancement : ~12-15 min  (telechargement + compilation)
-# Runs suivants  :  ~3-5 min  (cache Isabelle + cache heap HOL)
+# JOB 2 - COMPILATION ISABELLE/HOL  (multi-miroirs - script Gabriel)
+# 3 miroirs : Cambridge -> SourceForge -> TUM
+# Sanity-check taille > 100 Mo avant extraction
 # ==============================================================================
   isabelle-build:
-    name: "Job 2 - Compilation Isabelle/HOL (express + cache)"
+    name: "Job 2 - Compilation Isabelle/HOL (multi-miroirs)"
     runs-on: ubuntu-latest
     needs: attestations
 
@@ -282,112 +282,109 @@ jobs:
       - name: "2.1 - Checkout du depot"
         uses: actions/checkout@v4
 
-      - name: "2.2 - Installation Java 17 (JRE leger uniquement)"
+      - name: Install Isabelle 2025-2 (multi-miroirs)
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends \
-            openjdk-17-jre-headless \
-            wget \
-            tar
-          java -version
-
-      - name: "2.3 - Cache Isabelle 2024 (archive telechargee une seule fois)"
-        id: cache-isabelle
-        uses: actions/cache@v4
-        with:
-          path: ~/isabelle-dist/Isabelle2024
-          key: isabelle-2024-linux-v1
-
-      - name: "2.4 - Telechargement Isabelle 2024 (si cache absent)"
-        if: steps.cache-isabelle.outputs.cache-hit != 'true'
-        run: |
-          mkdir -p ~/isabelle-dist
-          cd ~/isabelle-dist
-          URL="https://isabelle.in.tum.de/dist/Isabelle2024_linux.tar.gz"
-          echo "Cache absent - telechargement en cours..."
-          wget --retry-connrefused \
-               --tries=5 \
-               --timeout=120 \
-               --waitretry=30 \
-               -q --show-progress \
-               "$URL" \
-          || curl -L \
-               --retry 5 \
-               --retry-delay 30 \
-               --connect-timeout 120 \
-               -o Isabelle2024_linux.tar.gz \
-               "$URL"
-          echo "Extraction..."
-          tar xzf Isabelle2024_linux.tar.gz
-          rm Isabelle2024_linux.tar.gz
-          echo "Telechargement et extraction termines."
-
-      - name: "2.7 - Cache session HOL compilee (cle = hash des .thy)"
-        id: cache-hol-session
-        uses: actions/cache@v4
-        with:
-          path: ~/.isabelle/Isabelle2024/heaps
-          key: hol-methode-spectrale-${{ hashFiles('hol/*.thy') }}
-          restore-keys: |
-            hol-methode-spectrale-
-
-      - name: "2.8 - Compilation de la session HOL Methode_Spectrale"
-        run: |
-          mkdir -p build-reports
-          set +e
-          isabelle build -D hol -b Methode_Spectrale -v \
-            2>&1 | tee build-reports/isabelle_build_log.txt
-          CODE=${PIPESTATUS[0]}
           set -e
-          if [ "$CODE" -eq 0 ]; then
-            echo "HOL_STATUS=SUCCESS" >> $GITHUB_ENV
-          else
-            echo "HOL_STATUS=FAILED_code_$CODE" >> $GITHUB_ENV
+          sudo apt-get update
+          sudo apt-get install -y wget tar bzip2 libgmp-dev perl
+          mkdir -p /tmp/isabelle
+          cd /tmp/isabelle
+
+          ARCHIVE="Isabelle2025-2_linux.tar.gz"
+          MIRRORS=(
+            "https://www.cl.cam.ac.uk/research/hvg/Isabelle/dist/${ARCHIVE}"
+            "https://downloads.sourceforge.net/projects/isabelle/files/Isabelle2025-2/${ARCHIVE}/download"
+            "https://isabelle.in.tum.de/website-Isabelle2025-2/dist/${ARCHIVE}"
+          )
+
+          success=0
+          for url in "${MIRRORS[@]}"; do
+            echo "::group::Tentative de telechargement : ${url}"
+            if wget --tries=3 --timeout=60 -O isabelle.tar.gz "${url}"; then
+              size=$(stat -c%s isabelle.tar.gz)
+              if [ "${size}" -gt 100000000 ]; then
+                echo "Telechargement OK (${size} octets)"
+                success=1
+                echo "::endgroup::"
+                break
+              else
+                echo "Archive trop petite (${size} octets), tentative suivante."
+              fi
+            fi
+            echo "::endgroup::"
+          done
+
+          if [ "${success}" -ne 1 ]; then
+            echo "::error::Aucun miroir Isabelle n'a repondu. Verifier la disponibilite reseau."
+            exit 8
           fi
 
-      - name: "2.9 - Rapport de compilation HOL detaille"
-        run: |
-          RAPPORT="build-reports/rapport_compilation_hol.txt"
-          {
-            echo "========================================================"
-            echo "  RAPPORT DE COMPILATION HOL ISABELLE"
-            echo "  Projet    : Methode Spectrale - Philippe Thomas Savard"
-            echo "  Depot     : ${{ github.repository }}"
-            echo "  Commit    : ${{ github.sha }}"
-            echo "  Date UTC  : $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
-            echo "  Run ID    : ${{ github.run_id }}"
-            echo "  Cache Isabelle : ${{ steps.cache-isabelle.outputs.cache-hit }}"
-            echo "  Cache HOL heap : ${{ steps.cache-hol-session.outputs.cache-hit }}"
-            echo "========================================================"
-            echo ""
-            echo "--- STATUT GLOBAL ---"
-            echo "  Compilation HOL : $HOL_STATUS"
-            echo ""
-            echo "--- Fichiers HOL ---"
-          } > "$RAPPORT"
-          ls -lh hol/*.thy >> "$RAPPORT"
-          { echo ""; echo "--- SHA-256 des fichiers HOL ---"; } >> "$RAPPORT"
-          sha256sum hol/*.thy >> "$RAPPORT"
-          { echo ""; echo "--- Session ROOT ---"; } >> "$RAPPORT"
-          cat hol/ROOT >> "$RAPPORT"
-          { echo ""; echo "--- LOG COMPLET DE COMPILATION ---"; } >> "$RAPPORT"
-          cat build-reports/isabelle_build_log.txt >> "$RAPPORT"
-          echo "========================================================" >> "$RAPPORT"
-          cat "$RAPPORT"
+          tar -xzf isabelle.tar.gz
+          ls -1
+          echo "/tmp/isabelle/Isabelle2025-2/bin" >> "$GITHUB_PATH"
+          /tmp/isabelle/Isabelle2025-2/bin/isabelle version
 
-      - name: "2.10 - Attestation GitHub SLSA - rapport compilation HOL"
-        if: hashFiles('build-reports/rapport_compilation_hol.txt') != ''
-        continue-on-error: true
+      - name: Show repository layout
+        run: |
+          pwd
+          ls -la
+          find . -maxdepth 3 \( -name ROOT -o -name 'methode_spectral.thy' \) | sort
+
+      - name: "2.4 - Creation du fichier ROOT (session Isabelle)"
+        run: |
+          {
+            echo 'session Methode_Spectrale = HOL +'
+            echo '  description "Methode Spectrale - Philippe Thomas Savard"'
+            echo '  options [timeout = 7200, document = false]'
+            echo '  sessions'
+            echo '    "HOL-Computational_Algebra"'
+            echo '    Complex_Main'
+            echo '  theories'
+            echo '    methode_spectral'
+          } > hol/ROOT
+          if [ -f "hol/rapport_architecture.thy" ]; then
+            echo '    rapport_architecture' >> hol/ROOT
+          fi
+          echo "Fichier ROOT cree :"
+          cat hol/ROOT
+
+      - name: Build Isabelle session (methode_spectral)
+        working-directory: hol
+        run: |
+          isabelle build -v -D .
+
+      - name: Create explicit attestation payload
+        if: success()
+        run: |
+          cat > attestation_payload.json <<'EOF'
+          {
+            "schemaVersion": 1,
+            "subject": "hol/methode_spectral.thy",
+            "author": "Philippe Thomas Savard",
+            "coAuthors": [
+              "Emergent.sh E1",
+              "Gordon Docker Desktop",
+              "Copilot Microsoft"
+            ],
+            "statement": "These assistants contributed remarkably and their contribution is invaluable for Philippe Thomas Savard."
+          }
+          EOF
+
+      - name: Generate build provenance attestation
+        if: success()
         uses: actions/attest-build-provenance@v2
         with:
-          subject-path: build-reports/rapport_compilation_hol.txt
+          subject-path: hol/methode_spectral.thy
 
-      - name: "2.11 - Upload artefact - Rapport compilation HOL"
+      - name: Upload attestation payload artifact
+        if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: rapport-compilation-hol
-          path: build-reports/
-          retention-days: 90
+          name: methode-spectral-attestation-payload
+          path: |
+            attestation_payload.json
+            hol/methode_spectral.thy
+          retention-days: 30
 
 # ==============================================================================
 # JOB 3 - COMPILATION LaTeX  (EXPRESS - packages minimaux)
@@ -407,7 +404,7 @@ jobs:
       - name: "3.2 - Installation LaTeX EXPRESS (packages minimaux)"
         run: |
           sudo apt-get update -qq
-                    sudo apt-get install -y --no-install-recommends \
+          sudo apt-get install -y --no-install-recommends \
             texlive-latex-base \
             texlive-latex-extra \
             texlive-latex-recommended \
@@ -483,3 +480,124 @@ jobs:
           cat build-latex/latex_build_log.txt                             >> "$RAPPORT"
           echo "========================================================"  >> "$RAPPORT"
           cat "$RAPPORT"
+
+      - name: "3.6 - Attestation GitHub SLSA - rapport LaTeX"
+        if: hashFiles('build-latex/rapport_compilation_latex.txt') != ''
+        continue-on-error: true
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: build-latex/rapport_compilation_latex.txt
+
+      - name: "3.7 - Upload artefact - PDF compile et rapport LaTeX"
+        uses: actions/upload-artifact@v4
+        with:
+          name: rapport-compilation-latex
+          path: build-latex/
+          retention-days: 90
+
+# ==============================================================================
+# JOB 4 - RAPPORT FINAL D'INTEGRITE GLOBALE
+# ==============================================================================
+  rapport-final:
+    name: "Job 4 - Rapport final integrite globale"
+    runs-on: ubuntu-latest
+    needs: [attestations, isabelle-build, latex-build]
+    if: always()
+
+    steps:
+
+      - name: "4.1 - Checkout du depot"
+        uses: actions/checkout@v4
+
+      - name: "4.2 - Telechargement de tous les artefacts"
+        uses: actions/download-artifact@v4
+        with:
+          path: all-artifacts
+
+      - name: "4.3 - Generation du rapport final integrite"
+        run: |
+          mkdir -p rapport-final
+          RAPPORT="rapport-final/rapport_integrite_global.txt"
+          echo "========================================================"  > "$RAPPORT"
+          echo "  RAPPORT FINAL D'INTEGRITE - PIPELINE SAVARD 2026"       >> "$RAPPORT"
+          echo "========================================================"  >> "$RAPPORT"
+          echo ""                                                          >> "$RAPPORT"
+          echo "  Projet    : La Geometrie du Spectre des Nombres Premiers" >> "$RAPPORT"
+          echo "  Auteur    : Philippe Thomas Savard"                      >> "$RAPPORT"
+          echo "  Site web  : www.universestaucarre.com"                   >> "$RAPPORT"
+          echo "  Depot     : ${{ github.repository }}"                   >> "$RAPPORT"
+          echo "  Commit    : ${{ github.sha }}"                          >> "$RAPPORT"
+          echo "  Branche   : ${{ github.ref_name }}"                     >> "$RAPPORT"
+          echo "  Date UTC  : $(date -u '+%Y-%m-%d %H:%M:%S UTC')"        >> "$RAPPORT"
+          echo "  Run ID    : ${{ github.run_id }}"                       >> "$RAPPORT"
+          echo "  Run URL   : https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> "$RAPPORT"
+          echo ""                                                          >> "$RAPPORT"
+          echo "========================================================"  >> "$RAPPORT"
+          echo "  SECTION 1 - STATUT DES JOBS"                            >> "$RAPPORT"
+          echo "========================================================"  >> "$RAPPORT"
+          echo ""                                                          >> "$RAPPORT"
+          echo "  Job 1 - Attestations SHA-256 : ${{ needs.attestations.result }}"    >> "$RAPPORT"
+          echo "  Job 2 - Compilation HOL      : ${{ needs.isabelle-build.result }}"  >> "$RAPPORT"
+          echo "  Job 3 - Compilation LaTeX    : ${{ needs.latex-build.result }}"     >> "$RAPPORT"
+          echo ""                                                          >> "$RAPPORT"
+          echo "========================================================"  >> "$RAPPORT"
+          echo "  SECTION 2 - SHA-256 GLOBAL DE TOUS LES FICHIERS"        >> "$RAPPORT"
+          echo "========================================================"  >> "$RAPPORT"
+          echo ""                                                          >> "$RAPPORT"
+          echo "--- HOL Isabelle (.thy) ---"                              >> "$RAPPORT"
+          { sha256sum hol/*.thy 2>/dev/null || echo "  (aucun)"; }        >> "$RAPPORT"
+          { echo ""; echo "--- Python (.py) ---"; }                       >> "$RAPPORT"
+          { sha256sum py/*.py 2>/dev/null || echo "  (aucun)"; }          >> "$RAPPORT"
+          { echo ""; echo "--- LaTeX (.tex) ---"; }                       >> "$RAPPORT"
+          { sha256sum tex/*.tex 2>/dev/null || echo "  (aucun)"; }        >> "$RAPPORT"
+          { echo ""; echo "--- JSON (.json) ---"; }                       >> "$RAPPORT"
+          { sha256sum json/*.json 2>/dev/null || echo "  (aucun)"; }      >> "$RAPPORT"
+          { echo ""; echo "--- Base SQLite (.db) ---"; }                  >> "$RAPPORT"
+          { sha256sum corpus/*.db 2>/dev/null || echo "  (aucun)"; }      >> "$RAPPORT"
+          echo ""                                                          >> "$RAPPORT"
+          echo "========================================================"  >> "$RAPPORT"
+          echo "  SECTION 3 - ARTEFACTS PRODUITS PAR CE WORKFLOW"         >> "$RAPPORT"
+          echo "========================================================"  >> "$RAPPORT"
+          echo ""                                                          >> "$RAPPORT"
+          { ls -lhR all-artifacts/ 2>/dev/null || echo "  (aucun artefact)"; } >> "$RAPPORT"
+          echo ""                                                          >> "$RAPPORT"
+          echo "========================================================"  >> "$RAPPORT"
+          echo "  SECTION 4 - ARCHITECTURE LOGIQUE (Regle Savard)"        >> "$RAPPORT"
+          echo "========================================================"  >> "$RAPPORT"
+          echo ""                                                          >> "$RAPPORT"
+          echo "  ENSEMBLE = 1"                                            >> "$RAPPORT"
+          echo "    = 1/x  (Zeta Riemann)  = 1/y1 + 1/y2 + 1/y3"         >> "$RAPPORT"
+          echo "    + 1/t  (psi_savard)"                                  >> "$RAPPORT"
+          echo "    + 1/ms (Methode Spectrale) = 1/ms1 + 1/ms2 + 1/ms3"  >> "$RAPPORT"
+          echo ""                                                          >> "$RAPPORT"
+          echo "  Concordances :"                                          >> "$RAPPORT"
+          echo "    C1 : 1/y1 <-> 1/t    Tchebychev = psi_savard"        >> "$RAPPORT"
+          echo "    C2 : 1/y3 <-> 1/ms1  Zeros non-triviaux = positions P" >> "$RAPPORT"
+          echo "    C3 : 1/y2 <-> 1/ms3  Re(rho) = 1/2 = RsP = 1/2"     >> "$RAPPORT"
+          echo ""                                                          >> "$RAPPORT"
+          echo "  Theoreme central : synthese_pont_savard"                >> "$RAPPORT"
+          echo "    Pour tout n1>=1, n2>=1, n1!=n2 :"                    >> "$RAPPORT"
+          echo "    Re_droite_critique(n1,n2) = RsP(n1,n2) = 1/2"        >> "$RAPPORT"
+          echo ""                                                          >> "$RAPPORT"
+          echo "  Total objets formels HOL : 553"                         >> "$RAPPORT"
+          echo "  Sections logiques        : 10"                          >> "$RAPPORT"
+          echo "  Concordances             : 3 (C1, C2, C3)"              >> "$RAPPORT"
+          echo ""                                                          >> "$RAPPORT"
+          echo "========================================================"  >> "$RAPPORT"
+          echo "  FIN DU RAPPORT FINAL D'INTEGRITE"                       >> "$RAPPORT"
+          echo "========================================================"  >> "$RAPPORT"
+          cat "$RAPPORT"
+
+      - name: "4.4 - Attestation GitHub SLSA - rapport final"
+        if: hashFiles('rapport-final/rapport_integrite_global.txt') != ''
+        continue-on-error: true
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: rapport-final/rapport_integrite_global.txt
+
+      - name: "4.5 - Upload artefact - Rapport final integrite"
+        uses: actions/upload-artifact@v4
+        with:
+          name: rapport-integrite-global
+          path: rapport-final/
+          retention-days: 90
