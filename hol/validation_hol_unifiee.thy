@@ -376,13 +376,7 @@ end
 
 theorem ensemble_unifie_satisfaisable:
   "ensemble_unifie (1/2) (1/2) True True True"
-proof
-  show "1 / (2::real) = 1 / 2" by simp
-  show "(1::real) / 2 = 1 / 2" by simp
-  show "True = True" by simp
-  show "True = True" by simp
-  show "True = True" by simp
-qed
+  by (intro ensemble_unifie.intro ensemble_unifie_axioms.intro) simp_all
 
 theorem validation_finale_pont_savard:
   assumes "n1 \<ge> 1" "n2 \<ge> 1" "n1 \<noteq> n2"
