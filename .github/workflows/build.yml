@@ -367,8 +367,8 @@ jobs:
             echo "  Commit    : ${{ github.sha }}"
             echo "  Date UTC  : $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
             echo "  Run ID    : ${{ github.run_id }}"
-            echo "  Cache Isabelle : ${{ steps.cache-isabelle.outputs.cache-hit == 'true' && 'HIT (express)' || 'MISS (telechargement)' }}"
-            echo "  Cache HOL heap : ${{ steps.cache-hol-session.outputs.cache-hit == 'true' && 'HIT (express)' || 'MISS (compilation)' }}"
+            echo "  Cache Isabelle : ${{ steps.cache-isabelle.outputs.cache-hit }}"
+            echo "  Cache HOL heap : ${{ steps.cache-hol-session.outputs.cache-hit }}"
             echo "========================================================"
             echo ""
             echo "--- STATUT GLOBAL ---"
@@ -418,7 +418,7 @@ jobs:
       - name: "3.2 - Installation LaTeX EXPRESS (packages minimaux)"
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends \
+                    sudo apt-get install -y --no-install-recommends \
             texlive-latex-base \
             texlive-latex-extra \
             texlive-latex-recommended \
@@ -428,7 +428,8 @@ jobs:
             texlive-science \
             texlive-bibtex-extra \
             latexmk \
-            cm-super
+            cm-super \
+            lmodern
           echo "Installation LaTeX express terminee."
           latexmk --version
 
