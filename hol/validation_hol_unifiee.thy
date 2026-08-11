@@ -384,6 +384,7 @@ proof
   show "True = True" by simp
 qed
 
+
 text \<open>
   CONCLUSION : Ensemble = 1
   { F1 & F2 & F3 & F4 & F5 } => RsP = Re = 1/2 VRAI
