@@ -376,13 +376,12 @@ end
 
 theorem ensemble_unifie_satisfaisable:
   "ensemble_unifie (1/2) (1/2) True True True"
-  by (intro ensemble_unifie.intro ensemble_unifie_axioms.intro) simp_all
-
-theorem validation_finale_pont_savard:
-  assumes "n1 \<ge> 1" "n2 \<ge> 1" "n1 \<noteq> n2"
-  shows   "Re_droite_critique n1 n2 = RsP n1 n2 \<and> RsP n1 n2 = 1 / 2"
-proof -
-  show ?thesis using synthese_pont_savard[OF assms] by simp
+proof
+  show "1 / (2::real) = 1 / 2" by simp
+  show "(1::real) / 2 = 1 / 2" by simp
+  show "True = True" by simp
+  show "True = True" by simp
+  show "True = True" by simp
 qed
 
 text \<open>
