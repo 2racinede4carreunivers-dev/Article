@@ -266,7 +266,6 @@ jobs:
           name: attestations-sha256
           path: attestations/
           retention-days: 90
-
 # ==============================================================================
 # JOB 2 - COMPILATION ISABELLE/HOL  (multi-miroirs - script Gabriel)
 # 3 miroirs : Cambridge -> SourceForge -> TUM
@@ -290,6 +289,8 @@ jobs:
           mkdir -p /tmp/isabelle
           cd /tmp/isabelle
 
+          # Strategie multi-miroirs (Cambridge en tete = plus stable pour
+          # les IPs GitHub Actions, puis SourceForge en fallback, puis TUM).
           ARCHIVE="Isabelle2025-2_linux.tar.gz"
           MIRRORS=(
             "https://www.cl.cam.ac.uk/research/hvg/Isabelle/dist/${ARCHIVE}"
@@ -301,6 +302,8 @@ jobs:
           for url in "${MIRRORS[@]}"; do
             echo "::group::Tentative de telechargement : ${url}"
             if wget --tries=3 --timeout=60 -O isabelle.tar.gz "${url}"; then
+              # Sanity check : au moins 100 Mo (l'archive Isabelle complete
+              # pese ~700 Mo ; une page HTML d'erreur pese quelques Ko).
               size=$(stat -c%s isabelle.tar.gz)
               if [ "${size}" -gt 100000000 ]; then
                 echo "Telechargement OK (${size} octets)"
@@ -328,7 +331,7 @@ jobs:
         run: |
           pwd
           ls -la
-          find . -maxdepth 3 \( -name ROOT -o -name 'methode_spectral.thy' \) | sort
+          find . -maxdepth 3 \( -name ROOT -o -name 'methode_spectral.thy' -o -name 'validation_hol_unifiee.thy' \) | sort
 
       - name: "2.4 - Creation du fichier ROOT (session Isabelle)"
         run: |
@@ -380,6 +383,7 @@ jobs:
           path: |
             attestation_payload.json
             hol/methode_spectral.thy
+            hol/validation_hol_unifiee.thy
           retention-days: 30
 
 # ==============================================================================
