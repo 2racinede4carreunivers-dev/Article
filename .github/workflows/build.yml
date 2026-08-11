@@ -233,40 +233,29 @@ jobs:
             echo "========================================================"
             echo ""
             echo "--- HOL Isabelle (.thy) ---"
-          } >> "$RAPPORT"
+          } > "$RAPPORT"
           { sha256sum hol/*.thy 2>/dev/null || echo "  (aucun)"; } >> "$RAPPORT"
-          {
-            echo ""
-            echo "--- Python (.py) ---"
-          } >> "$RAPPORT"
+          { echo ""; echo "--- Python (.py) ---"; } >> "$RAPPORT"
           { sha256sum py/*.py 2>/dev/null || echo "  (aucun)"; } >> "$RAPPORT"
-          {
-            echo ""
-            echo "--- LaTeX (.tex) ---"
-          } >> "$RAPPORT"
+          { echo ""; echo "--- LaTeX (.tex) ---"; } >> "$RAPPORT"
           { sha256sum tex/*.tex 2>/dev/null || echo "  (aucun)"; } >> "$RAPPORT"
-          {
-            echo ""
-            echo "--- JSON (.json) ---"
-          } >> "$RAPPORT"
+          { echo ""; echo "--- JSON (.json) ---"; } >> "$RAPPORT"
           { sha256sum json/*.json 2>/dev/null || echo "  (aucun)"; } >> "$RAPPORT"
-          {
-            echo ""
-            echo "--- Base de donnees SQLite (.db) ---"
-          } >> "$RAPPORT"
+          { echo ""; echo "--- Base de donnees SQLite (.db) ---"; } >> "$RAPPORT"
           { sha256sum corpus/*.db 2>/dev/null || echo "  (aucun)"; } >> "$RAPPORT"
-          {
-            echo ""
-            echo "========================================================"
-          } >> "$RAPPORT"
+          { echo ""; echo "========================================================"; } >> "$RAPPORT"
           cat "$RAPPORT"
 
       - name: "1.8 - Attestation GitHub SLSA - methode_spectral.thy"
+        if: hashFiles('hol/methode_spectral.thy') != ''
+        continue-on-error: true
         uses: actions/attest-build-provenance@v2
         with:
           subject-path: hol/methode_spectral.thy
 
       - name: "1.9 - Attestation GitHub SLSA - rapport_architecture.thy"
+        if: hashFiles('hol/rapport_architecture.thy') != ''
+        continue-on-error: true
         uses: actions/attest-build-provenance@v2
         with:
           subject-path: hol/rapport_architecture.thy
@@ -316,8 +305,10 @@ jobs:
             echo '    Complex_Main'
             echo '  theories'
             echo '    methode_spectral'
-            echo '    rapport_architecture'
           } > hol/ROOT
+          if [ -f "hol/rapport_architecture.thy" ]; then
+            echo '    rapport_architecture' >> hol/ROOT
+          fi
           echo "Fichier ROOT cree :"
           cat hol/ROOT
 
@@ -354,25 +345,18 @@ jobs:
             echo "--- Fichiers HOL ---"
           } > "$RAPPORT"
           ls -lh hol/*.thy >> "$RAPPORT"
-          {
-            echo ""
-            echo "--- SHA-256 des fichiers HOL ---"
-          } >> "$RAPPORT"
+          { echo ""; echo "--- SHA-256 des fichiers HOL ---"; } >> "$RAPPORT"
           sha256sum hol/*.thy >> "$RAPPORT"
-          {
-            echo ""
-            echo "--- Session ROOT ---"
-          } >> "$RAPPORT"
+          { echo ""; echo "--- Session ROOT ---"; } >> "$RAPPORT"
           cat hol/ROOT >> "$RAPPORT"
-          {
-            echo ""
-            echo "--- LOG COMPLET DE COMPILATION ---"
-          } >> "$RAPPORT"
+          { echo ""; echo "--- LOG COMPLET DE COMPILATION ---"; } >> "$RAPPORT"
           cat build-reports/isabelle_build_log.txt >> "$RAPPORT"
           echo "========================================================" >> "$RAPPORT"
           cat "$RAPPORT"
 
       - name: "2.7 - Attestation GitHub SLSA - rapport compilation HOL"
+        if: hashFiles('build-reports/rapport_compilation_hol.txt') != ''
+        continue-on-error: true
         uses: actions/attest-build-provenance@v2
         with:
           subject-path: build-reports/rapport_compilation_hol.txt
@@ -406,22 +390,30 @@ jobs:
       - name: "3.3 - SHA-256 du fichier source .tex"
         run: |
           mkdir -p build-latex
-          sha256sum tex/*.tex | tee build-latex/sha256_tex_source.txt
+          { sha256sum tex/*.tex 2>/dev/null || echo "  (aucun .tex)"; } \
+            | tee build-latex/sha256_tex_source.txt
 
       - name: "3.4 - Compilation LaTeX - Geometrie_du_Spectre"
         run: |
-          cd tex
-          set +e
-          latexmk -pdf \
-            -interaction=nonstopmode \
-            Geometrie_du_Spectre_des_Nombres_Premiers_2026.tex \
-            2>&1 | tee ../build-latex/latex_build_log.txt
-          set -e
-          if ls *.pdf 1>/dev/null 2>&1; then
-            cp *.pdf ../build-latex/
-            echo "LATEX_STATUS=SUCCESS" >> $GITHUB_ENV
+          mkdir -p build-latex
+          if ls tex/*.tex 1>/dev/null 2>&1; then
+            cd tex
+            set +e
+            latexmk -pdf \
+              -interaction=nonstopmode \
+              Geometrie_du_Spectre_des_Nombres_Premiers_2026.tex \
+              2>&1 | tee ../build-latex/latex_build_log.txt
+            set -e
+            if ls *.pdf 1>/dev/null 2>&1; then
+              cp *.pdf ../build-latex/
+              echo "LATEX_STATUS=SUCCESS" >> $GITHUB_ENV
+            else
+              echo "LATEX_STATUS=FAILED" >> $GITHUB_ENV
+            fi
           else
-            echo "LATEX_STATUS=FAILED" >> $GITHUB_ENV
+            echo "LATEX_STATUS=NO_TEX_FILE" >> $GITHUB_ENV
+            echo "  (aucun fichier .tex trouve dans tex/)" \
+              > build-latex/latex_build_log.txt
           fi
 
       - name: "3.5 - Rapport de compilation LaTeX"
@@ -442,31 +434,21 @@ jobs:
             echo ""
             echo "--- Fichier source .tex ---"
           } > "$RAPPORT"
-          ls -lh tex/*.tex >> "$RAPPORT"
-          {
-            echo ""
-            echo "--- SHA-256 source .tex ---"
-          } >> "$RAPPORT"
-          sha256sum tex/*.tex >> "$RAPPORT"
-          {
-            echo ""
-            echo "--- PDF genere ---"
-          } >> "$RAPPORT"
+          { ls -lh tex/*.tex 2>/dev/null || echo "  (aucun)"; } >> "$RAPPORT"
+          { echo ""; echo "--- SHA-256 source .tex ---"; } >> "$RAPPORT"
+          { sha256sum tex/*.tex 2>/dev/null || echo "  (aucun)"; } >> "$RAPPORT"
+          { echo ""; echo "--- PDF genere ---"; } >> "$RAPPORT"
           { ls -lh build-latex/*.pdf 2>/dev/null || echo "  (aucun)"; } >> "$RAPPORT"
-          {
-            echo ""
-            echo "--- SHA-256 PDF genere ---"
-          } >> "$RAPPORT"
+          { echo ""; echo "--- SHA-256 PDF genere ---"; } >> "$RAPPORT"
           { sha256sum build-latex/*.pdf 2>/dev/null || echo "  (aucun)"; } >> "$RAPPORT"
-          {
-            echo ""
-            echo "--- LOG COMPLET LaTeX ---"
-          } >> "$RAPPORT"
+          { echo ""; echo "--- LOG COMPLET LaTeX ---"; } >> "$RAPPORT"
           cat build-latex/latex_build_log.txt >> "$RAPPORT"
           echo "========================================================" >> "$RAPPORT"
           cat "$RAPPORT"
 
       - name: "3.6 - Attestation GitHub SLSA - rapport LaTeX"
+        if: hashFiles('build-latex/rapport_compilation_latex.txt') != ''
+        continue-on-error: true
         uses: actions/attest-build-provenance@v2
         with:
           subject-path: build-latex/rapport_compilation_latex.txt
@@ -531,25 +513,13 @@ jobs:
             echo "--- HOL Isabelle (.thy) ---"
           } > "$RAPPORT"
           { sha256sum hol/*.thy 2>/dev/null || echo "  (aucun)"; } >> "$RAPPORT"
-          {
-            echo ""
-            echo "--- Python (.py) ---"
-          } >> "$RAPPORT"
+          { echo ""; echo "--- Python (.py) ---"; } >> "$RAPPORT"
           { sha256sum py/*.py 2>/dev/null || echo "  (aucun)"; } >> "$RAPPORT"
-          {
-            echo ""
-            echo "--- LaTeX (.tex) ---"
-          } >> "$RAPPORT"
+          { echo ""; echo "--- LaTeX (.tex) ---"; } >> "$RAPPORT"
           { sha256sum tex/*.tex 2>/dev/null || echo "  (aucun)"; } >> "$RAPPORT"
-          {
-            echo ""
-            echo "--- JSON (.json) ---"
-          } >> "$RAPPORT"
+          { echo ""; echo "--- JSON (.json) ---"; } >> "$RAPPORT"
           { sha256sum json/*.json 2>/dev/null || echo "  (aucun)"; } >> "$RAPPORT"
-          {
-            echo ""
-            echo "--- Base SQLite (.db) ---"
-          } >> "$RAPPORT"
+          { echo ""; echo "--- Base SQLite (.db) ---"; } >> "$RAPPORT"
           { sha256sum corpus/*.db 2>/dev/null || echo "  (aucun)"; } >> "$RAPPORT"
           {
             echo ""
@@ -590,6 +560,8 @@ jobs:
           cat "$RAPPORT"
 
       - name: "4.4 - Attestation GitHub SLSA - rapport final"
+        if: hashFiles('rapport-final/rapport_integrite_global.txt') != ''
+        continue-on-error: true
         uses: actions/attest-build-provenance@v2
         with:
           subject-path: rapport-final/rapport_integrite_global.txt
