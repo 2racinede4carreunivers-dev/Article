@@ -375,15 +375,15 @@ end
 (* ============================================================ *)
 
 theorem ensemble_unifie_satisfaisable:
-  "ensemble_unifie (1/2) (1/2) True True True"
-proof
-  show "1 / (2::real) = 1 / 2" by simp
+  "ensemble_unifie (RsP 1 2) (1 / 2) True True True"
+proof (unfold_locales)
+  show "RsP 1 2 = 1 / 2"
+    using RsP_un_demi_general[of 1 2] by simp
   show "(1::real) / 2 = 1 / 2" by simp
   show "True = True" by simp
   show "True = True" by simp
   show "True = True" by simp
 qed
-
 
 text \<open>
   CONCLUSION : Ensemble = 1
