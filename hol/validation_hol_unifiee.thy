@@ -369,20 +369,13 @@ proof -
 qed
 
 end
-
 (* ============================================================ *)
 (*  SECTION 5 : SATISFAISABILITÉ ET THÉORÈME FINAL              *)
 (* ============================================================ *)
 
 theorem ensemble_unifie_satisfaisable:
   "ensemble_unifie (1/2) (1/2) True True True"
-proof
-  show "1 / (2::real) = 1 / 2" by simp
-  show "(1::real) / 2 = 1 / 2" by simp
-  show "True = True" by simp
-  show "True = True" by simp
-qed
-
+  by (unfold_locales, simp_all)
 
 text \<open>
   CONCLUSION : Ensemble = 1
