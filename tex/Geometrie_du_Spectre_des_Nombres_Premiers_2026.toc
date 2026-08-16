@@ -1,0 +1,52 @@
+\babel@toc {french}{}\relax 
+\contentsline {section}{\numberline {1}Géométrie du Spectre des Nombres Premiers}{3}{section.1}%
+\contentsline {section}{\numberline {2}Avant-propos — La Chair Première Géométrique}{4}{section.2}%
+\contentsline {section}{\numberline {3}Section 0 — Fondements et méta-théorie}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}0.1 Vocabulaire canonique}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}0.2 Les six postulats fondamentaux (P1 à P6)}{7}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}0.3 Les trois opérations fondamentales}{9}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}0.4 La règle Savard — Ensemble = 1}{9}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Section I — Rapport spectral 1/2 : les fondations}{10}{section.4}%
+\contentsline {subsection}{\numberline {4.1}I.1 Définition des suites SA et SB}{10}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}I.2 Le rapport spectral vaut exactement 1/2}{13}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}I.3 L'incohérence algébrique locale — un point philosophique crucial}{14}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}I.4 Le digamma calculé et l'équation du premier}{14}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}I.5 Exemples concrets validés : les premiers 23, 29, 31, 37 et 41}{15}{subsection.4.5}%
+\contentsline {subsubsection}{\numberline {4.5.1}Premier 23 — rang n = 9 (9e nombre premier)}{15}{subsubsection.4.5.1}%
+\contentsline {subsubsection}{\numberline {4.5.2}Premier 29 — rang n = 10 (10e nombre premier)}{16}{subsubsection.4.5.2}%
+\contentsline {subsubsection}{\numberline {4.5.3}Premier 31 — rang n = 11 (11e nombre premier)}{16}{subsubsection.4.5.3}%
+\contentsline {subsubsection}{\numberline {4.5.4}Premier 37 — rang n = 12 (12e nombre premier)}{17}{subsubsection.4.5.4}%
+\contentsline {subsubsection}{\numberline {4.5.5}Premier 41 — rang n = 13 (13e nombre premier)}{17}{subsubsection.4.5.5}%
+\contentsline {section}{\numberline {5}Section II — Modèle spectral 1/4}{19}{section.5}%
+\contentsline {subsection}{\numberline {5.1}II.1 Les suites A1/4 et B1/4}{19}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}II.2 Exemple complet : le premier 947}{19}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Section III — Modèle spectral 1/3}{19}{section.6}%
+\contentsline {subsection}{\numberline {6.1}III.1 Les suites A1/3 et B1/3}{20}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}III.2 Le rapport spectral constant 1/3}{20}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}III.3 Exemple complet : le premier 227}{20}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Sections IV à VI — Régimes étendus : suites mixtes et négatives}{21}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Suites mixtes (mélange de termes positifs et négatifs)}{21}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Régime négatif — une découverte originale}{24}{subsection.7.2}%
+\contentsline {section}{\numberline {8}Section VII — Géométrie spectrale : asymétries}{24}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Asymétrie ordonnée et asymétrie chaotique}{24}{subsection.8.1}%
+\contentsline {section}{\numberline {9}Section VIII — La preuve par l'absurde : les composés sont exclus}{25}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Le théorème central : aucun composé n'est un prime\_i}{25}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Les six exemples canoniques}{26}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Les trois piliers de la Méthode Spectrale bornés à ℙ}{26}{subsection.9.3}%
+\contentsline {section}{\numberline {10}Section IX — Construction géométrique des suites}{27}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Les règles de construction pour les suites à 8 termes ou plus}{27}{subsection.10.1}%
+\contentsline {section}{\numberline {11}Section XI — Le Pont Logique Savard : Tchebychev ↔ Spectral ↔ RH}{28}{section.11}%
+\contentsline {subsection}{\numberline {11.1}L'équation de Tchebychev classique (Riemann – von Mangoldt)}{28}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}L'équation psi\_savard — version Méthode Spectrale}{28}{subsection.11.2}%
+\contentsline {subsection}{\numberline {11.3}Validations numériques — le pont en chiffres}{28}{subsection.11.3}%
+\contentsline {subsection}{\numberline {11.4}L'union fonctionnelle : psi\_savard contient strictement Tchebychev}{29}{subsection.11.4}%
+\contentsline {subsection}{\numberline {11.5}Le théorème de synthèse — RsP = Re = 1/2}{29}{subsection.11.5}%
+\contentsline {subsubsection}{\numberline {11.5.1}Les cinq faits réunis}{30}{subsubsection.11.5.1}%
+\contentsline {subsubsection}{\numberline {11.5.2}La conclusion unifiée — Ensemble = 1}{31}{subsubsection.11.5.2}%
+\contentsline {subsubsection}{\numberline {11.5.3}Le code Isabelle/HOL complet — version 3.42}{31}{subsubsection.11.5.3}%
+\contentsline {subsubsection}{\numberline {11.5.4}Comment lire ce théorème — explication en langage courant}{32}{subsubsection.11.5.4}%
+\contentsline {section}{\numberline {12}Position épistémologique de l'auteur}{33}{section.12}%
+\contentsline {section}{\numberline {13}Section finale — Navigation et licence}{34}{section.13}%
+\contentsline {subsection}{\numberline {13.1}Synthèse-index des théorèmes clés}{34}{subsection.13.1}%
+\contentsline {subsection}{\numberline {13.2}Navigation suggérée dans methode\_spectral.thy}{34}{subsection.13.2}%
+\contentsline {subsection}{\numberline {13.3}Licence Apache 2.0}{35}{subsection.13.3}%
