@@ -1,0 +1,271 @@
+# Arborescence & Schéma — Géométrie du Spectre des Nombres Premiers
+
+[![Statut du Build](https://github.com/2racinede4carreunivers-dev/Article/actions/workflows/main.yml/badge.svg)](https://github.com/2racinede4carreunivers-dev/Article/actions)
+
+> Soumission : **Communications mathématiques canadiennes**
+
+---
+
+## 1. Arborescence du dépôt GitHub
+
+```
+Article/
+├── .github/
+│   └── workflows/
+│       └── main.yml                        # CI GitHub Actions (badge de build)
+│
+├── corpus/                                 # Corpus documentaire de l'article
+│
+├── docs/                                   # Documentation complémentaire
+│
+├── hol/
+│   ├── methode_spectral.thy                # Validation principale Isabelle/HOL (~4000+ lignes)
+│   └── validation_hol_unifiee.thy          # Contre-validation générée (Pont Savard)
+│
+├── json/                                   # Données structurées (exports pipeline)
+│
+├── py/
+│   ├── orchestrateur_1.py                  # Génération base SQLite + extraction des points
+│   └── orchestrateur_2.py                  # Génération contre-validation HOL (Pont Savard)
+│
+├── tex/                                    # Sources LaTeX de l'article
+│
+└── README.md                               # Ce fichier
+```
+
+---
+
+## 2. Schéma de la base de données SQLite
+
+La base de données générée par l'Orchestrateur 1 contient **4 tables principales** modélisant
+la structure logique et sémantique de `methode_spectral.thy`.
+
+### 2.1 Table `sections`
+
+Représente la hiérarchie logique du fichier `.thy` selon le Pont Savard.
+
+| Colonne        | Type    | Contrainte          | Description                                  |
+|----------------|---------|---------------------|----------------------------------------------|
+| `id`           | INTEGER | PRIMARY KEY AUTOINCREMENT | Identifiant unique                    |
+| `code`         | TEXT    | NOT NULL UNIQUE      | Code court de la section (ex. `1/ms1`)       |
+| `label`        | TEXT    | NOT NULL             | Libellé lisible de la section                |
+| `description`  | TEXT    |                      | Description détaillée                        |
+| `parent`       | TEXT    | FK → sections(code)  | Section parente (hiérarchie concentrique)    |
+| `hol_anchor`   | TEXT    |                      | Point HOL d'ancrage principal                |
+| `ligne_anchor` | INTEGER |                      | Ligne de référence dans le `.thy`            |
+
+### 2.2 Table `points`
+
+Représente chaque point formel du fichier `methode_spectral.thy` (lemme, définition, théorème…).
+
+| Colonne           | Type    | Contrainte          | Description                                         |
+|-------------------|---------|---------------------|-----------------------------------------------------|
+| `id`              | INTEGER | PRIMARY KEY          | Identifiant unique                                  |
+| `type`            | TEXT    | NOT NULL             | Type HOL : `lemma`, `definition`, `theorem`, `locale`, `axiomatization`, `consts`, `subsection`, `text` |
+| `nom`             | TEXT    | NOT NULL             | Nom du point HOL                                    |
+| `ligne`           | INTEGER | NOT NULL             | Numéro de ligne dans `methode_spectral.thy`         |
+| `section_thy`     | TEXT    |                      | Section `.thy` d'appartenance                       |
+| `subsection_thy`  | TEXT    |                      | Sous-section `.thy` d'appartenance                  |
+| `section_logique` | TEXT    | NOT NULL, FK → sections(code) | Section logique Pont Savard            |
+
+### 2.3 Table `relations`
+
+Modélise les dépendances sémantiques entre points HOL.
+
+| Colonne          | Type    | Contrainte                      | Description                         |
+|------------------|---------|---------------------------------|-------------------------------------|
+| `id`             | INTEGER | PRIMARY KEY                      | Identifiant unique                  |
+| `point_source_id`| INTEGER | NOT NULL, FK → points(id)        | Point source de la relation         |
+| `point_cible_id` | INTEGER | NOT NULL, FK → points(id)        | Point cible de la relation          |
+| `type_relation`  | TEXT    | NOT NULL                         | Type : `VALIDE`, `DEPEND_DE`, etc.  |
+| `description`    | TEXT    |                                  | Description de la relation          |
+
+### 2.4 Table `concordances`
+
+Mappe les sections de `methode_spectral.thy` vers `validation_hol_unifiee.thy`.
+
+| Colonne          | Type    | Contrainte                      | Description                                     |
+|------------------|---------|---------------------------------|-------------------------------------------------|
+| `id`             | INTEGER | PRIMARY KEY AUTOINCREMENT        | Identifiant unique                              |
+| `code`           | TEXT    | NOT NULL UNIQUE                  | Code de la concordance                          |
+| `section_source` | TEXT    | NOT NULL, FK → sections(code)    | Section dans `methode_spectral.thy`             |
+| `section_cible`  | TEXT    | NOT NULL, FK → sections(code)    | Section dans `validation_hol_unifiee.thy`       |
+| `type_relation`  | TEXT    | NOT NULL                         | Nature de la concordance                        |
+| `description`    | TEXT    |                                  | Description                                     |
+| `hol_lemmes`     | TEXT    |                                  | Lemmes HOL associés                             |
+
+---
+
+## 3. Schéma de la Méthode Spectrale — Pont Savard
+
+La méthode spectrale est organisée en **cercles concentriques** selon l'équation fondamentale :
+
+$$\text{Ensemble} = \frac{1}{x} + \frac{1}{ms} + \frac{1}{t}$$
+
+```
+ENSEMBLE  (Théorème d'unification Pont Savard)
+│         synthese_pont_savard : RsP = Re = 1/2  VRAI
+│
+├── 1/x  ─── Fonction zeta de Riemann
+│   │         Décomposée en 1/y1 + 1/y2 + 1/y3
+│   │         Ancre HOL : ensemble_savard
+│   │
+│   ├── 1/y1  ─── Composante Tchebychev
+│   │              Zéros non-triviaux de ζ → positions P
+│   │              Ancre : methode_spectrale_exclusivite_P
+│   │
+│   ├── 1/y2  ─── Droite critique Re(ρ) = 1/2
+│   │              Hypothèse de Riemann (Section XIII.5)
+│   │              Ancre : alignement_central
+│   │
+│   └── 1/y3  ─── Équation de Tchebychev (ψ classique)
+│                  Validée numériquement : x = 30, 98, 228
+│                  Ancre : psi_savard_expanded
+│
+├── 1/ms ─── Méthode Spectrale (opérationnelle)
+│   │         Ancre : RsP_universel_entier_naturel
+│   │
+│   ├── 1/ms1  ─── Opération 1 : Reconstruction du i-ième premier
+│   │   │           Suites SA/SB, digamma_calc, prime_equation_prime_i
+│   │   │           Sections I à XI.bis
+│   │   │
+│   │   ├── 0. Foundations / Meta-theory (v3.35)
+│   │   │   ├── Foundations.1 - Ontologie et vocabulaire
+│   │   │   ├── Foundations.2 - Postulats fondamentaux (P1..P6)
+│   │   │   ├── Foundations.3 - Les trois opérations fondamentales
+│   │   │   ├── Foundations.4 - La règle Savard (Ensemble = 1)
+│   │   │   └── Foundations.5 - Statut épistémologique et lecture
+│   │   │       └── [locale] foundations_marker
+│   │   │       └── [lemma]  foundations_marker_satisfaisable
+│   │   │
+│   │   ├── Axiomatisation positive
+│   │   │   ├── [axiomatization] axiomatization_bloc_1
+│   │   │   └── [lemma]          prime_equation_for_primes_pos
+│   │   │
+│   │   ├── Forme générale des suites A et B
+│   │   │   ├── [definition] SA
+│   │   │   ├── [definition] SB
+│   │   │   ├── [lemma]      SA_forme_generale
+│   │   │   └── [lemma]      SB_forme_generale
+│   │   │
+│   │   ├── Exemple complet — premiers 29, 31, 37, 41
+│   │   │   ├── [definition] n29, n31, n37, n41
+│   │   │   └── [definition] D29, D31, D37, D41
+│   │   │
+│   │   ├── Valeur des sommes A et B pour n
+│   │   │   ├── [lemma] SA_10..SA_13, SB_10..SB_13
+│   │   │   ├── [lemma] digamma_calc_29, _31, _37, _41
+│   │   │   └── [lemma] relation_29, _31, _37, _41
+│   │   │
+│   │   ├── Équation générale reliant SB, digamma_calc et le nombre premier
+│   │   │   ├── [lemma]   SB_minus_digamma_is_64p
+│   │   │   ├── [lemma]   prime_equation_general
+│   │   │   ├── [lemma]   SB_minus_digamma_div_64_general
+│   │   │   └── [theorem] reconstruction_premier_pos
+│   │   │
+│   │   ├── Modèle spectral 1/4 : Forme générale des suites A et B
+│   │   │   ├── [definition] A_1_4, B_1_4
+│   │   │   ├── [definition] prime_equation_1_4
+│   │   │   └── [lemma]      prime_equation_1_4_identity
+│   │   │
+│   │   ├── Axiomatisation spectral 1/4
+│   │   │   ├── [axiomatization] axiomatization_bloc_3
+│   │   │   └── [lemma]          prime_equation_1_4_for_primes
+│   │   │
+│   │   ├── Modèle spectral 1/4 — détermination du premier 947
+│   │   │   ├── [definition] suite_A_1_4_somme, suite_B_1_4_somme
+│   │   │   ├── [definition] digamma_1_4, digamma_calcule_1_4
+│   │   │   └── [lemma]      preuve_premier_947
+│   │   │
+│   │   ├── Rapport 1/3 — forme généralisée suites A et B
+│   │   │
+│   │   └── Généralisation spectrale pour le i-ième nombre premier
+│   │       ├── [subsection] Définition du i-ième nombre premier
+│   │       │   ├── [definition] prime_i
+│   │       │   ├── [lemma]      prime_i_spec, prime_i_is_prime, prime_i_position
+│   │       ├── [subsection] Lemmes généraux SA, SB et digamma
+│   │       │   ├── [lemma] SA_general_i, SB_general_i, digamma_general_i
+│   │       ├── [subsection] Équation spectrale générale pour tout i
+│   │       │   ├── [lemma] prime_equation_general_i
+│   │       ├── [subsection] Corollaire : reconstruction du i-ième nombre premier
+│   │       │   └── [lemma] prime_equation_prime_i
+│   │       └── [axiomatization] axiomatization_bloc_2 + [consts] consts_bloc_1
+│   │
+│   ├── 1/ms2  ─── Opération 2 : Exclusion stricte des composés C
+│   │               Preuve par l'absurde
+│   │               Trois piliers :
+│   │               ├── composite_not_prime_i
+│   │               ├── composite_no_reconstruction_position
+│   │               └── composite_pair_no_rsp_positions
+│   │
+│   └── 1/ms3  ─── Opération 3 : Rapport spectral RsP = 1/2
+│       │           Régime central k=2 : RsP(n1,n2) = 1/2 pour tout n1≠n2
+│       │           Ancre : RsP_un_demi_general
+│       │
+│       ├── Rapport spectral 1/2
+│       │   ├── [definition]  RsP
+│       │   ├── [lemma]       RsP_un_demi_general
+│       │   ├── [subsection]  Instance 1 : Incohérence algébrique locale (Espace Imaginaire)
+│       │   │   └── [lemma]   algebriquement_incoherent_local
+│       │   └── [subsection]  Instance 2 : Cohérence numérique réelle globale (Re = 1/2)
+│       │       └── [lemma]   coherence_numerique_reelle_P
+│       │
+│       ├── Rapport spectral n×n (généralisation symétrique)
+│       │   ├── [definition] RsP_nn, rapport_spectral_un_demi_nn
+│       │   ├── [definition] A3, B3
+│       │   └── [lemma]      exemple_3x3_spectral
+│       │
+│       └── Section du Digamma calculé
+│           ├── [definition]  digamma_calc
+│           ├── [definition]  prime_equation
+│           ├── [lemma]       SB_affine_en_SA
+│           ├── [lemma]       ecart_spectral_constant
+│           ├── [lemma]       digamma_affine_en_SA
+│           ├── [lemma]       difference_SA_succ, difference_SB_succ
+│           ├── [lemma]       ratio_incremental_un_demi
+│           └── [lemma]       digamma_calc_equation_alt
+│
+└── 1/t  ─── Pont Tchebychev ↔ Méthode Spectrale
+              psi_savard : lien via x^p/p et 2^n/SB_n
+              Sections XIII.1 – XIII.2
+              Ancre : psi_savard
+```
+
+---
+
+## 4. Types de points HOL présents dans la validation
+
+| Type HOL          | Rôle dans `methode_spectral.thy`                          |
+|-------------------|-----------------------------------------------------------|
+| `definition`      | Définition formelle d'un objet mathématique               |
+| `lemma`           | Lemme intermédiaire démontré                              |
+| `theorem`         | Résultat principal (ex. `reconstruction_premier_pos`)     |
+| `locale`          | Contexte local Isabelle                                   |
+| `axiomatization`  | Bloc d'axiomes fondateurs                                 |
+| `consts`          | Déclaration de constantes                                 |
+| `subsection`      | Marqueur structurel dans le fichier `.thy`                |
+| `text`            | Bloc de texte explicatif                                  |
+
+---
+
+## 5. Types de relations entre points
+
+| Type           | Sémantique                                                            |
+|----------------|-----------------------------------------------------------------------|
+| `VALIDE`       | Le point source valide la présence du point cible dans la logique     |
+| `DEPEND_DE`    | Le point source dépend formellement du point cible                    |
+
+---
+
+## 6. Équation fondamentale du Pont Savard
+
+$$\text{Ensemble} = \frac{1}{x} + \frac{1}{ms} + \frac{1}{t} = 1$$
+
+Chaque cercle concentrique de `validation_hol_unifiee.thy` confirme que :
+- **Tous les points** de `methode_spectral.thy` sont présents selon leur section logique.
+- **Chaque ensemble** C1, C2, C3 valide la sémantique recherchée par l'auteur.
+- La **contre-validation** garantit aux évaluateurs une lecture cohérente et orientée du fichier principal.
+
+---
+
+*Généré automatiquement à partir de la base de données SQLite du pipeline — Philippe, Lévis QC*
